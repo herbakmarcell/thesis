@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class PlayerGenerator : MonoBehaviour
@@ -32,40 +33,16 @@ public class PlayerGenerator : MonoBehaviour
     void GenerateFriendlies()
     {
         int x = -2;
-        int y;
-        GameObject newPlayer;
-        switch (GameManager.Instance.playerCount)
+        int friendlyCount = GameManager.Instance.playerCount;
+        for (int i = 0; i < friendlyCount; i++)
         {
-            case 1:
-                y = 0;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
-                break;
-            case 2:
-                for (int i = -1; i <= 1; i+=2)
-                {
-                    y = i;
-                    newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                    friendlies.Add(newPlayer);
-                }
-                break; 
-            case 3:
-                for (int i = -2; i <= 2; i+=2)
-                {
-                    y = i;
-                    newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                    friendlies.Add(newPlayer);
-                }
-                break;
-            case 4:
-            default:
-                for (int i = -3; i <= 3; i+=2)
-                {
-                    y = i;
-                    newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                    friendlies.Add(newPlayer);
-                }
-                break;
+
+            float setY = i - (friendlyCount - 1) / 2f;
+            int y = setY < 0 ? Mathf.FloorToInt(setY) : Mathf.CeilToInt(setY);
+
+            GameObject newFriendly = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+            friendlies.Add(newFriendly);
+
         }
         GameManager.Instance.friendlies = friendlies;
     }
@@ -73,40 +50,15 @@ public class PlayerGenerator : MonoBehaviour
     void GenerateEnemies()
     {
         int x = 5;
-        int y;
-        GameObject newEnemy;
-        switch (GameManager.Instance.enemyCount)
+        int enemyCount = GameManager.Instance.enemyCount;
+        for (int i = 0; i < enemyCount; i++)
         {
-            case 1:
-                y = 0;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
-                break;
-            case 2:
-                for (int i = -1; i <= 1; i += 2)
-                {
-                    y = i;
-                    newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                    friendlies.Add(newEnemy);
-                }
-                break;
-            case 3:
-                for (int i = -2; i <= 2; i += 2)
-                {
-                    y = i;
-                    newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                    friendlies.Add(newEnemy);
-                }
-                break;
-            case 4:
-            default:
-                for (int i = -3; i <= 3; i += 2)
-                {
-                    y = i;
-                    newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                    friendlies.Add(newEnemy);
-                }
-                break;
+
+            float setY = i - (enemyCount - 1) / 2f;
+            int y = setY < 0 ? Mathf.FloorToInt(setY) : Mathf.CeilToInt(setY);
+
+            GameObject newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+            enemies.Add(newEnemy);
         }
         GameManager.Instance.enemies = enemies;
     }
