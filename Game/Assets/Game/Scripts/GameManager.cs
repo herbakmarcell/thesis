@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public int playerCount;
+    public int enemyCount;
+
+    public List<GameObject> friendlies;
+    public List<GameObject> enemies;
 
     private void Awake()
     {
