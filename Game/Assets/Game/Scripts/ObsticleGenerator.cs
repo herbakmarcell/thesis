@@ -29,7 +29,7 @@ public class ObsticleGenerator : MonoBehaviour
         
         for (int i = 0; i < obsticleCount; i++)
         {
-            int x = UnityEngine.Random.Range(-5,5);
+            int x = UnityEngine.Random.Range(-3,3);
             int y = UnityEngine.Random.Range(-3, 4);
             bool isGenerated = false;
             for (int j = 0; j < generatedObsticles.Count; j++)

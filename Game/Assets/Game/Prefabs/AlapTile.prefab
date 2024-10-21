@@ -890,6 +890,7 @@ GameObject:
   - component: {fileID: 8010246412001688861}
   - component: {fileID: 288001462941124044}
   - component: {fileID: 3100560646905993685}
+  - component: {fileID: 4491705872354196939}
   m_Layer: 0
   m_Name: AlapTile
   m_TagString: Untagged
@@ -943,3 +944,20 @@ MonoBehaviour:
   generatedObsticles: []
   obsticleParent: {fileID: 610069811006721110}
   obsticleCount: 6
+--- !u!114 &4491705872354196939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6910307633522722211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7086ad9950bf6cb42a20eb80409d23ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friendlyModel: {fileID: 5158959617645974207, guid: ff99576035fefee4bbdbdfd5811f2d73, type: 3}
+  friendlies: []
+  enemyModel: {fileID: 6414733509144734878, guid: f2b134d89cff2694193cd1feeb127976, type: 3}
+  enemies: []
+  gridParent: {fileID: 0}
