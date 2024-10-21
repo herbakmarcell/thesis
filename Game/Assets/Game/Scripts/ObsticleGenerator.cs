@@ -19,26 +19,23 @@ public class ObsticleGenerator : MonoBehaviour
         GenerateObsticle();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void GenerateObsticle()
     {
-        
         for (int i = 0; i < obsticleCount; i++)
         {
             int x = UnityEngine.Random.Range(-3,3);
             int y = UnityEngine.Random.Range(-3, 4);
+
             bool isGenerated = false;
+
             for (int j = 0; j < generatedObsticles.Count; j++)
             {
-                if (generatedObsticles[j].transform.position.x == x && generatedObsticles[j].transform.position.y == y)
+                if (generatedObsticles[j].transform.position.x == x+0.5f && generatedObsticles[j].transform.position.y == y)
                 {
                     isGenerated = true;
                 }
             }
+
             if (!isGenerated)
             {
                 GameObject newObsticle = Instantiate(obsticles[UnityEngine.Random.Range(0, obsticles.Length)], new Vector3(x+0.5f, y, 0), Quaternion.identity, obsticleParent.transform);

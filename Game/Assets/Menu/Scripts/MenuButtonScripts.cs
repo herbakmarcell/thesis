@@ -10,6 +10,7 @@ public class MenuButtonScripts : MonoBehaviour
 {
     public TMP_Dropdown playerDropdown;
     public TMP_Dropdown enemyDropdown;
+    public TMP_Text turnText;
 
     private void Start()
     {
@@ -33,11 +34,26 @@ public class MenuButtonScripts : MonoBehaviour
         Debug.Log(GameManager.Instance.enemyCount);
     }
 
+    public void ChangeStartingTurn()
+    {
+        if (GameManager.Instance.playerTurn)
+        {
+            GameManager.Instance.playerTurn = false;
+            turnText.text = "Ellenfél kezd";
+        }
+        else
+        {
+            GameManager.Instance.playerTurn = true;
+            turnText.text = "Játékos kezd";
+        }
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
 
     }
+
     public void ExitGame()
     {
        Application.Quit();

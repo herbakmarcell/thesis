@@ -7,6 +7,7 @@ public class PlayerGenerator : MonoBehaviour
 {
     public GameObject friendlyModel;
     public List<GameObject> friendlies;
+
     public GameObject enemyModel;
     public List<GameObject> enemies;
 
@@ -22,25 +23,16 @@ public class PlayerGenerator : MonoBehaviour
         GenerateEnemies();
     }
 
-
-    void Update()
-    {
-
-    }
-
     void GenerateFriendlies()
     {
         int x = -4;
         int friendlyCount = GameManager.Instance.playerCount;
         for (int i = 0; i < friendlyCount; i++)
         {
-
-            float setY = i - (friendlyCount - 1) / 2f;
-            int y = setY < 0 ? Mathf.FloorToInt(setY) : Mathf.CeilToInt(setY);
+            float y = (i * 2) - (friendlyCount - 1);
 
             GameObject newFriendly = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gameObject.transform);
             friendlies.Add(newFriendly);
-
         }
         GameManager.Instance.friendlies = friendlies;
     }
@@ -51,9 +43,7 @@ public class PlayerGenerator : MonoBehaviour
         int enemyCount = GameManager.Instance.enemyCount;
         for (int i = 0; i < enemyCount; i++)
         {
-
-            float setY = i - (enemyCount - 1) / 2f;
-            int y = setY < 0 ? Mathf.FloorToInt(setY) : Mathf.CeilToInt(setY);
+            float y = (i * 2) - (enemyCount - 1);
 
             GameObject newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gameObject.transform);
             enemies.Add(newEnemy);

@@ -891,6 +891,7 @@ GameObject:
   - component: {fileID: 288001462941124044}
   - component: {fileID: 3100560646905993685}
   - component: {fileID: 4491705872354196939}
+  - component: {fileID: 5806115471698525488}
   m_Layer: 0
   m_Name: AlapTile
   m_TagString: Untagged
@@ -943,7 +944,7 @@ MonoBehaviour:
   - {fileID: 1745268614198723418, guid: 171a1f51a80322847a653061289ca44e, type: 3}
   generatedObsticles: []
   obsticleParent: {fileID: 610069811006721110}
-  obsticleCount: 6
+  obsticleCount: 15
 --- !u!114 &4491705872354196939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,4 +961,18 @@ MonoBehaviour:
   friendlies: []
   enemyModel: {fileID: 6414733509144734878, guid: f2b134d89cff2694193cd1feeb127976, type: 3}
   enemies: []
-  gridParent: {fileID: 0}
+--- !u!114 &5806115471698525488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6910307633522722211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8107177389cc34d43ae939a44376df0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 4944407383695635838}
+  highlightColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+  validTileColor: {r: 1, g: 1, b: 1, a: 1}

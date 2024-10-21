@@ -26,6 +26,9 @@ public class GameManager
     public int playerCount;
     public int enemyCount;
 
+    public bool playerTurn = true;
+    public int activePlayer;
+
     public List<GameObject> friendlies = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();
 
