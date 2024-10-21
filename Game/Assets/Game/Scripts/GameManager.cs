@@ -2,27 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
-    public static GameManager Instance { get; private set; }
+    private static GameManager instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GameManager();
+            }
+            return instance;
+        }
+    }
+
+    public GameManager()
+    {
+        playerCount = 1;
+        enemyCount = 1;
+    }
 
     public int playerCount;
     public int enemyCount;
 
-    public List<GameObject> friendlies;
-    public List<GameObject> enemies;
+    public List<GameObject> friendlies = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+
+
 }
 
