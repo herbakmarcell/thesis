@@ -42,38 +42,29 @@ public class PlayerGenerator : MonoBehaviour
                 friendlies.Add(newPlayer);
                 break;
             case 2:
-                y = 1;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
-                y = -1;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
+                for (int i = -1; i <= 1; i+=2)
+                {
+                    y = i;
+                    newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+                    friendlies.Add(newPlayer);
+                }
                 break; 
             case 3:
-                y = 0;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
-                y = 2;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
-                y = -2;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
+                for (int i = -2; i <= 2; i+=2)
+                {
+                    y = i;
+                    newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+                    friendlies.Add(newPlayer);
+                }
                 break;
             case 4:
             default:
-                y = 1;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
-                y = -1;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
-                y = 3;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
-                y = -3;
-                newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                friendlies.Add(newPlayer);
+                for (int i = -3; i <= 3; i+=2)
+                {
+                    y = i;
+                    newPlayer = Instantiate(friendlyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+                    friendlies.Add(newPlayer);
+                }
                 break;
         }
         GameManager.Instance.friendlies = friendlies;
@@ -92,38 +83,29 @@ public class PlayerGenerator : MonoBehaviour
                 enemies.Add(newEnemy);
                 break;
             case 2:
-                y = 1;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
-                y = -1;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
+                for (int i = -1; i <= 1; i += 2)
+                {
+                    y = i;
+                    newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+                    friendlies.Add(newEnemy);
+                }
                 break;
             case 3:
-                y = 0;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
-                y = 2;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
-                y = -2;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
+                for (int i = -2; i <= 2; i += 2)
+                {
+                    y = i;
+                    newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+                    friendlies.Add(newEnemy);
+                }
                 break;
             case 4:
             default:
-                y = 1;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
-                y = -1;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
-                y = 3;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
-                y = -3;
-                newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
-                enemies.Add(newEnemy);
+                for (int i = -3; i <= 3; i += 2)
+                {
+                    y = i;
+                    newEnemy = Instantiate(enemyModel, new Vector3(x + 0.5f, y, 0), Quaternion.identity, gridParent.transform);
+                    friendlies.Add(newEnemy);
+                }
                 break;
         }
         GameManager.Instance.enemies = enemies;
