@@ -26,7 +26,11 @@ public class GameButtonScript : MonoBehaviour
 
     void Update()
     {
-
+        if (TileSelector.playerMoved)
+        {
+            PlayerMoved();
+            TileSelector.playerMoved = false;
+        }
     }
 
     public void MoveTurnButtonPressed()
@@ -102,6 +106,13 @@ public class GameButtonScript : MonoBehaviour
         heavyAttackButton.gameObject.SetActive(false);
         lightAttackButton.gameObject.SetActive(false);
         spellAttackButton.gameObject.SetActive(false);
+
+        cancelButton.gameObject.SetActive(false);
+    }
+
+    public void PlayerMoved()
+    {
+        EnableTurnButtons();
 
         cancelButton.gameObject.SetActive(false);
     }

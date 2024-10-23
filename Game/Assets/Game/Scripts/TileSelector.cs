@@ -13,6 +13,8 @@ public class TileSelector : MonoBehaviour
 
     private GameManager gameManager;
 
+    public static bool playerMoved = false;
+
     void Awake()
     {
         cam = Camera.main;
@@ -53,6 +55,7 @@ public class TileSelector : MonoBehaviour
                 {
                     gameManager.friendlies[gameManager.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
                     gameManager.NextTurn();
+                    playerMoved = true;
                     ResetPreviousCell();
                 }
             }

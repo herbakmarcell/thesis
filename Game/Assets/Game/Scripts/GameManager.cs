@@ -6,7 +6,8 @@ public enum AttackType
 {
     HEAVY,
     LIGHT,
-    SPELL
+    SPELL,
+    NONE
 }
 
 public class GameManager
@@ -58,6 +59,9 @@ public class GameManager
                 activePlayer = 0;
                 playerTurn = false;
             }
+            actionSelected = false;
+            moveTurn = false;
+            attackType = AttackType.NONE;
         }
     }
 }
