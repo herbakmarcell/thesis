@@ -25,33 +25,41 @@ public class TileSelector : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.playerTurn) SelectTile();        
+    }
+
+    void SelectTile()
+    {
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
         worldPos.z = 0;
 
         Vector3Int currentCell = tilemap.WorldToCell(worldPos);
         Vector3Int playerCell = tilemap.WorldToCell(gameManager.friendlies[gameManager.activePlayer].transform.position);
-
-        if (IsValidMove(currentCell, playerCell))
+        if (gameManager.actionSelected && gameManager.moveTurn)
         {
-            tilemap.SetTileFlags(currentCell, TileFlags.None);
-            tilemap.SetColor(currentCell, highlightColor);
+            if (IsValidMove(currentCell, playerCell))
+            {
+                tilemap.SetTileFlags(currentCell, TileFlags.None);
+                tilemap.SetColor(currentCell, highlightColor);
 
-            if (previousCell != currentCell)
+                if (previousCell != currentCell)
+                {
+                    ResetPreviousCell();
+                    previousCell = currentCell;
+                }
+
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    gameManager.friendlies[gameManager.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
+                    gameManager.NextTurn();
+                    ResetPreviousCell();
+                }
+            }
+            else
             {
                 ResetPreviousCell();
-                previousCell = currentCell;
             }
-
-            if (Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                gameManager.friendlies[gameManager.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
-                gameManager.activePlayer = (gameManager.activePlayer + 1) % gameManager.friendlies.Count;
-            }
-        }
-        else
-        {
-            ResetPreviousCell();
         }
     }
 

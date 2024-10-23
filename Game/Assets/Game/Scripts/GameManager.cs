@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AttackType
+{
+    HEAVY,
+    LIGHT,
+    SPELL
+}
+
 public class GameManager
 {
     private static GameManager instance;
@@ -29,10 +36,29 @@ public class GameManager
     public bool playerTurn = true;
     public int activePlayer;
 
+    public bool actionSelected;
+    public bool moveTurn;
+    public AttackType attackType;
+
+
     public List<GameObject> friendlies = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();
 
-
-
+    public void NextTurn()
+    {
+        if (playerTurn)
+        {
+            if (activePlayer + 1 < playerCount)
+            {
+                activePlayer++;
+                Debug.Log(activePlayer);
+            }
+            else
+            {
+                activePlayer = 0;
+                playerTurn = false;
+            }
+        }
+    }
 }
 
