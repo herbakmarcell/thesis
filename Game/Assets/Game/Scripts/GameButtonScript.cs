@@ -112,7 +112,10 @@ public class GameButtonScript : MonoBehaviour
 
     public void PlayerMoved()
     {
-        EnableTurnButtons();
+        if (GameManager.Instance.playerTurn)
+        {
+            EnableTurnButtons();
+        }
 
         cancelButton.gameObject.SetActive(false);
     }
