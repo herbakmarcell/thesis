@@ -26,10 +26,10 @@ public class GameButtonScript : MonoBehaviour
 
     void Update()
     {
-        if (TileSelector.playerMoved)
+        if (TileSelector.playerActionDone)
         {
             PlayerMoved();
-            TileSelector.playerMoved = false;
+            TileSelector.playerActionDone = false;
         }
     }
 

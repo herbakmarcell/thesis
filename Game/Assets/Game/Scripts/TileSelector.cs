@@ -14,7 +14,7 @@ public class TileSelector : MonoBehaviour
 
     private GameManager gameManager;
 
-    public static bool playerMoved = false;
+    public static bool playerActionDone = false;
 
     void Awake()
     {
@@ -56,7 +56,7 @@ public class TileSelector : MonoBehaviour
                 {
                     gameManager.friendlies[gameManager.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
                     gameManager.NextTurn();
-                    playerMoved = true;
+                    playerActionDone = true;
                     ResetPreviousCell();
                 }
             }
@@ -90,6 +90,7 @@ public class TileSelector : MonoBehaviour
                             {
                                 enemy.gameObject.GetComponent<EntityStat>().TakeDamage(1);
                                 gameManager.NextTurn();
+                                playerActionDone = true;
                                 ResetPreviousCell();
                             }
                         }
@@ -119,7 +120,7 @@ public class TileSelector : MonoBehaviour
     private bool IsValidMove(Vector3Int targetCell, Vector3Int playerCell)
     {
         float distance = Vector2.Distance(tilemap.GetCellCenterWorld(targetCell), tilemap.GetCellCenterWorld(playerCell));
-        return distance == 1.0f && !IsObstacle(targetCell) && !IsFriendlyOccupied(targetCell);
+        return distance == 1.0f && !IsObstacle(targetCell) && !IsFriendlyOccupied(targetCell) && !IsEnemyOccupied(targetCell);
     }
 
     private bool IsObstacle(Vector3Int cell)
