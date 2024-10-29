@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -67,41 +68,28 @@ public class TileSelector : MonoBehaviour
         } 
         else if(gameManager.actionSelected && !gameManager.moveTurn)
         {
-            switch (gameManager.attackType)
+            if (IsValidAttack(currentCell, playerCell))
             {
-                case AttackType.HEAVY:
-                    break;
-                case AttackType.LIGHT:
-                    if (IsValidLightAttack(currentCell, playerCell))
+                tilemap.SetTileFlags(currentCell, TileFlags.None);
+                tilemap.SetColor(currentCell, highlightColor);
+
+                if (previousCell != currentCell)
+                {
+                    ResetPreviousCell();
+                    previousCell = currentCell;
+                }
+
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    GameObject enemy = SelectEnemy(currentCell);
+                    if (enemy != null)
                     {
-                        tilemap.SetTileFlags(currentCell, TileFlags.None);
-                        tilemap.SetColor(currentCell, highlightColor);
-
-                        if (previousCell != currentCell)
-                        {
-                            ResetPreviousCell();
-                            previousCell = currentCell;
-                        }
-
-                        if (Mouse.current.leftButton.wasPressedThisFrame)
-                        {
-                            GameObject enemy = SelectEnemy(currentCell);
-                            if (enemy != null)
-                            {
-                                enemy.gameObject.GetComponent<EntityStat>().TakeDamage(1);
-                                gameManager.NextTurn();
-                                playerActionDone = true;
-                                ResetPreviousCell();
-                            }
-                        }
+                        enemy.gameObject.GetComponent<EntityStat>().TakeDamage(1);
+                        gameManager.NextTurn();
+                        playerActionDone = true;
+                        ResetPreviousCell();
                     }
-                    break;
-                case AttackType.SPELL:
-                    break;
-                case AttackType.NONE:
-                    break;
-                default:
-                    break;
+                }
             }
         }
     }
@@ -160,9 +148,20 @@ public class TileSelector : MonoBehaviour
         return gameManager.enemies.FirstOrDefault(enemy => tilemap.WorldToCell(enemy.transform.position) == cell);
     }
 
-    bool IsValidLightAttack(Vector3Int targetCell, Vector3Int playerCell)
+    bool IsValidAttack(Vector3Int targetCell, Vector3Int playerCell)
     {
         float distance = Vector2.Distance(tilemap.GetCellCenterWorld(targetCell), tilemap.GetCellCenterWorld(playerCell));
-        return distance == 1.0f && !IsObstacle(targetCell) && IsEnemyOccupied(targetCell);
+        switch (gameManager.attackType)
+        {
+            case AttackType.HEAVY:
+            case AttackType.LIGHT:
+                return distance == 1.0f && !IsObstacle(targetCell) && IsEnemyOccupied(targetCell);
+            case AttackType.SPELL:
+                return distance <= 3.0f && !IsObstacle(targetCell) && IsEnemyOccupied(targetCell);
+            case AttackType.NONE:
+            default:
+                return false;
+        }
+        
     }
 }

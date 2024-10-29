@@ -28,7 +28,7 @@ public class GameButtonScript : MonoBehaviour
     {
         if (TileSelector.playerActionDone)
         {
-            PlayerMoved();
+            PlayerAction();
             TileSelector.playerActionDone = false;
         }
     }
@@ -110,13 +110,13 @@ public class GameButtonScript : MonoBehaviour
         cancelButton.gameObject.SetActive(false);
     }
 
-    public void PlayerMoved()
+    public void PlayerAction()
     {
         if (GameManager.Instance.playerTurn)
         {
             EnableTurnButtons();
         }
-
+        DisableAttackButtons();
         cancelButton.gameObject.SetActive(false);
     }
 }
