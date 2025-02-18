@@ -24,26 +24,24 @@ public class MenuButtonScripts : MonoBehaviour
 
     void OnPlayerDropdownChanged(int playerCount)
     {
-        GameManager.Instance.playerCount = int.Parse(playerDropdown.options[playerCount].text);
-        Debug.Log(GameManager.Instance.playerCount);
+        Options.friendlyCount = int.Parse(playerDropdown.options[playerCount].text);
     }
 
     void OnEnemyDropdownChanged(int enemyCount)
     {
-        GameManager.Instance.enemyCount = int.Parse(enemyDropdown.options[enemyCount].text);
-        Debug.Log(GameManager.Instance.enemyCount);
+        Options.enemyCount = int.Parse(enemyDropdown.options[enemyCount].text);
     }
 
     public void ChangeStartingTurn()
     {
-        if (GameManager.Instance.playerTurn)
+        if (Options.playerStarts)
         {
-            GameManager.Instance.playerTurn = false;
+            Options.playerStarts = false;
             turnText.text = "Ellenfél kezd";
         }
         else
         {
-            GameManager.Instance.playerTurn = true;
+            Options.playerStarts = true;
             turnText.text = "Játékos kezd";
         }
     }
@@ -51,7 +49,6 @@ public class MenuButtonScripts : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
-
     }
 
     public void ExitGame()

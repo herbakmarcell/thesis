@@ -21,6 +21,8 @@ public class ObsticleGenerator : MonoBehaviour
 
     public void GenerateObsticle()
     {
+
+
         for (int i = 0; i < obsticleCount; i++)
         {
             int x = UnityEngine.Random.Range(-3,3);

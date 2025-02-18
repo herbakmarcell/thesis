@@ -27,12 +27,15 @@ public class GameManager
 
     public GameManager()
     {
-        playerCount = 1;
-        enemyCount = 1;
+        friendlies = new List<GameObject>();
+        enemies = new List<GameObject>();
+        obstacles = new List<GameObject>();
+        // EL KELL TÁVOLÍTANI MAJD EZT A SORT
+        // A MENÜNEK MEGFELELÕEN KELL MAJD MENNIE
+        stateRepresentation = new StateRepresentation();
     }
 
-    public int playerCount;
-    public int enemyCount;
+    public StateRepresentation stateRepresentation;
 
     public bool playerTurn = true;
     public int activePlayer;
@@ -42,14 +45,15 @@ public class GameManager
     public AttackType attackType;
 
 
-    public List<GameObject> friendlies = new List<GameObject>();
-    public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> friendlies;
+    public List<GameObject> enemies;
+    public List<GameObject> obstacles;
 
     public void NextTurn()
     {
         if (playerTurn)
         {
-            if (activePlayer + 1 < playerCount)
+            if (activePlayer + 1 < Options.friendlyCount)
             {
                 activePlayer++;
                 Debug.Log(activePlayer);

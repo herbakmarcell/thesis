@@ -457,6 +457,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487040100}
   m_CullTransparentMesh: 1
+--- !u!1 &567079769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 610069811006721110, guid: 793c3eca74a427f4790850929bdfd4fe, type: 3}
+  m_PrefabInstance: {fileID: 847114968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &651072831
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +870,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3100560646905993685, guid: 793c3eca74a427f4790850929bdfd4fe, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491705872354196939, guid: 793c3eca74a427f4790850929bdfd4fe, type: 3}
+      propertyPath: obstacleModel
+      value: 
+      objectReference: {fileID: 1745268614198723418, guid: 171a1f51a80322847a653061289ca44e, type: 3}
+    - target: {fileID: 4491705872354196939, guid: 793c3eca74a427f4790850929bdfd4fe, type: 3}
+      propertyPath: obstacleParent
+      value: 
+      objectReference: {fileID: 567079769}
     - target: {fileID: 6910307633522722211, guid: 793c3eca74a427f4790850929bdfd4fe, type: 3}
       propertyPath: m_Name
       value: AlapTile
@@ -1215,7 +1232,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
