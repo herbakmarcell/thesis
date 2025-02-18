@@ -28,7 +28,7 @@ public class StateRepresentation //: ICloneable
         currentPlayer = Options.playerStarts ? Player.PLAYER : Player.AI;
     }
 
-    int GetHeuristics()
+    int GetHeuristics(Player player)
     {
         return 0;
     }
