@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class EntityStat : MonoBehaviour
 {
+    public string id;
+    public Vector2 position;
     public int health;
-
-    void Awake()
-    {
-        health = 10;
-    }
+    public int attack;
+    public bool isAI;
 
     public void TakeDamage(int damage)
     {

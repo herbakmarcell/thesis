@@ -8,4 +8,6 @@ public static class Options
     public static int enemyCount = 3;
 
     public static bool playerStarts = true;
+
+    public static int obstacleCount = 10;
 }

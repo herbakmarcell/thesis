@@ -77,7 +77,7 @@ public class StateRepresentation //: ICloneable
 
     void GenerateObstacles()
     {
-        int obstacleCount = 100;
+        int obstacleCount = Options.obstacleCount;
         for (int i = 0; i < obstacleCount; i++)
         {
             int x = UnityEngine.Random.Range(2, 8);

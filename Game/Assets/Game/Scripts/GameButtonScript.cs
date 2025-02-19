@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class GameButtonScript : MonoBehaviour
 {
-    public Button heavyAttackButton;
-    public Button lightAttackButton;
-    public Button spellAttackButton;
-
     public Button attackTurnButton;
     public Button moveTurnButton;
 
@@ -94,19 +90,11 @@ public class GameButtonScript : MonoBehaviour
 
     void EnableAttackButtons()
     {
-        heavyAttackButton.gameObject.SetActive(true);
-        lightAttackButton.gameObject.SetActive(true);
-        spellAttackButton.gameObject.SetActive(true);
-
         cancelButton.gameObject.SetActive(true);
     }
 
     void DisableAttackButtons()
     {
-        heavyAttackButton.gameObject.SetActive(false);
-        lightAttackButton.gameObject.SetActive(false);
-        spellAttackButton.gameObject.SetActive(false);
-
         cancelButton.gameObject.SetActive(false);
     }
 

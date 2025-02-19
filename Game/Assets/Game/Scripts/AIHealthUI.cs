@@ -5,9 +5,9 @@ using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthUI : MonoBehaviour
+public class AIHealthUI : MonoBehaviour
 {
-    public GameObject playerGroupPrefab;
+    public GameObject aiGroupPrefab;
     public List<GameObject> healthList = new List<GameObject>();
 
     void Start()
@@ -24,7 +24,7 @@ public class HealthUI : MonoBehaviour
     {
         for (int i = 0; i < healthList.Count; i++)
         {
-            healthList[i].GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.friendlies[i].GetComponent<EntityStat>().health);
+            healthList[i].GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.enemies[i].GetComponent<EntityStat>().health);
         }
     }
 
@@ -32,11 +32,11 @@ public class HealthUI : MonoBehaviour
     {
         ClearHealthUI();
 
-        for (int i = 0; i < GameManager.Instance.friendlies.Count; i++)
+        for (int i = 0; i < GameManager.Instance.enemies.Count; i++)
         {
-            GameObject singleHealthBar = Instantiate(playerGroupPrefab, transform);
+            GameObject singleHealthBar = Instantiate(aiGroupPrefab, transform);
             healthList.Add(singleHealthBar);
-            singleHealthBar.GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.friendlies[i].GetComponent<EntityStat>().health);
+            singleHealthBar.GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.enemies[i].GetComponent<EntityStat>().health);
         }
     }
 

@@ -25,6 +25,11 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < friendlyObjects.Count; i++)
         {
             GameObject newFriendly = Instantiate(friendlyModel, new Vector3(friendlyObjects[i].position.x - 4.5f, friendlyObjects[i].position.y - 4f, 0), Quaternion.identity, gameObject.transform);
+            newFriendly.GetComponent<EntityStat>().id = friendlyObjects[i].id;
+            newFriendly.GetComponent<EntityStat>().position = friendlyObjects[i].position;
+            newFriendly.GetComponent<EntityStat>().health = friendlyObjects[i].health;
+            newFriendly.GetComponent<EntityStat>().attack = friendlyObjects[i].attack;
+            newFriendly.GetComponent<EntityStat>().isAI = friendlyObjects[i].isAI;
             GameManager.Instance.friendlies.Add(newFriendly);
         }
     }
@@ -35,6 +40,11 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < enemyObjects.Count; i++)
         {
             GameObject newEnemy = Instantiate(enemyModel, new Vector3(enemyObjects[i].position.x - 4.5f, enemyObjects[i].position.y -4f, 0), Quaternion.identity, gameObject.transform);
+            newEnemy.GetComponent<EntityStat>().id = enemyObjects[i].id;
+            newEnemy.GetComponent<EntityStat>().position = enemyObjects[i].position;
+            newEnemy.GetComponent<EntityStat>().health = enemyObjects[i].health;
+            newEnemy.GetComponent<EntityStat>().attack = enemyObjects[i].attack;
+            newEnemy.GetComponent<EntityStat>().isAI = enemyObjects[i].isAI;
             GameManager.Instance.enemies.Add(newEnemy);
         }
     }

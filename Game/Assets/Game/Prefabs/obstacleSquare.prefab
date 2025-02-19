@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1822941412657225006}
   - component: {fileID: 5543920855403374896}
   m_Layer: 0
-  m_Name: obsticleSquare
+  m_Name: obstacleSquare
   m_TagString: Obsticle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

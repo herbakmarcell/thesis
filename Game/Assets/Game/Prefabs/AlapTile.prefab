@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223009539302705728}
   m_Layer: 0
-  m_Name: ObsticleParent
+  m_Name: ObstacleParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -889,7 +889,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8010246412001688861}
   - component: {fileID: 288001462941124044}
-  - component: {fileID: 3100560646905993685}
   - component: {fileID: 4491705872354196939}
   - component: {fileID: 5806115471698525488}
   m_Layer: 0
@@ -928,23 +927,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &3100560646905993685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6910307633522722211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abfdf977a559d99479953f4904120715, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obsticles:
-  - {fileID: 1745268614198723418, guid: 171a1f51a80322847a653061289ca44e, type: 3}
-  generatedObsticles: []
-  obsticleParent: {fileID: 610069811006721110}
-  obsticleCount: 15
 --- !u!114 &4491705872354196939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,9 +940,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friendlyModel: {fileID: 5158959617645974207, guid: ff99576035fefee4bbdbdfd5811f2d73, type: 3}
-  friendlies: []
   enemyModel: {fileID: 6414733509144734878, guid: f2b134d89cff2694193cd1feeb127976, type: 3}
-  enemies: []
+  obstacleModel: {fileID: 1745268614198723418, guid: 171a1f51a80322847a653061289ca44e, type: 3}
+  obstacleParent: {fileID: 610069811006721110}
 --- !u!114 &5806115471698525488
 MonoBehaviour:
   m_ObjectHideFlags: 0
