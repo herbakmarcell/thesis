@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
-public enum Player
+public enum Turn
 {
     PLAYER, AI
 }
 
-public class StateRepresentation //: ICloneable
+public class StateRepresentation : ICloneable
 {
     public FieldObject[,] board = new FieldObject[7,10];
 
-    public Player currentPlayer;
+    public Turn currentTurn;
 
     public StateRepresentation()
     {
@@ -25,15 +26,25 @@ public class StateRepresentation //: ICloneable
 
         GenerateObstacles();
 
-        currentPlayer = Options.playerStarts ? Player.PLAYER : Player.AI;
+        currentTurn = Options.playerStarts ? Turn.PLAYER : Turn.AI;
     }
 
-    int GetHeuristics(Player player)
+    public void ChangeTurn()
     {
-        return 0;
+        if (currentTurn == Turn.PLAYER)
+        {
+            currentTurn = Turn.AI;
+        }
+        else
+        {
+            currentTurn = Turn.PLAYER;
+        }
     }
 
-
+    int GetHeuristics(Turn player)
+    {
+        return UnityEngine.Random.Range(0,100);
+    }
 
     void GenerateBoard()
     {
@@ -53,7 +64,7 @@ public class StateRepresentation //: ICloneable
         int j = 1;
         for (int x = 1; x <= friendlyCount; x++)
         {
-            int i = (x + 3) - (friendlyCount - x);
+            int i = ((x + 3) - (friendlyCount - x)) - 1;
             
 
             PlayerObject newFriendly = new PlayerObject("PLAYER" + x, new Vector2(j, i), 10, 1, false);
@@ -68,7 +79,7 @@ public class StateRepresentation //: ICloneable
         int j = 8;
         for (int x = 1; x <= enemyCount; x++)
         {
-            int i = (x + 3) - (enemyCount - x);
+            int i = ((x + 3) - (enemyCount - x)) - 1;
 
             PlayerObject newEnemy = new PlayerObject("ENEMY" + x, new Vector2(j, i), 10, 1, true);
             board[i, j] = newEnemy;
@@ -98,10 +109,12 @@ public class StateRepresentation //: ICloneable
     {
         return board.Cast<FieldObject>().Where(x => x.id == "OBSTACLE").ToList();
     }
+    public object Clone()
+    {
+        StateRepresentation newState = new StateRepresentation();
+        newState.board = board.Clone() as FieldObject[,];
+        newState.currentTurn = currentTurn;
 
-    //public object Clone()
-    //{
-    //    StateRepresentation newState = new StateRepresentation();
-    //    newState.board = board.Clone() as FieldObject[,];
-    //}
+        return newState;
+    }
 }

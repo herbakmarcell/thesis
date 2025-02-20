@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +21,14 @@ public class GameManager
             if (instance == null)
             {
                 instance = new GameManager();
+                //new Thread(xd).Start();
             }
             return instance;
         }
+    }
+    static void xd()
+    {
+        new TurnOperatorGenerator();
     }
 
     public GameManager()

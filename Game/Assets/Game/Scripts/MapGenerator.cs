@@ -24,7 +24,7 @@ public class MapGenerator : MonoBehaviour
         List<PlayerObject> friendlyObjects = GameManager.Instance.stateRepresentation.ListPlayerObjects(false);
         for (int i = 0; i < friendlyObjects.Count; i++)
         {
-            GameObject newFriendly = Instantiate(friendlyModel, new Vector3(friendlyObjects[i].position.x - 4.5f, friendlyObjects[i].position.y - 4f, 0), Quaternion.identity, gameObject.transform);
+            GameObject newFriendly = Instantiate(friendlyModel, new Vector3(friendlyObjects[i].position.x - 4.5f, friendlyObjects[i].position.y - 3f, 0), Quaternion.identity, gameObject.transform);
             newFriendly.GetComponent<EntityStat>().id = friendlyObjects[i].id;
             newFriendly.GetComponent<EntityStat>().position = friendlyObjects[i].position;
             newFriendly.GetComponent<EntityStat>().health = friendlyObjects[i].health;
@@ -39,7 +39,7 @@ public class MapGenerator : MonoBehaviour
         List<PlayerObject> enemyObjects = GameManager.Instance.stateRepresentation.ListPlayerObjects(true);
         for (int i = 0; i < enemyObjects.Count; i++)
         {
-            GameObject newEnemy = Instantiate(enemyModel, new Vector3(enemyObjects[i].position.x - 4.5f, enemyObjects[i].position.y -4f, 0), Quaternion.identity, gameObject.transform);
+            GameObject newEnemy = Instantiate(enemyModel, new Vector3(enemyObjects[i].position.x - 4.5f, enemyObjects[i].position.y -3f, 0), Quaternion.identity, gameObject.transform);
             newEnemy.GetComponent<EntityStat>().id = enemyObjects[i].id;
             newEnemy.GetComponent<EntityStat>().position = enemyObjects[i].position;
             newEnemy.GetComponent<EntityStat>().health = enemyObjects[i].health;
