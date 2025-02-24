@@ -21,7 +21,8 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateFriendlyGameObjects()
     {
-        List<PlayerObject> friendlyObjects = GameManager.Instance.stateRepresentation.ListPlayerObjects(false);
+        StateRepresentation stateRepresentation = GameManager.Instance.stateRepresentation as StateRepresentation;
+        List<PlayerObject> friendlyObjects = stateRepresentation.ListPlayerObjects(false);
         for (int i = 0; i < friendlyObjects.Count; i++)
         {
             GameObject newFriendly = Instantiate(friendlyModel, new Vector3(friendlyObjects[i].position.x - 4.5f, friendlyObjects[i].position.y - 3f, 0), Quaternion.identity, gameObject.transform);
@@ -36,7 +37,8 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateEnemyGameObjects()
     {
-        List<PlayerObject> enemyObjects = GameManager.Instance.stateRepresentation.ListPlayerObjects(true);
+        StateRepresentation stateRepresentation = GameManager.Instance.stateRepresentation as StateRepresentation;
+        List<PlayerObject> enemyObjects = stateRepresentation.ListPlayerObjects(true);
         for (int i = 0; i < enemyObjects.Count; i++)
         {
             GameObject newEnemy = Instantiate(enemyModel, new Vector3(enemyObjects[i].position.x - 4.5f, enemyObjects[i].position.y -3f, 0), Quaternion.identity, gameObject.transform);
@@ -51,7 +53,8 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateObstacles()
     {
-        List<FieldObject> obstacles = GameManager.Instance.stateRepresentation.ListObstacles();
+        StateRepresentation stateRepresentation = GameManager.Instance.stateRepresentation as StateRepresentation;
+        List<FieldObject> obstacles = stateRepresentation.ListObstacles();
         for (int i = 0; i < obstacles.Count; i++)
         {
             GameObject newObstacle = Instantiate(obstacleModel, new Vector3(obstacles[i].position.x - 4.5f, obstacles[i].position.y - 3f, 0), Quaternion.identity, obstacleParent.transform);

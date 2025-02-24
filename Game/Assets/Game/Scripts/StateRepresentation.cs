@@ -11,11 +11,9 @@ public enum Turn
     PLAYER, AI
 }
 
-public class StateRepresentation : ICloneable
+public class StateRepresentation : State
 {
     public FieldObject[,] board = new FieldObject[7,10];
-
-    public Turn currentTurn;
 
     public StateRepresentation()
     {
@@ -26,23 +24,39 @@ public class StateRepresentation : ICloneable
 
         GenerateObstacles();
 
-        currentTurn = Options.playerStarts ? Turn.PLAYER : Turn.AI;
+        CurrentTurn = Options.playerStarts ? Turn.PLAYER : Turn.AI;
     }
 
     public void ChangeTurn()
     {
-        if (currentTurn == Turn.PLAYER)
+        if (CurrentTurn == Turn.PLAYER)
         {
-            currentTurn = Turn.AI;
+            CurrentTurn = Turn.AI;
         }
         else
         {
-            currentTurn = Turn.PLAYER;
+            CurrentTurn = Turn.PLAYER;
         }
     }
 
-    int GetHeuristics(Turn player)
+    public override Status GetStatus()
     {
+        if ((GameManager.Instance.enemies.Count == 0))
+        {
+            return Status.PLAYERWIN;
+        }
+
+        if (GameManager.Instance.friendlies.Count == 0)
+        {
+            return Status.AIWIN;
+        }
+
+        return Status.PLAYING;
+    }
+
+    public override int GetHeuristics(Turn player)
+    {
+        //TODO
         return UnityEngine.Random.Range(0,100);
     }
 
@@ -109,12 +123,14 @@ public class StateRepresentation : ICloneable
     {
         return board.Cast<FieldObject>().Where(x => x.id == "OBSTACLE").ToList();
     }
-    public object Clone()
+    public override object Clone()
     {
         StateRepresentation newState = new StateRepresentation();
         newState.board = board.Clone() as FieldObject[,];
-        newState.currentTurn = currentTurn;
+        newState.CurrentTurn = CurrentTurn;
 
         return newState;
     }
+
+    
 }

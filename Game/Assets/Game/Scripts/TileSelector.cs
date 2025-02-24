@@ -39,6 +39,7 @@ public class TileSelector : MonoBehaviour
         worldPos.z = 0;
 
         Vector3Int currentCell = tilemap.WorldToCell(worldPos);
+        //if (gameManager.activePlayer >= gameManager.friendlies.Count) return;
         Vector3Int playerCell = tilemap.WorldToCell(gameManager.friendlies[gameManager.activePlayer].transform.position);
         if (gameManager.actionSelected && gameManager.moveTurn)
         {
@@ -56,6 +57,7 @@ public class TileSelector : MonoBehaviour
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
                     gameManager.friendlies[gameManager.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
+                    UnityEngine.Debug.Log("NextTurn");
                     gameManager.NextTurn();
                     playerActionDone = true;
                     ResetPreviousCell();
@@ -151,17 +153,6 @@ public class TileSelector : MonoBehaviour
     bool IsValidAttack(Vector3Int targetCell, Vector3Int playerCell)
     {
         float distance = Vector2.Distance(tilemap.GetCellCenterWorld(targetCell), tilemap.GetCellCenterWorld(playerCell));
-        switch (gameManager.attackType)
-        {
-            case AttackType.HEAVY:
-            case AttackType.LIGHT:
-                return distance == 1.0f && !IsObstacle(targetCell) && IsEnemyOccupied(targetCell);
-            case AttackType.SPELL:
-                return distance <= 3.0f && !IsObstacle(targetCell) && IsEnemyOccupied(targetCell);
-            case AttackType.NONE:
-            default:
-                return false;
-        }
-        
+        return distance == 1.0f && !IsObstacle(targetCell) && IsEnemyOccupied(targetCell);
     }
 }

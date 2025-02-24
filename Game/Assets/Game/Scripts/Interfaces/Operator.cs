@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface Operator
 {
-    bool IsApplicable(StateRepresentation state);
-    StateRepresentation Apply(StateRepresentation state);
+    bool IsApplicable(State state);
+    State Apply(State state);
 }

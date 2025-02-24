@@ -2,14 +2,7 @@ using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum AttackType
-{
-    HEAVY,
-    LIGHT,
-    SPELL,
-    NONE
-}
+using Unity.VisualScripting;
 
 public class GameManager
 {
@@ -21,14 +14,9 @@ public class GameManager
             if (instance == null)
             {
                 instance = new GameManager();
-                //new Thread(xd).Start();
             }
             return instance;
         }
-    }
-    static void xd()
-    {
-        new TurnOperatorGenerator();
     }
 
     public GameManager()
@@ -36,19 +24,24 @@ public class GameManager
         friendlies = new List<GameObject>();
         enemies = new List<GameObject>();
         obstacles = new List<GameObject>();
-        // EL KELL TÁVOLÍTANI MAJD EZT A SORT
-        // A MENÜNEK MEGFELELÕEN KELL MAJD MENNIE
+
         stateRepresentation = new StateRepresentation();
+        solver = new MiniMaxWithAlphaBetaPruning(new TurnOperatorGenerator(), 3);
+
+        actionPosition = new Vector2(-1, -1);
     }
 
-    public StateRepresentation stateRepresentation;
+    [SerializeField]
+    public State stateRepresentation;
+    public Solver solver;
 
     public bool playerTurn = true;
     public int activePlayer;
 
     public bool actionSelected;
     public bool moveTurn;
-    public AttackType attackType;
+
+    public Vector2 actionPosition;
 
 
     public List<GameObject> friendlies;
@@ -57,21 +50,33 @@ public class GameManager
 
     public void NextTurn()
     {
+        Operator o;
+        List<PlayerAction> actions = new List<PlayerAction>();
         if (playerTurn)
         {
-            if (activePlayer + 1 < Options.friendlyCount)
+            if (activePlayer < Options.friendlyCount)
             {
+                if(moveTurn)
+                {
+                    PlayerAction playerAction = new PlayerAction("PLAYER" + (activePlayer + 1), ActionType.MOVE, actionPosition);
+                    actions.Add(playerAction);
+                }
                 activePlayer++;
-                Debug.Log(activePlayer);
             }
             else
             {
+                o = new TurnOperator(actions);
+                stateRepresentation = o.Apply(stateRepresentation);
                 activePlayer = 0;
                 playerTurn = false;
             }
             actionSelected = false;
             moveTurn = false;
-            attackType = AttackType.NONE;
+        } 
+        else
+        {
+            Debug.Log("AI TURN");
+            stateRepresentation = solver.NextMove(stateRepresentation);
         }
     }
 }

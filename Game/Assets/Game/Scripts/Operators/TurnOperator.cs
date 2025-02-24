@@ -12,7 +12,7 @@ public class TurnOperator : Operator
 
     public List<PlayerAction> playerActions;
 
-    public StateRepresentation Apply(StateRepresentation state)
+    public State Apply(State state)
     {
         if (state == null || !(state is StateRepresentation))
         {
@@ -24,16 +24,20 @@ public class TurnOperator : Operator
         {
             if (playerAction.action == ActionType.MOVE)
             {
-                PlayerObject player = newState.ListPlayerObjects(newState.currentTurn == Turn.AI).Find(x => x.id == playerAction.playerId);
+                PlayerObject player = newState.ListPlayerObjects(newState.CurrentTurn == Turn.AI).Find(x => x.id == playerAction.playerId);
                 newState.board[(int)player.position.x, (int)player.position.y] = new FieldObject("EMPTY", player.position);
                 newState.board[(int)playerAction.actionPosition.x, (int)playerAction.actionPosition.y] = player;
                 player.position = playerAction.actionPosition;
+                //TODO move
+                MapFunctions.EntityMove(player.id, player.isAI,playerAction.actionPosition);
+                
             }
             else
             {
-                PlayerObject player = newState.ListPlayerObjects(newState.currentTurn == Turn.AI).Find(x => x.id == playerAction.playerId);
-                PlayerObject target = newState.ListPlayerObjects(newState.currentTurn != Turn.AI).Find(x => x.position == playerAction.actionPosition);
+                PlayerObject player = newState.ListPlayerObjects(newState.CurrentTurn == Turn.AI).Find(x => x.id == playerAction.playerId);
+                PlayerObject target = newState.ListPlayerObjects(newState.CurrentTurn != Turn.AI).Find(x => x.position == playerAction.actionPosition);
                 target.health -= player.attack;
+                //TODO
             }
         }
         newState.ChangeTurn();
@@ -42,34 +46,33 @@ public class TurnOperator : Operator
     }
 
 
-    public bool IsApplicable(StateRepresentation state)
+    public bool IsApplicable(State state)
     {
+        if (!isValidState(state)) return false;
+
+        StateRepresentation stateRepresentation = state as StateRepresentation;
         bool illegalAction = false;
         foreach (PlayerAction playerAction in playerActions) 
         {
             if (playerAction.action == ActionType.MOVE)
             {
-                illegalAction = !IsApplicableMove(state, playerAction);
+                illegalAction = !IsApplicableMove(stateRepresentation, playerAction);
             }
             else
             {
-                illegalAction = !IsApplicableAttack(state, playerAction);
+                illegalAction = !IsApplicableAttack(stateRepresentation, playerAction);
             }
 
-            if (illegalAction)
-            {
-                return false;
-            }
+            if (illegalAction) return false;
         }
         return true;
     }
 
     bool IsApplicableMove(StateRepresentation state, PlayerAction action)
     {
-        PlayerObject player = state.ListPlayerObjects(state.currentTurn == Turn.AI).Find(x => x.id == action.playerId);
+        PlayerObject player = state.ListPlayerObjects(state.CurrentTurn == Turn.AI).Find(x => x.id == action.playerId);
 
-        return isValidState(state) &&
-                IsOnBoard(action) &&
+        return  IsOnBoard(action) &&
                 IsNewPosition(player, action) &&
                 IsOneSquare(player, action) &&
                 IsCharacterThePlayer(state, player) &&
@@ -79,10 +82,9 @@ public class TurnOperator : Operator
 
     bool IsApplicableAttack(StateRepresentation state, PlayerAction action)
     {
-        PlayerObject player = state.ListPlayerObjects(state.currentTurn == Turn.AI).Find(x => x.id == action.playerId);
+        PlayerObject player = state.ListPlayerObjects(state.CurrentTurn == Turn.AI).Find(x => x.id == action.playerId);
 
-        return isValidState(state) &&
-                IsOnBoard(action) &&
+        return  IsOnBoard(action) &&
                 IsNewPosition(player, action) &&
                 IsOneSquare(player, action) &&
                 IsCharacterThePlayer(state, player) &&
@@ -90,7 +92,7 @@ public class TurnOperator : Operator
                 IsPlayerTurn(state, player);
     }
 
-    bool isValidState(StateRepresentation state)
+    bool isValidState(State state)
     {
         return state != null && state is StateRepresentation;
     }
@@ -126,7 +128,7 @@ public class TurnOperator : Operator
     }
     bool IsPlayerTurn(StateRepresentation state, PlayerObject player)
     {
-        return state.currentTurn == Turn.PLAYER && player.id.Contains("PLAYER") || state.currentTurn == Turn.AI && player.id.Contains("ENEMY");
+        return state.CurrentTurn == Turn.PLAYER && player.id.Contains("PLAYER") || state.CurrentTurn == Turn.AI && player.id.Contains("ENEMY");
     }
 }
 

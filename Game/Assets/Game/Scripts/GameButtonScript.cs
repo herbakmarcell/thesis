@@ -44,21 +44,6 @@ public class GameButtonScript : MonoBehaviour
         EnableAttackButtons();
     }
 
-    public void HeavyAttackButtonPressed()
-    {
-        GameManager.Instance.attackType = AttackType.HEAVY;
-    }
-
-    public void LightAttackButtonPressed()
-    {
-        GameManager.Instance.attackType = AttackType.LIGHT;
-    }
-
-    public void SpellAttackButtonPressed()
-    {
-        GameManager.Instance.attackType = AttackType.SPELL;
-    }
-
     public void CancelButtonPressed()
     {
         GameManager.Instance.actionSelected = false;

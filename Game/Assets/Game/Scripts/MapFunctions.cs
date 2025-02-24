@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapFunctions : MonoBehaviour
 {
-    public void EntityMove(string id, bool isAI, Vector2 newPostion)
+    public static void EntityMove(string id, bool isAI, Vector2 newPostion)
     {
         if (isAI)
         {
