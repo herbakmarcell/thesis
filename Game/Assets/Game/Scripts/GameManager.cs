@@ -4,19 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 
-public class GameManager
+public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance
     {
         get
         {
-            if (instance == null)
-            {
-                instance = new GameManager();
-            }
             return instance;
         }
+    }
+
+    void Awake()
+    {
+        instance = this;
     }
 
     public GameManager()
@@ -29,11 +30,15 @@ public class GameManager
         solver = new MiniMaxWithAlphaBetaPruning(new TurnOperatorGenerator(), 3);
 
         actionPosition = new Vector2(-1, -1);
+
+        debug = stateRepresentation as StateRepresentation;
     }
 
-    [SerializeField]
     public State stateRepresentation;
     public Solver solver;
+
+    //TODO: Remove
+    public StateRepresentation debug;
 
     public bool playerTurn = true;
     public int activePlayer;

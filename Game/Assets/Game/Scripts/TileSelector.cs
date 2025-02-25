@@ -13,8 +13,6 @@ public class TileSelector : MonoBehaviour
     private Vector3Int previousCell = new Vector3Int(int.MaxValue, int.MaxValue, int.MaxValue);
     private Camera cam;
 
-    private GameManager gameManager;
-
     public static bool playerActionDone = false;
 
     void Awake()
@@ -24,12 +22,11 @@ public class TileSelector : MonoBehaviour
         {
             cam = FindFirstObjectByType<Camera>();
         }
-        gameManager = GameManager.Instance;
     }
 
     void Update()
     {
-        if (gameManager.playerTurn) SelectTile();        
+        if (GameManager.Instance.playerTurn) SelectTile();        
     }
 
     void SelectTile()
@@ -40,8 +37,8 @@ public class TileSelector : MonoBehaviour
 
         Vector3Int currentCell = tilemap.WorldToCell(worldPos);
         //if (gameManager.activePlayer >= gameManager.friendlies.Count) return;
-        Vector3Int playerCell = tilemap.WorldToCell(gameManager.friendlies[gameManager.activePlayer].transform.position);
-        if (gameManager.actionSelected && gameManager.moveTurn)
+        Vector3Int playerCell = tilemap.WorldToCell(GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position);
+        if (GameManager.Instance.actionSelected && GameManager.Instance.moveTurn)
         {
             if (IsValidMove(currentCell, playerCell))
             {
@@ -56,9 +53,9 @@ public class TileSelector : MonoBehaviour
 
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
-                    gameManager.friendlies[gameManager.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
+                    GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
                     UnityEngine.Debug.Log("NextTurn");
-                    gameManager.NextTurn();
+                    GameManager.Instance.NextTurn();
                     playerActionDone = true;
                     ResetPreviousCell();
                 }
@@ -68,7 +65,7 @@ public class TileSelector : MonoBehaviour
                 ResetPreviousCell();
             }
         } 
-        else if(gameManager.actionSelected && !gameManager.moveTurn)
+        else if(GameManager.Instance.actionSelected && !GameManager.Instance.moveTurn)
         {
             if (IsValidAttack(currentCell, playerCell))
             {
@@ -87,7 +84,7 @@ public class TileSelector : MonoBehaviour
                     if (enemy != null)
                     {
                         enemy.gameObject.GetComponent<EntityStat>().TakeDamage(1);
-                        gameManager.NextTurn();
+                        GameManager.Instance.NextTurn();
                         playerActionDone = true;
                         ResetPreviousCell();
                     }
@@ -121,7 +118,7 @@ public class TileSelector : MonoBehaviour
 
     private bool IsFriendlyOccupied(Vector3Int cell)
     {
-        foreach (var friendly in gameManager.friendlies)
+        foreach (var friendly in GameManager.Instance.friendlies)
         {
             Vector3Int friendlyCell = tilemap.WorldToCell(friendly.transform.position);
             if (friendlyCell == cell)
@@ -134,7 +131,7 @@ public class TileSelector : MonoBehaviour
 
     bool IsEnemyOccupied(Vector3Int cell)
     {
-        foreach (var enemy in gameManager.enemies)
+        foreach (var enemy in GameManager.Instance.enemies)
         {
             Vector3Int enemyCell = tilemap.WorldToCell(enemy.transform.position);
             if (enemyCell == cell)
@@ -147,7 +144,7 @@ public class TileSelector : MonoBehaviour
 
     GameObject SelectEnemy(Vector3Int cell)
     {
-        return gameManager.enemies.FirstOrDefault(enemy => tilemap.WorldToCell(enemy.transform.position) == cell);
+        return GameManager.Instance.enemies.FirstOrDefault(enemy => tilemap.WorldToCell(enemy.transform.position) == cell);
     }
 
     bool IsValidAttack(Vector3Int targetCell, Vector3Int playerCell)
