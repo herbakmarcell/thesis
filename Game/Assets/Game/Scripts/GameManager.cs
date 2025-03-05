@@ -55,7 +55,7 @@ public class GameManager
     public List<GameObject> obstacles;
 
     public void NextTurn()
-    {
+    { 
         Operator o;
         List<PlayerAction> actions = new List<PlayerAction>();
         if (playerTurn)
