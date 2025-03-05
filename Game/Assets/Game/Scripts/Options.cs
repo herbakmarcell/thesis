@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class Options
 {
-    public static int friendlyCount = 1;
-    public static int enemyCount = 1;
+    public static int friendlyCount = 2;
+    public static int enemyCount = 2;
 
     public static bool playerStarts = true;
 

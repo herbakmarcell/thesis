@@ -34,6 +34,7 @@ public class TileColoring : MonoBehaviour
 
     void HighlightTile()
     {
+        if (GameManager.Instance.activePlayer >= GameManager.Instance.friendlies.Count) return;
         Vector2 mousePos = Mouse.current.position.ReadValue();
         Vector3 worldPos = camera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, camera.nearClipPlane));
         worldPos.z = 0;

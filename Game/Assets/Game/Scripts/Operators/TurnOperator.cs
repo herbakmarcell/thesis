@@ -24,24 +24,23 @@ public class TurnOperator : Operator
         {
             if (playerAction.actionType == ActionType.MOVE)
             {
-                PlayerObject player = newState.ListPlayerObjects(newState.CurrentTurn == Turn.AI).Find(x => x.id == playerAction.playerId);
-                newState.board[(int)player.position.x, (int)player.position.y] = new FieldObject("EMPTY", player.position);
+                PlayerObject player = newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
+                newState.board[(int)player.position.y, (int)player.position.x] = new FieldObject("EMPTY", player.position);
                 Vector2 newPos = ActionPosition(playerAction, player);
-                newState.board[(int)newPos.x, (int)newPos.y] = player;
+                //Debug.Log($"{player.id} {newPos.x} {newPos.y}");
+                newState.board[(int)newPos.y, (int)newPos.x] = player;
                 player.position = newPos;
-                //TODO move
-                //MapFunctions.EntityMove(player.id, player.isAI,playerAction.actionPosition);
                 
             }
             else
             {
-                PlayerObject player = newState.ListPlayerObjects(newState.CurrentTurn == Turn.AI).Find(x => x.id == playerAction.playerId);
+                PlayerObject player = newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
                 Vector2 actionPos = ActionPosition(playerAction, player);
-                PlayerObject target = newState.ListPlayerObjects(newState.CurrentTurn != Turn.AI).Find(x => x.position == actionPos);
+                PlayerObject target = newState.ListAllPlayerObjects().Find(x => x.position == actionPos);
                 target.health -= player.attack;
-                //TODO
             }
         }
+        //playerActions.Clear();
         newState.ChangeTurn();
 
         return newState;
@@ -60,10 +59,10 @@ public class TurnOperator : Operator
             {
                 illegalAction = !IsApplicableMove(stateRepresentation, playerAction);
             }
-            else
+            else if (playerAction.actionType == ActionType.ATTACK)
             {
                 illegalAction = !IsApplicableAttack(stateRepresentation, playerAction);
-            }
+            } 
 
             if (illegalAction) return false;
         }
@@ -72,7 +71,7 @@ public class TurnOperator : Operator
 
     bool IsApplicableMove(StateRepresentation state, PlayerAction action)
     {
-        PlayerObject player = state.ListPlayerObjects(state.CurrentTurn == Turn.AI).Find(x => x.id == action.playerId);
+        PlayerObject player = state.ListAllPlayerObjects().Find(x => x.id == action.playerId);
 
         return  IsOnBoard(action, player) &&
                 IsCharacterThePlayer(state, player) &&
@@ -82,7 +81,7 @@ public class TurnOperator : Operator
 
     bool IsApplicableAttack(StateRepresentation state, PlayerAction action)
     {
-        PlayerObject player = state.ListPlayerObjects(state.CurrentTurn == Turn.AI).Find(x => x.id == action.playerId);
+        PlayerObject player = state.ListAllPlayerObjects().Find(x => x.id == action.playerId);
 
         return  IsOnBoard(action, player) &&
                 IsCharacterThePlayer(state, player) &&
@@ -92,6 +91,7 @@ public class TurnOperator : Operator
 
     Vector2 ActionPosition(PlayerAction playerAction, PlayerObject player)
     {
+        
         switch (playerAction.actionDirection)
         {
             case ActionDirection.UP:
@@ -117,13 +117,13 @@ public class TurnOperator : Operator
     }
     bool IsCharacterThePlayer(StateRepresentation state, PlayerObject player)
     {
-        FieldObject fieldObject = state.board[(int)player.position.x, (int)player.position.y];
+        FieldObject fieldObject = state.board[(int)player.position.y, (int)player.position.x];
         return fieldObject is PlayerObject p && p == player;
     }
     bool IsEmpty(StateRepresentation state, PlayerAction action, PlayerObject player)
     {
         Vector2 newPos = ActionPosition(action, player);
-        FieldObject fieldObject = state.board[(int)newPos.x, (int)newPos.y];
+        FieldObject fieldObject = state.board[(int)newPos.y, (int)newPos.x];
         return fieldObject.id == "EMPTY";
     }
     bool IsOpposite(StateRepresentation state, PlayerObject player, PlayerAction action)
@@ -131,13 +131,13 @@ public class TurnOperator : Operator
         Vector2 newPos = ActionPosition(action, player);
         if (player.isAI)
         {
-            return state.board[(int)newPos.x, (int)newPos.y].id.Contains("PLAYER");
+            return state.board[(int)newPos.y, (int)newPos.x].id.Contains("PLAYER");
         }
-        return state.board[(int)newPos.x, (int)newPos.y].id.Contains("ENEMY");
+        return state.board[(int)newPos.y, (int)newPos.x].id.Contains("ENEMY");
     }
     bool IsPlayerTurn(StateRepresentation state, PlayerObject player)
     {
-        return state.CurrentTurn == Turn.PLAYER && player.id.Contains("PLAYER") || state.CurrentTurn == Turn.AI && player.id.Contains("ENEMY");
+        return (state.CurrentTurn == Turn.PLAYER && player.id.Contains("PLAYER")) || (state.CurrentTurn == Turn.AI && player.id.Contains("ENEMY"));
     }
 }
 

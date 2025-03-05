@@ -29,6 +29,7 @@ public class MiniMaxWithAlphaBetaPruning : Solver
 
         foreach (Operator op in Operators)
         {
+            
             if (op.IsApplicable(node.State))
             {
                 State newState = op.Apply(node.State);

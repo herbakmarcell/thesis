@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,8 +6,6 @@ using UnityEngine.Tilemaps;
 public class TileSelector : MonoBehaviour
 {
     public Tilemap tilemap;
-    public Color highlightColor;
-    public Color validTileColor;
 
     private Vector3Int previousCell = new Vector3Int(int.MaxValue, int.MaxValue, int.MaxValue);
     private Camera cam;
@@ -44,9 +41,10 @@ public class TileSelector : MonoBehaviour
 
                 if (IsValidMove(currentCell, playerCell))
                 {
+                    GameManager.Instance.actionDirection = GetDirection(currentCell, playerCell);
+                    GameManager.Instance.friendlies[GameManager.Instance.activePlayer].GetComponent<EntityStat>().position = SetNewObjectPosition(GameManager.Instance.actionDirection);
                     GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
-                    UnityEngine.Debug.Log("Next Character");
-                    GameManager.Instance.NextTurn();
+                    GameManager.Instance.ProgressGame();
                 }
             }
         }
@@ -56,6 +54,36 @@ public class TileSelector : MonoBehaviour
     {
         float distance = Vector2.Distance(tilemap.GetCellCenterWorld(targetCell), tilemap.GetCellCenterWorld(playerCell));
         return distance == 1.0f && !IsObstacle(targetCell) && !IsFriendlyOccupied(targetCell) && !IsEnemyOccupied(targetCell);
+    }
+
+    private ActionDirection GetDirection(Vector3Int targetCell, Vector3Int playerCell)
+    {
+        if (targetCell.x > playerCell.x) return ActionDirection.RIGHT;
+        if (targetCell.x < playerCell.x) return ActionDirection.LEFT;
+        if (targetCell.y > playerCell.y) return ActionDirection.UP;
+        if (targetCell.y < playerCell.y) return ActionDirection.DOWN;
+        throw new System.Exception("Invalid direction");
+    }
+
+    private Vector2 SetNewObjectPosition(ActionDirection actionDirection)
+    {
+        Vector2 position = GameManager.Instance.friendlies[GameManager.Instance.activePlayer].GetComponent<EntityStat>().position;
+        switch (actionDirection)
+        {
+            case ActionDirection.UP:
+                position.y += 1;
+                break;
+            case ActionDirection.DOWN:
+                position.y -= 1;
+                break;
+            case ActionDirection.LEFT:
+                position.x -= 1;
+                break;
+            case ActionDirection.RIGHT:
+                position.x += 1;
+                break;
+        }
+        return position;
     }
 
     private bool IsObstacle(Vector3Int cell)

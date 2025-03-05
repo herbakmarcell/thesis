@@ -7,20 +7,13 @@ using UnityEngine;
 
 public class TurnOperatorGenerator : OperatorGenerator
 {
-    public BlockingCollection<Operator> Operators { get; }
+    public List<Operator> Operators { get; }
 
     public TurnOperatorGenerator()
     {
-        Operators = new BlockingCollection<Operator>();
-        Task.Run(() =>
-        {
-            GeneratePlayerOperators();
-        });
-        Task.Run(() =>
-        {
-            GenerateAIOperators();
-        });
-
+        Operators = new List<Operator>();
+        GeneratePlayerOperators();
+        GenerateAIOperators();
     }
     void GeneratePlayerOperators()
     {
@@ -51,7 +44,7 @@ public class TurnOperatorGenerator : OperatorGenerator
                 playerActions.Add(actions[i][indexes[i]]);
             }
             Operators.Add(new TurnOperator(playerActions));
-            Debug.Log($"[PLAYER] {string.Join('x', lenghts)} = {lenghts.Aggregate(1, (acc, x) => acc * x)} \t Current: {Operators.Count}");
+            //Debug.Log($"[PLAYER] {string.Join('x', lenghts)} = {lenghts.Aggregate(1, (acc, x) => acc * x)} \t Current: {Operators.Count}");
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
                 indexes[i]++;
@@ -90,7 +83,7 @@ public class TurnOperatorGenerator : OperatorGenerator
                 playerActions.Add(actions[i][indexes[i]]);
             }
             Operators.Add(new TurnOperator(playerActions));
-            Debug.Log($"[AI] {string.Join('x', lenghts)} = {lenghts.Aggregate(1, (acc, x) => acc * x)} \t Current: {Operators.Count}");
+            //Debug.Log($"[AI] {string.Join('x', lenghts)} = {lenghts.Aggregate(1, (acc, x) => acc * x)} \t Current: {Operators.Count}");
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
                 indexes[i]++;

@@ -119,6 +119,10 @@ public class StateRepresentation : State
     {
         return board.Cast<FieldObject>().Where(x => x is PlayerObject && (x as PlayerObject).isAI == isAI).Select(x => x as PlayerObject).ToList();
     }
+    public List<PlayerObject> ListAllPlayerObjects()
+    {
+        return board.Cast<FieldObject>().Where(x => x is PlayerObject).Select(x => x as PlayerObject).ToList();
+    }
     public List<FieldObject> ListObstacles()
     {
         return board.Cast<FieldObject>().Where(x => x.id == "OBSTACLE").ToList();
@@ -126,7 +130,23 @@ public class StateRepresentation : State
     public override object Clone()
     {
         StateRepresentation newState = new StateRepresentation();
-        newState.board = board.Clone() as FieldObject[,];
+        int rows = board.GetLength(0);
+        int cols = board.GetLength(1);
+        FieldObject[,] clonedBoard = new FieldObject[rows, cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                if (board[i, j] is PlayerObject)
+                {
+                    clonedBoard[i, j] = board[i, j].Clone() as PlayerObject;
+                }
+                else clonedBoard[i, j] = (FieldObject)board[i, j].Clone();
+
+            }
+        }
+        newState.board = clonedBoard;
         newState.CurrentTurn = CurrentTurn;
 
         return newState;

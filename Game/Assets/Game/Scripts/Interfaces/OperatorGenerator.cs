@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface OperatorGenerator
 {
-    BlockingCollection<Operator> Operators { get; }
+    List<Operator> Operators { get; }
 }
