@@ -31,14 +31,14 @@ public class GameButtonScript : MonoBehaviour
 
     public void MoveTurnButtonPressed()
     {
-        GameManager.Instance.actionSelected = true;
+        GameManager.Instance.actionSelected = ActionSelected.MOVE;
         GameManager.Instance.moveTurn = true;
         DisableTurnButtons();
     }
 
     public void AttackTurnButtonPressed()
     {
-        GameManager.Instance.actionSelected = true;
+        GameManager.Instance.actionSelected = ActionSelected.ATTACK;
         GameManager.Instance.moveTurn = false;
         DisableTurnButtons();
         EnableAttackButtons();
@@ -46,7 +46,7 @@ public class GameButtonScript : MonoBehaviour
 
     public void CancelButtonPressed()
     {
-        GameManager.Instance.actionSelected = false;
+        GameManager.Instance.actionSelected = ActionSelected.NONE;
         if (GameManager.Instance.moveTurn)
         {
             EnableTurnButtons();

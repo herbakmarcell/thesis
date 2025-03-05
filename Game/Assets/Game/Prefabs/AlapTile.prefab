@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 9185046558468662633}
   - component: {fileID: 4944407383695635838}
   - component: {fileID: 6949134250021756930}
+  - component: {fileID: 501212496672551320}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -879,6 +880,22 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &501212496672551320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4798182498616738069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58605624ef64ca34fba9d074ab30a6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
+  highlightColor: {r: 0.6862745, g: 0.6862745, b: 0.6862745, a: 0.39215687}
+  validColor: {r: 0, g: 1, b: 0, a: 0.47058824}
+  invalidColor: {r: 1, g: 0, b: 0, a: 0.47058824}
 --- !u!1 &6910307633522722211
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,17 +7,21 @@ public enum ActionType
 {
     MOVE, ATTACK
 }
+public enum ActionDirection
+{
+    UP, DOWN, LEFT, RIGHT
+}
 public class PlayerAction
 {
     public string playerId;
-    public ActionType action;
-    public Vector2 actionPosition;
+    public ActionType actionType;
+    public ActionDirection actionDirection;
 
-    public PlayerAction(string playerId, ActionType action, Vector2 actionPosition)
+    public PlayerAction(string playerId, ActionType action, ActionDirection actionDirection)
     {
         this.playerId = playerId;
-        this.action = action;
-        this.actionPosition = actionPosition;
+        this.actionType = action;
+        this.actionDirection = actionDirection;
     }
     public PlayerAction()
     {

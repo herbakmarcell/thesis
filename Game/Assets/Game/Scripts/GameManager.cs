@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 
+public enum ActionSelected{
+    MOVE, ATTACK, NONE
+}
+
 public class GameManager
 {
     private static GameManager instance;
@@ -28,7 +32,10 @@ public class GameManager
         stateRepresentation = new StateRepresentation();
         solver = new MiniMaxWithAlphaBetaPruning(new TurnOperatorGenerator(), 3);
 
-        actionPosition = new Vector2(-1, -1);
+        currentStatus = Status.PLAYING;
+        actionSelected = ActionSelected.NONE;
+
+        playerTurn = Options.playerStarts;
     }
 
     [SerializeField]
@@ -38,11 +45,10 @@ public class GameManager
     public bool playerTurn = true;
     public int activePlayer;
 
-    public bool actionSelected;
-    public bool moveTurn;
+    public Status currentStatus;
 
-    public Vector2 actionPosition;
-
+    public ActionSelected actionSelected;
+    public ActionDirection actionDirection;
 
     public List<GameObject> friendlies;
     public List<GameObject> enemies;
@@ -56,11 +62,23 @@ public class GameManager
         {
             if (activePlayer < Options.friendlyCount)
             {
-                if(moveTurn)
+                PlayerAction playerAction = null;
+                switch (actionSelected)
                 {
-                    PlayerAction playerAction = new PlayerAction("PLAYER" + (activePlayer + 1), ActionType.MOVE, actionPosition);
-                    actions.Add(playerAction);
+                    case ActionSelected.MOVE:
+                        playerAction = new PlayerAction("PLAYER" + (activePlayer + 1), ActionType.MOVE, actionDirection);
+                        break;
+                    case ActionSelected.ATTACK:
+                        playerAction = new PlayerAction("PLAYER" + (activePlayer + 1), ActionType.ATTACK, actionDirection);
+                        break;
+                    case ActionSelected.NONE:
+                    default:
+                        break;
+
                 }
+                actions.Add(playerAction);
+
+            }
                 activePlayer++;
             }
             else
@@ -70,8 +88,7 @@ public class GameManager
                 activePlayer = 0;
                 playerTurn = false;
             }
-            actionSelected = false;
-            moveTurn = false;
+            actionSelected = ActionSelected.NONE;
         } 
         else
         {

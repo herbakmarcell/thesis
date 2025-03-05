@@ -27,15 +27,17 @@ public class TurnOperatorGenerator : OperatorGenerator
         List<List<PlayerAction>> actions = new List<List<PlayerAction>>();
         for (int i = 0; i < Options.friendlyCount; i++)
         {
-            List<PlayerAction> playerActionI = new List<PlayerAction>();
-            for (int x = 0; x < 10; x++)
+            List<PlayerAction> playerActionI = new List<PlayerAction>
             {
-                for (int y = 0; y < 7; y++)
-                {
-                    playerActionI.Add(new PlayerAction("PLAYER" + (i + 1), ActionType.MOVE, new Vector2(x, y)));
-                    playerActionI.Add(new PlayerAction("PLAYER" + (i + 1), ActionType.ATTACK, new Vector2(x, y)));
-                }
-            }
+                new PlayerAction("PLAYER" + (i + 1), ActionType.MOVE, ActionDirection.UP),
+                new PlayerAction("PLAYER" + (i + 1), ActionType.MOVE, ActionDirection.DOWN),
+                new PlayerAction("PLAYER" + (i + 1), ActionType.MOVE, ActionDirection.LEFT),
+                new PlayerAction("PLAYER" + (i + 1), ActionType.MOVE, ActionDirection.RIGHT),
+                new PlayerAction("PLAYER" + (i + 1), ActionType.ATTACK, ActionDirection.UP),
+                new PlayerAction("PLAYER" + (i + 1), ActionType.ATTACK, ActionDirection.DOWN),
+                new PlayerAction("PLAYER" + (i + 1), ActionType.ATTACK, ActionDirection.LEFT),
+                new PlayerAction("PLAYER" + (i + 1), ActionType.ATTACK, ActionDirection.RIGHT)
+            };     
             actions.Add(playerActionI);
         }
 
@@ -64,15 +66,17 @@ public class TurnOperatorGenerator : OperatorGenerator
         List<List<PlayerAction>> actions = new List<List<PlayerAction>>();
         for (int i = 0; i < Options.enemyCount; i++)
         {
-            List<PlayerAction> playerActionI = new List<PlayerAction>();
-            for (int x = 0; x < 10; x++)
+            List<PlayerAction> playerActionI = new List<PlayerAction>
             {
-                for (int y = 0; y < 7; y++)
-                {
-                    playerActionI.Add(new PlayerAction("ENEMY" + (i + 1), ActionType.MOVE, new Vector2(x, y)));
-                    playerActionI.Add(new PlayerAction("ENEMY" + (i + 1), ActionType.ATTACK, new Vector2(x, y)));
-                }
-            }
+                new PlayerAction("ENEMY" + (i + 1), ActionType.MOVE, ActionDirection.UP),
+                new PlayerAction("ENEMY" + (i + 1), ActionType.MOVE, ActionDirection.DOWN),
+                new PlayerAction("ENEMY" + (i + 1), ActionType.MOVE, ActionDirection.LEFT),
+                new PlayerAction("ENEMY" + (i + 1), ActionType.MOVE, ActionDirection.RIGHT),
+                new PlayerAction("ENEMY" + (i + 1), ActionType.ATTACK, ActionDirection.UP),
+                new PlayerAction("ENEMY" + (i + 1), ActionType.ATTACK, ActionDirection.DOWN),
+                new PlayerAction("ENEMY" + (i + 1), ActionType.ATTACK, ActionDirection.LEFT),
+                new PlayerAction("ENEMY" + (i + 1), ActionType.ATTACK, ActionDirection.RIGHT)
+            };
             actions.Add(playerActionI);
         }
 
