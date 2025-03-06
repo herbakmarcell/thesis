@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurnOperator : Operator
@@ -25,19 +27,29 @@ public class TurnOperator : Operator
             if (playerAction.actionType == ActionType.MOVE)
             {
                 PlayerObject player = newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
+                
                 newState.board[(int)player.position.y, (int)player.position.x] = new FieldObject("EMPTY", player.position);
+
                 Vector2 newPos = ActionPosition(playerAction, player);
                 //Debug.Log($"{player.id} {newPos.x} {newPos.y}");
                 newState.board[(int)newPos.y, (int)newPos.x] = player;
                 player.position = newPos;
-                
             }
             else
             {
                 PlayerObject player = newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
                 Vector2 actionPos = ActionPosition(playerAction, player);
-                PlayerObject target = newState.ListAllPlayerObjects().Find(x => x.position == actionPos);
+                //Object reference 
+                PlayerObject target = newState.ListAllPlayerObjects().Find(x => x.position == actionPos).Clone() as PlayerObject;
                 target.health -= player.attack;
+                if (target.health <= 0)
+                {
+                    newState.board[(int)target.position.y, (int)target.position.x] = new FieldObject("EMPTY", target.position);
+                }
+                else
+                {
+                    newState.board[(int)target.position.y, (int)target.position.x] = target;
+                }
             }
         }
         //playerActions.Clear();
@@ -52,12 +64,13 @@ public class TurnOperator : Operator
         if (!isValidState(state)) return false;
 
         StateRepresentation stateRepresentation = state as StateRepresentation;
-        bool illegalAction = false;
+        bool illegalAction = true;
         foreach (PlayerAction playerAction in playerActions) 
         {
             if (playerAction.actionType == ActionType.MOVE)
             {
                 illegalAction = !IsApplicableMove(stateRepresentation, playerAction);
+                
             }
             else if (playerAction.actionType == ActionType.ATTACK)
             {
@@ -66,14 +79,22 @@ public class TurnOperator : Operator
 
             if (illegalAction) return false;
         }
+        if (HasSamePosition(state)) return false;
         return true;
     }
 
     bool IsApplicableMove(StateRepresentation state, PlayerAction action)
     {
+        Debug.Log("Lista hossza: " + state.ListAllPlayerObjects().Count);
+        Debug.Log("0. elem: " + state.ListAllPlayerObjects()[0].id);
+        Debug.Log("1. elem: " + state.ListAllPlayerObjects()[1].id);
+        //Debug.Log("Action ID:" + action.playerId);
+        //Debug.Log(state.ListAllPlayerObjects().Find(x => x.id == action.playerId));
         PlayerObject player = state.ListAllPlayerObjects().Find(x => x.id == action.playerId);
 
-        return  IsOnBoard(action, player) &&
+        return  isValidState(state) &&
+                IsOnBoard(action, player) &&
+                //HasSamePosition(state) &&
                 IsCharacterThePlayer(state, player) &&
                 IsEmpty(state, action, player) &&
                 IsPlayerTurn(state, player);
@@ -91,7 +112,7 @@ public class TurnOperator : Operator
 
     Vector2 ActionPosition(PlayerAction playerAction, PlayerObject player)
     {
-        
+        //Debug.Log(player);
         switch (playerAction.actionDirection)
         {
             case ActionDirection.UP:
@@ -105,6 +126,41 @@ public class TurnOperator : Operator
             default:
                 return player.position;
         }
+    }
+
+    bool HasSamePosition(State state)
+    {
+        List<PlayerObject> playerObjects = null;
+        if ((state as StateRepresentation).CurrentTurn == Turn.AI)
+        {
+            playerObjects = (state as StateRepresentation).ListAllPlayerObjects().Where(x => x.isAI).ToList();
+        }
+        else if ((state as StateRepresentation).CurrentTurn == Turn.PLAYER)
+        {
+            playerObjects = (state as StateRepresentation).ListAllPlayerObjects().Where(x => !x.isAI).ToList();
+        }
+        List<PlayerObject> playerObjects2 = new List<PlayerObject>();
+        foreach (var item in playerObjects)
+        {
+            PlayerObject player = item.Clone() as PlayerObject;
+            foreach (var action in playerActions)
+            {
+                if(action.playerId == player.id && action.actionType == ActionType.MOVE) 
+                    player.position = ActionPosition(playerActions.Find(x => x.playerId == player.id), player);
+            }
+            
+            playerObjects2.Add(player);
+        }
+        List<Vector2> positions = new List<Vector2>();
+        foreach (PlayerObject playerObject in playerObjects2)
+        {
+            if (positions.Contains(playerObject.position))
+            {
+                return true;
+            }
+            positions.Add(playerObject.position);
+        }
+        return false;
     }
     bool isValidState(State state)
     {

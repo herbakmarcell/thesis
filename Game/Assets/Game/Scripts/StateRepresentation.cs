@@ -142,7 +142,7 @@ public class StateRepresentation : State
                 {
                     clonedBoard[i, j] = board[i, j].Clone() as PlayerObject;
                 }
-                else clonedBoard[i, j] = (FieldObject)board[i, j].Clone();
+                else clonedBoard[i, j] = board[i, j].Clone() as FieldObject;
 
             }
         }
