@@ -41,12 +41,12 @@ public class StateRepresentation : State
 
     public override Status GetStatus()
     {
-        if ((GameManager.Instance.enemies.Count == 0))
+        if (ListPlayerObjects(true).Count == 0)
         {
             return Status.PLAYERWIN;
         }
 
-        if (GameManager.Instance.friendlies.Count == 0)
+        if (ListPlayerObjects(false).Count == 0)
         {
             return Status.AIWIN;
         }
@@ -57,7 +57,8 @@ public class StateRepresentation : State
     public override int GetHeuristics(Turn player)
     {
         //TODO
-        return UnityEngine.Random.Range(0,100);
+        //return UnityEngine.Random.Range(0,100);
+        return 1;
     }
 
     void GenerateBoard()
@@ -81,7 +82,7 @@ public class StateRepresentation : State
             int i = ((x + 3) - (friendlyCount - x)) - 1;
             
 
-            PlayerObject newFriendly = new PlayerObject("PLAYER" + x, new Vector2(j, i), 10, 1, false);
+            PlayerObject newFriendly = new PlayerObject("PLAYER" + x, new Vector2(j, i), 10, 10, false);
             board[i, j] = newFriendly;
         }
     }

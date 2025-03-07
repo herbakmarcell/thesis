@@ -59,6 +59,11 @@ public class TileSelector : MonoBehaviour
                     GameObject enemy = SelectEnemy(currentCell);
                     GameManager.Instance.actionDirection = GetDirection(currentCell, playerCell);
                     enemy.GetComponent<EntityStat>().health -= GameManager.Instance.friendlies[GameManager.Instance.activePlayer].GetComponent<EntityStat>().attack;
+                    if (enemy.GetComponent<EntityStat>().health <= 0)
+                    {
+                        GameManager.Instance.enemies.Remove(enemy);
+                        Destroy(enemy);
+                    }
                     GameManager.Instance.ProgressGame();
                 }
             }

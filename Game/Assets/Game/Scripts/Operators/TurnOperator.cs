@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class TurnOperator : Operator
 {
@@ -24,6 +25,13 @@ public class TurnOperator : Operator
         StateRepresentation newState = state.Clone() as StateRepresentation;
         foreach (PlayerAction playerAction in playerActions)
         {
+            if (newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId) == null)
+            {
+                continue;
+            }
+
+
+
             if (playerAction.actionType == ActionType.MOVE)
             {
                 PlayerObject player = newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
@@ -31,24 +39,33 @@ public class TurnOperator : Operator
                 newState.board[(int)player.position.y, (int)player.position.x] = new FieldObject("EMPTY", player.position);
 
                 Vector2 newPos = ActionPosition(playerAction, player);
-                //Debug.Log($"{player.id} {newPos.x} {newPos.y}");
+                Debug.Log($"{player.id} {newPos.x} {newPos.y}");
                 newState.board[(int)newPos.y, (int)newPos.x] = player;
                 player.position = newPos;
             }
             else
             {
+
+
                 PlayerObject player = newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
                 Vector2 actionPos = ActionPosition(playerAction, player);
-                //Object reference 
-                PlayerObject target = newState.ListAllPlayerObjects().Find(x => x.position == actionPos).Clone() as PlayerObject;
-                target.health -= player.attack;
-                if (target.health <= 0)
+                List<PlayerObject> playerObjects = newState.ListAllPlayerObjects();
+                PlayerObject target = playerObjects.Find(x => x.position == actionPos);
+
+                if (target == null)
                 {
-                    newState.board[(int)target.position.y, (int)target.position.x] = new FieldObject("EMPTY", target.position);
+                    continue;
+                }
+
+                PlayerObject targetClone = target.Clone() as PlayerObject;
+                targetClone.health -= player.attack;
+                if (targetClone.health <= 0)
+                {
+                    newState.board[(int)targetClone.position.y, (int)targetClone.position.x] = new FieldObject("EMPTY", targetClone.position);
                 }
                 else
                 {
-                    newState.board[(int)target.position.y, (int)target.position.x] = target;
+                    newState.board[(int)targetClone.position.y, (int)targetClone.position.x] = targetClone;
                 }
             }
         }
@@ -64,13 +81,21 @@ public class TurnOperator : Operator
         if (!isValidState(state)) return false;
 
         StateRepresentation stateRepresentation = state as StateRepresentation;
-        bool illegalAction = true;
-        foreach (PlayerAction playerAction in playerActions) 
+        bool illegalAction = false;
+        foreach (PlayerAction playerAction in playerActions)
         {
+            if (stateRepresentation.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId) == null)
+            {
+                continue;
+            }
+            //PlayerObject player = stateRepresentation.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
+            //Vector2 actionPos = ActionPosition(playerAction, player);
+            //if (playerAction.actionType == ActionType.ATTACK && (stateRepresentation.ListAllPlayerObjects().Find(x => x.position == actionPos) == null)) continue;
+
             if (playerAction.actionType == ActionType.MOVE)
             {
                 illegalAction = !IsApplicableMove(stateRepresentation, playerAction);
-                
+
             }
             else if (playerAction.actionType == ActionType.ATTACK)
             {
@@ -86,8 +111,8 @@ public class TurnOperator : Operator
     bool IsApplicableMove(StateRepresentation state, PlayerAction action)
     {
         Debug.Log("Lista hossza: " + state.ListAllPlayerObjects().Count);
-        Debug.Log("0. elem: " + state.ListAllPlayerObjects()[0].id);
-        Debug.Log("1. elem: " + state.ListAllPlayerObjects()[1].id);
+        //Debug.Log("0. elem: " + state.ListAllPlayerObjects()[0].id);
+        //Debug.Log("1. elem: " + state.ListAllPlayerObjects()[1].id);
         //Debug.Log("Action ID:" + action.playerId);
         //Debug.Log(state.ListAllPlayerObjects().Find(x => x.id == action.playerId));
         PlayerObject player = state.ListAllPlayerObjects().Find(x => x.id == action.playerId);

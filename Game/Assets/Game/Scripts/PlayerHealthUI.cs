@@ -15,28 +15,21 @@ public class PlayerHealthUI : MonoBehaviour
         GenerateHealthUI();
     }
 
-    void Update()
+    public void UpdateHealthUI()
     {
-        UpdateHealthUI();
-    }
-
-    void UpdateHealthUI()
-    {
-        for (int i = 0; i < healthList.Count; i++)
-        {
-            healthList[i].GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.friendlies[i].GetComponent<EntityStat>().health);
-        }
+        ClearHealthUI();
+        GenerateHealthUI();
     }
 
     void GenerateHealthUI()
     {
-        ClearHealthUI();
+        List<GameObject> friendlies = GameManager.Instance.friendlies;
 
-        for (int i = 0; i < GameManager.Instance.friendlies.Count; i++)
+        foreach (var friendly in friendlies)
         {
             GameObject singleHealthBar = Instantiate(playerGroupPrefab, transform);
             healthList.Add(singleHealthBar);
-            singleHealthBar.GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.friendlies[i].GetComponent<EntityStat>().health);
+            singleHealthBar.GetComponent<PlayerGroupManager>().SetBar(friendly.GetComponent<EntityStat>().health);
         }
     }
 

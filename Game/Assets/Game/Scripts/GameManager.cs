@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 using System;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public enum ActionSelected{
     MOVE, ATTACK, NONE
@@ -29,6 +31,9 @@ public class GameManager
         friendlies = new List<GameObject>();
         enemies = new List<GameObject>();
         obstacles = new List<GameObject>();
+
+        aiHealthUI = GameObject.FindObjectOfType<AIHealthUI>();
+        playerHealthUI = GameObject.FindObjectOfType<PlayerHealthUI>();
 
         stateRepresentation = new StateRepresentation();
         solver = new MiniMaxWithAlphaBetaPruning(new TurnOperatorGenerator(), 2);
@@ -60,10 +65,13 @@ public class GameManager
 
     List<PlayerAction> actions = new List<PlayerAction>();
 
+    AIHealthUI aiHealthUI;
+    PlayerHealthUI playerHealthUI;
+
     public void ProgressGame()
     {
         Operator o;
-        
+
         if (playerTurn)
         {
             if (activePlayer < friendlies.Count)
@@ -81,7 +89,14 @@ public class GameManager
                     default:
                         return;
 
-                } 
+                }
+                if (enemies.Count == 0)
+                {
+                    currentStatus = Status.PLAYERWIN;
+                    SceneManager.LoadScene("EndScene");
+                }
+                RedrawTable();
+                
                 actions.Add(playerAction);
                 actionSelected = ActionSelected.NONE;
                 activePlayer++;
@@ -90,7 +105,7 @@ public class GameManager
             {
                 o = new TurnOperator(actions);
                 stateRepresentation = o.Apply(stateRepresentation);
-                PlayerObject player = (stateRepresentation as StateRepresentation).ListAllPlayerObjects().Find(x=> x.id.Contains("PLAYER"));
+                PlayerObject player = (stateRepresentation as StateRepresentation).ListAllPlayerObjects().Find(x => x.id.Contains("PLAYER"));
                 Debug.Log($"Name: {player.id} " + $"X: {player.position.x} " + $"Y: {player.position.y} ");
                 activePlayer = 0;
                 actionSelected = ActionSelected.NONE;
@@ -98,25 +113,26 @@ public class GameManager
                 actions.Clear();
             }
         }
+        if (CheckStatus(stateRepresentation))
+        {
+            currentStatus = Status.PLAYERWIN;
+            SceneManager.LoadScene("EndScene");
+        }
         if (!playerTurn) 
         {
-            if (CheckStatus(stateRepresentation)) 
-            {
-                currentStatus = Status.PLAYERWIN;
-            }
-
+            
             stateRepresentation = solver.NextMove(stateRepresentation);
-
-            RedrawTable();
 
             if (CheckStatus(stateRepresentation))
             {
                 currentStatus = Status.AIWIN;
-            } 
+                SceneManager.LoadScene("EndScene");
+            }
             else
             {
+                RedrawTable();
                 playerTurn = true;
-            }
+            }            
         }
 
     }
@@ -141,18 +157,78 @@ public class GameManager
     void RedrawTable()
     {
         StateRepresentation stateRepresentation = GameManager.Instance.stateRepresentation as StateRepresentation;
+
         List<PlayerObject> enemyObjects = stateRepresentation.ListPlayerObjects(true);
-        for (int i = 0; i < enemyObjects.Count; i++)
+        List<PlayerObject> friendlyObjects = stateRepresentation.ListPlayerObjects(false);
+
+
+        List<GameObject> deletableEnemyObjects = new List<GameObject>();
+        List<GameObject> deletableFriendlyObjects = new List<GameObject>();
+
+        foreach (var gameObject in enemies)
         {
-            GameObject enemy = enemies[i];
-            enemy.transform.position = new Vector3(enemyObjects[i].position.x - 4.5f, enemyObjects[i].position.y - 3f, 0);
+            bool contains = enemyObjects.Any(x => x.id == gameObject.GetComponent<EntityStat>().id);
+            if (!contains)
+            {
+                deletableEnemyObjects.Add(gameObject);
+            }
         }
 
-        List<PlayerObject> friendlyObjects = stateRepresentation.ListPlayerObjects(false);
+        foreach (var gameObject in friendlies)
+        {
+            bool contains = friendlyObjects.Any(x => x.id == gameObject.GetComponent<EntityStat>().id);
+            if (!contains)
+            {
+                deletableFriendlyObjects.Add(gameObject);
+            }
+        }
+
+        deletableEnemyObjects.ForEach(enemy =>
+        {
+            enemies.Remove(enemy);
+            GameObject.Destroy(enemy);
+        });
+
+        deletableFriendlyObjects.ForEach(friendly =>
+        {
+            friendlies.Remove(friendly);
+            GameObject.Destroy(friendly);
+        });
+
+        enemies.ForEach(enemy =>
+        {
+            enemy.GetComponent<EntityStat>().health = enemyObjects.Find(x => x.id == enemy.GetComponent<EntityStat>().id).health;
+        });
+
         friendlies.ForEach(friendly =>
         {
             friendly.GetComponent<EntityStat>().health = friendlyObjects.Find(x => x.id == friendly.GetComponent<EntityStat>().id).health;
         });
+
+        aiHealthUI.UpdateHealthUI();
+        playerHealthUI.UpdateHealthUI();
+
+        foreach (var enemy in stateRepresentation.ListPlayerObjects(true))
+        {
+            enemies.ForEach(e =>
+            {
+                if (e.GetComponent<EntityStat>().id == enemy.id)
+                {
+                    e.GetComponent<EntityStat>().position = enemy.position;
+                }
+            });
+        }
+
+        //This the problem :(
+        foreach (var enemy in enemies)
+        {
+            enemy.transform.position = new Vector3(enemy.GetComponent<EntityStat>().position.x - 4.5f, enemy.GetComponent<EntityStat>().position.y - 3f, 0);
+        }
+        //for (int i = 0; i < enemyObjects.Count; i++)
+        //{
+        //    GameObject enemy = enemies[i];
+        //    enemy.transform.position = new Vector3(enemyObjects[i].position.x - 4.5f, enemyObjects[i].position.y - 3f, 0);
+        //}
     }
 }
 

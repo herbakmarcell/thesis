@@ -15,28 +15,21 @@ public class AIHealthUI : MonoBehaviour
         GenerateHealthUI();
     }
 
-    void Update()
+    public void UpdateHealthUI()
     {
-        UpdateHealthUI();
-    }
-
-    void UpdateHealthUI()
-    {
-        for (int i = 0; i < healthList.Count; i++)
-        {
-            healthList[i].GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.enemies[i].GetComponent<EntityStat>().health);
-        }
+        ClearHealthUI();
+        GenerateHealthUI();
     }
 
     void GenerateHealthUI()
     {
-        ClearHealthUI();
+        List<GameObject> enemies = GameManager.Instance.enemies;
 
-        for (int i = 0; i < GameManager.Instance.enemies.Count; i++)
+        foreach (var enemy in enemies)
         {
             GameObject singleHealthBar = Instantiate(aiGroupPrefab, transform);
             healthList.Add(singleHealthBar);
-            singleHealthBar.GetComponent<PlayerGroupManager>().SetBar(GameManager.Instance.enemies[i].GetComponent<EntityStat>().health);
+            singleHealthBar.GetComponent<PlayerGroupManager>().SetBar(enemy.GetComponent<EntityStat>().health);
         }
     }
 
