@@ -1,0 +1,61 @@
+%
+% Szakdolgozatminta az Eszterházy Károly Katolikus Egyetem
+% matematika illetve informatika szakos hallgatóinak.
+%
+
+\documentclass[
+% opciók nélkül: egyoldalas nyomtatás, elektronikus verzió
+% twoside,     % kétoldalas nyomtatás
+% tocnopagenum,% oldalszámozás a tartalomjegyzék után kezdődik
+]{thesis-ekf}
+\usepackage[T1]{fontenc}
+\PassOptionsToPackage{defaults=hu-min}{magyar.ldf}
+\usepackage[magyar]{babel}
+\usepackage{mathtools,amssymb,amsthm,pdfpages}
+\footnotestyle{rule=fourth}
+
+\newtheorem{tetel}{Tétel}[chapter]
+\theoremstyle{definition}
+\newtheorem{definicio}[tetel]{Definíció}
+\theoremstyle{remark}
+\newtheorem{megjegyzes}[tetel]{Megjegyzés}
+
+\begin{document}
+
+\institute{Matematikai és Informatikai Intézet}
+\title{A szakdolgozat címe}
+\author{Herbák Marcell\\Programtervező Informatikus BSc}
+\supervisor{Dr. Kovásznai Gergely\\Egyetemi docens}
+\city{Eger}
+\date{2025}
+\maketitle
+
+\tableofcontents
+
+\chapter*{Bevezetés}
+\addcontentsline{toc}{chapter}{Bevezetés}
+
+
+\chapter{Mesterséges intelligencia}
+
+\section{Története}
+
+\chapter{Technológiák}
+
+\section{Unity}
+
+\chapter{Megvalósítás}
+
+\chapter{Tesztelés}
+
+\chapter*{Összegzés}
+\addcontentsline{toc}{chapter}{Összegzés}
+
+
+\begin{thebibliography}{2}
+\addcontentsline{toc}{chapter}{\bibname}
+\end{thebibliography}
+
+% Aláírt, szkennelt nyilatkozat beillesztése a szakdolgozat végére
+\includepdf{nyilatkozat/nyilatkozat.pdf}
+\end{document}

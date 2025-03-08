@@ -1,0 +1,9 @@
+\select@language {magyar} \contentsline {chapter}{Bevezetés}{3}{chapter*.2}%
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Mesterséges intelligencia}{4}{chapter.1}%
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Története}{4}{section.1.1}%
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Technológiák}{5}{chapter.2}%
+\select@language {magyar} \contentsline {section}{\numberline {2.1}Unity}{5}{section.2.1}%
+\select@language {magyar} \contentsline {chapter}{\numberline {3}Megvalósítás}{6}{chapter.3}%
+\select@language {magyar} \contentsline {chapter}{\numberline {4}Tesztelés}{7}{chapter.4}%
+\select@language {magyar} \contentsline {chapter}{Összegzés}{8}{chapter*.3}%
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{9}{chapter*.4}%
