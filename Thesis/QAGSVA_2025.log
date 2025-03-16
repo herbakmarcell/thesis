@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  8 MAR 2025 19:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  16 MAR 2025 22:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -615,7 +615,7 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 LaTeX Info: Redefining \cal on input line 577.
 LaTeX Info: Redefining \mit on input line 578.
 )
-<eszterhazy-logo-hu.pdf, id=40, 256.07971pt x 88.04292pt>
+<eszterhazy-logo-hu.pdf, id=100, 256.07971pt x 88.04292pt>
 File: eszterhazy-logo-hu.pdf Graphic file (type pdf)
 <use eszterhazy-logo-hu.pdf>
 Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 31.
@@ -636,16 +636,14 @@ thesis-ekf/eszterhazy-logo-hu.pdf>] (./QAGSVA_2025.toc)
 [2
 
 ]
+1. fejezet.
+
 
 [3
 
 ]
-1. fejezet.
 
-
-[4
-
-]
+[4]
 2. fejezet.
 
 
@@ -664,56 +662,62 @@ thesis-ekf/eszterhazy-logo-hu.pdf>] (./QAGSVA_2025.toc)
 [7
 
 ]
+5. fejezet.
+
 
 [8
 
 ]
 
-LaTeX Warning: Empty `thebibliography' environment on input line 57.
+[9
 
-<nyilatkozat/nyilatkozat.pdf, id=93, 597.50829pt x 845.0471pt>
+]
+
+LaTeX Warning: Empty `thebibliography' environment on input line 101.
+
+<nyilatkozat/nyilatkozat.pdf, id=173, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 60.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 104.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 60.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 104.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<nyilatkozat/nyilatkozat.pdf, id=96, page=1, 597.50829pt x 845.0471pt>
+<nyilatkozat/nyilatkozat.pdf, id=176, page=1, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 60.
+ 104.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 60.
+ 104.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
-[9
+[10
 
 ]
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 60.
+ 104.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 60.
+ 104.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 60.
+ 104.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-[10
+[11
 
  <./nyilatkozat/nyilatkozat.pdf>] (./QAGSVA_2025.aux)
  ***********
@@ -721,24 +725,24 @@ LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-25>
  ***********
 Package rerunfilecheck Info: File `QAGSVA_2025.out' has not changed.
-(rerunfilecheck)             Checksum: 051BFDF60BCBE721E4A4ABF5EC581225;1107.
+(rerunfilecheck)             Checksum: F4D5229738FB80F0F30AB54314E82D95;3919.
  ) 
 Here is how much of TeX's memory you used:
- 14904 strings out of 473207
- 238649 string characters out of 5720461
- 659873 words of memory out of 5000000
- 37901 multiletter control sequences out of 15000+600000
+ 14939 strings out of 473207
+ 239205 string characters out of 5720461
+ 664888 words of memory out of 5000000
+ 37920 multiletter control sequences out of 15000+600000
  611384 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,17n,93p,548b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,93p,964b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024
 /texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/texlive/2024/texmf-dist/fonts
 /type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lm
 ri12.pfb>
-Output written on QAGSVA_2025.pdf (10 pages, 126380 bytes).
+Output written on QAGSVA_2025.pdf (11 pages, 135418 bytes).
 PDF statistics:
- 147 PDF objects out of 1000 (max. 8388607)
- 117 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 231 PDF objects out of 1000 (max. 8388607)
+ 200 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 218 words of extra memory for PDF output out of 10000 (max. 10000000)
 
