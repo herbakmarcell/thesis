@@ -23,7 +23,7 @@
 \begin{document}
 
 \institute{Matematikai és Informatikai Intézet}
-\title{A szakdolgozat címe}
+\title{Mesterséges intelligencia számítógépes játékokban}
 \author{Herbák Marcell\\Programtervező Informatikus BSc}
 \supervisor{Dr. Kovásznai Gergely\\Egyetemi docens}
 \city{Eger}
@@ -36,18 +36,36 @@
 
 \section{Játék ismertetése}
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=14cm]{./pictures/persona3_xbox.png}
+	\caption{Persona 3 Reload}
+	\label{persona3}
+\end{figure}
+
 \subsection{Játék ötlete}
+
+Szakdolgozatom programjaként egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel szabadidőmet is szívesen töltöm. Választásom végül is egy körökre osztott stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, legfrissebb jelenleg a 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők.\cite{Persona,Persona3}
+
+Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcrendszere (\ref{persona1} ábra) rendelkezett mezőkre felbontott csatatérrel, amelyeknél még a támadásoknak volt egy bizonyos maximális távolsága. Ezek alapján szerettem volna egy olyan játékteret készíteni, ahol a játékosnak nem csak a támadásának a távolságát kell figyelembe vennie, hanem a helyét is a csatatéren. \cite{Persona1,Persona1Gameplay}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=13cm]{./pictures/persona_psp.png}
+	\caption{Revelations: Persona}
+	\label{persona1}
+\end{figure}
 
 \subsection{Játék szabályok}
 
-A játék egy fixált méretű, négyzetekből álló, 7x10 nagyságú tábla. A játékot kettő játékos tudja játszani, melyből a szakdolgozatomban az egyik játékos a mesterséges intelligencia lesz. Mindegyik játékos rendelkezik karakterekkel, amelynek kezdő mennyisége a játék indítása előtt kiválasztható. Mindkét játékos rendelkezik minimum 1, maximum pedig 3 karakterrel. A karakterek mennyisége játékosonként eltérő lehet, nem szükséges mindkét játékosnak ugyanazzal a karakter mennyiséggel kezdenie. Az egyik játékos karakterei (több karakter esetén függőlegesen egy mező kihagyással) a 2. oszlopban, a másik játékos karakterei pedig a 9. oszlopban kezdenek. A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. A táblán léteznek akadályozó mezők, amelyekre a játékosok nem léphetnek, illetve nem támadhatják meg.
+A játék egy fixált méretű, négyzetekből álló, 7x10 nagyságú tábla. A játékot kettő játékos tudja játszani, melyből a szakdolgozatomban az egyik játékos a mesterséges intelligencia lesz. Mindegyik játékos rendelkezik karakterekkel, amelynek kezdő mennyisége a játék indítása előtt kiválasztható. Mindkét játékos rendelkezik minimum 1, maximum pedig 3 karakterrel. A karakterek mennyisége játékosonként eltérő lehet, nem szükséges mindkét játékosnak ugyanazzal a karakter mennyiséggel kezdenie. Az egyik játékos karakterei (több karakter esetén függőlegesen egy mező kihagyással) a 2. oszlopban, a másik játékos karakterei pedig a 9. oszlopban kezdenek. A táblán léteznek akadályozó mezők, amelyekre a játékosok nem léphetnek, illetve nem támadhatják meg. 
 
 A játék során a játékosok egymás után jönnek, egy körben az összes karakterükkel végre kell hajtaniuk egy interakciót. Ez a két interakció lehet:
 \begin{itemize}
 	\item Lépés
 	\item Támadás
 \end{itemize}
-Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak.
+
+Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt. A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak.
 
 Egy karakter, amennyiben elveszíti összes életerejét, eltűnik a tábláról, mezője felszabadul, illetve innentől kezdve azzal nem tud a játékos interakciót végrehajtani és nem hozhatja vissza.
  
@@ -57,7 +75,41 @@ A játékos célja, hogy ellenfele összes karakterét eltüntesse a tábláról
 
 \section{Története}
 
+A mesterséges intelligencia története az 1930-as években vett rohamos lépéstempót Alan Turing és John McCarthy munkásságával.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=7cm]{./pictures/Alan_Turing.jpg}
+	\caption{Alan Turing}
+	\label{Turing}
+\end{figure} 
+
+\textsc{Alan Turing} (1912--1954) az 1930-as évek elején megalkotta a Turing-gépet \textsc{Kurt Gödel} (1906--1978) munkássága alapján, amely a modern számítógépek elméleti alapját képezte. 1950-ben publikálta a ''Computing Machinery and Intelligence'' című tanulmányát, amelyben felvetette a gépek gondolkodási képességének kérdését, és bevezette a híres Turing-tesztet, amely azt vizsgálja, hogy egy gép képes-e emberihez hasonló intelligens viselkedésre. \cite{AlanTuring,CMI}
+
+\textsc{John McCarthy} (1927–-2011) amerikai számítástechnikai és kognitív tudós volt, akit a mesterséges intelligencia egyik alapítójaként tartanak számon. Ő alkotta meg a "mesterséges intelligencia" (artificial intelligence) kifejezést az 1956-os Dartmouth Konferencián, amelyet ő szervezett, és amelyet az MI hivatalos születésnapjaként tartanak számon. McCarthy 1958-ban kifejlesztette a Lisp programozási nyelvet, amely a mesterséges intelligencia-kutatás egyik legfontosabb eszközévé vált. Emellett jelentős hatással volt az ALGOL nyelv tervezésére, népszerűsítette az időosztásos rendszereket, és feltalálta a szemétgyűjtést (garbage collection). 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=5cm]{./pictures/John_McCarthy.png}
+	\caption{John McCarthy}
+	\label{McCarthy}
+\end{figure}
+
+McCarthy munkássága jelentős hatással volt a mesterséges intelligencia fejlődésére. Az 1960-as és 1970-es években az MI-kutatás optimizmusa után nehéz időszak jött, amikor a fejlődés lelassult a korlátozott számítási kapacitás és a finanszírozási problémák miatt. Azonban McCarthy és kortársai kitartása hozzájárult ahhoz, hogy az MI napjainkban az egyik legdinamikusabban fejlődő területté váljon. Az utóbbi évtizedekben a gépi tanulás, a neurális hálózatok és a mélytanulás forradalmasították az MI-t, amely ma már számos területen, például az orvostudományban, az iparban és az önvezető autókban is kulcsszerepet játszik. \cite{JohnMcCarthy}
+
 \section{Minimax algoritmus}
+
+A minimax elv olyan alkalmazott döntési szabály a játékelméletben, ami szerint azt a lehetőséget kell választani, ami minimalizálja a maximális veszteséget. Ezt az elvet felhasználhatjuk a kétfős zéróösszegű játékoknál, ami magába foglalja a két játékos szimultán döntéseit és a felváltva tett lépéseit is. \cite{MiniMaxEnWiki}
+
+Formális definíció szerint a következőképpen tudjuk felírni a számítást:
+
+\begin{equation*}
+\overline{v_{i}}=\underset{{a_{-i}}}{\min} \underset{{a_{i}}}{\max} v_{i}(a_{i}, a_{-i})
+\end{equation*}
+
+A minimax érték azt fejezi ki, hogy egy játékos legrosszabb esetben mekkora értéket érhet el, ha a többi játékos a számára legkedvezőtlenebb stratégiát követi. Másképpen megfogalmazva, ez az a legnagyobb érték, amelyet a játékos garantáltan megszerezhet, ha ismeri a többi játékos lépéseit. 
+
+Egy kétszemélyes játékban az egyik játékos a maximalizáló, aki a saját pontszámának maximalizálására törekszik, míg a másik a minimalizáló, aki a maximalizáló pontszámának minimalizálására törekszik. Az algoritmus úgy működik, hogy kiértékeli az összes lehetséges lépést mindkét játékos számára, előrejelzi az ellenfél válaszait, és kiválasztja az optimális lépést annak érdekében, hogy a lehető legjobb eredményt biztosítsa. \cite{MiniMaxGfG}
 
 \subsection{Minimax alfa-béta vágással}
 
@@ -69,9 +121,20 @@ A szakdolgozatom megvalósításához a Unity-t (korábban Unity3D) használom. 
 
 \section{Grafikus szerkesztő}
 
+A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, általam készített pixelábrákat használok a karakterek képeként, amelyekhez a Paint.NET szoftvert használtam. A Paint.NET egy szabad licenszű, rasztergrafikus alkalmazás, amelyet a dotPDN fejleszt. A szakdolgozatom készítésekor 5.1.2 verzióját használtam a szoftvernek.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=15cm]{./pictures/paint_net.png}
+	\caption{Paint.NET felülete}
+	\label{PaintNET}
+\end{figure}
+
 \chapter{Implementáció}
 
 \section{Játék megvalósítása}
+
+\subsection{Megjelenítés}
 
 \subsection{Állapottér}
 
@@ -87,7 +150,7 @@ A szakdolgozatom megvalósításához a Unity-t (korábban Unity3D) használom. 
 
 \subsection{Heurisztika}
 
-\subsection{Megjelenítés}
+
 
 
 \chapter{Tesztelés}
@@ -98,6 +161,46 @@ A szakdolgozatom megvalósításához a Unity-t (korábban Unity3D) használom. 
 
 \begin{thebibliography}{2}
 \addcontentsline{toc}{chapter}{\bibname}
+
+\bibitem{Persona}
+\textsc{Wikipédia:} \emph{Persona (series)} 
+\url{https://en.wikipedia.org/wiki/Persona_(series)}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{Persona3}
+\textsc{Wikipédia:} \emph{Persona 3 Reload} 
+\url{https://en.wikipedia.org/wiki/Persona_3_Reload}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{Persona1}
+\textsc{Wikipédia:} \emph{Revelations:~Persona} 
+\url{https://en.wikipedia.org/wiki/Revelations:_Persona}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{Persona1Gameplay}
+\textsc{YouTube:} \emph{Persona: Mastering the Formation System} 
+\url{https://www.youtube.com/watch?v=t_FPK84jcbE}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{AlanTuring}
+\textsc{Wikipédia:} \emph{Alan Turing} 
+\url{https://en.wikipedia.org/wiki/Alan_Turing}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{CMI}
+\textsc{Wikipédia:} \emph{Computing Machinery and Intelligence} 
+\url{https://en.wikipedia.org/wiki/Computing_Machinery_and_Intelligence}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{JohnMcCarthy}
+\textsc{Wikipédia:} \emph{John McCarthy (computer scientist)} 
+\url{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{MiniMaxEnWiki}
+\textsc{Wikipédia:} \emph{Minimax} 
+\url{https://en.wikipedia.org/wiki/Minimax}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{MiniMaxGfG}
+\textsc{GeeksforGeeks:} \emph{Mini-Max Algorithm in Artificial Intelligence} 
+\url{https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/}, Megtekintés dátuma: 2025.03.19.
+
+
+
+
 \end{thebibliography}
 
 % Aláírt, szkennelt nyilatkozat beillesztése a szakdolgozat végére
