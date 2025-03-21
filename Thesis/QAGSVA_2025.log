@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  19 MAR 2025 15:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  19 MAR 2025 18:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -615,7 +615,7 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 LaTeX Info: Redefining \cal on input line 577.
 LaTeX Info: Redefining \mit on input line 578.
 )
-<eszterhazy-logo-hu.pdf, id=100, 256.07971pt x 88.04292pt>
+<eszterhazy-logo-hu.pdf, id=104, 256.07971pt x 88.04292pt>
 File: eszterhazy-logo-hu.pdf Graphic file (type pdf)
 <use eszterhazy-logo-hu.pdf>
 Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 31.
@@ -637,7 +637,7 @@ thesis-ekf/eszterhazy-logo-hu.pdf>] (./QAGSVA_2025.toc)
 
 ]
 1. fejezet.
-<./pictures/persona3_xbox.png, id=143, 1445.4pt x 813.0375pt>
+<./pictures/persona3_xbox.png, id=148, 1445.4pt x 813.0375pt>
 File: ./pictures/persona3_xbox.png Graphic file (type png)
 <use ./pictures/persona3_xbox.png>
 Package pdftex.def Info: ./pictures/persona3_xbox.png  used on input line 41.
@@ -647,7 +647,7 @@ Package pdftex.def Info: ./pictures/persona3_xbox.png  used on input line 41.
 [3
 
  <./pictures/persona3_xbox.png>]
-<./pictures/persona_psp.png, id=155, 481.8pt x 271.0125pt>
+<./pictures/persona_psp.png, id=160, 481.8pt x 271.0125pt>
 File: ./pictures/persona_psp.png Graphic file (type png)
 <use ./pictures/persona_psp.png>
 Package pdftex.def Info: ./pictures/persona_psp.png  used on input line 53.
@@ -658,131 +658,153 @@ Package pdftex.def Info: ./pictures/persona_psp.png  used on input line 53.
 
 [5]
 2. fejezet.
-<./pictures/Alan_Turing.jpg, id=170, 642.4pt x 857.2025pt>
+<./pictures/Alan_Turing.jpg, id=176, 642.4pt x 857.2025pt>
 File: ./pictures/Alan_Turing.jpg Graphic file (type jpg)
 <use ./pictures/Alan_Turing.jpg>
-Package pdftex.def Info: ./pictures/Alan_Turing.jpg  used on input line 82.
+Package pdftex.def Info: ./pictures/Alan_Turing.jpg  used on input line 76.
 (pdftex.def)             Requested size: 199.16928pt x 265.76927pt.
 
 
 [6
 
  <./pictures/Alan_Turing.jpg>]
-<./pictures/John_McCarthy.png, id=180, 307.90031pt x 383.93437pt>
+<./pictures/John_McCarthy.png, id=186, 307.90031pt x 383.93437pt>
 File: ./pictures/John_McCarthy.png Graphic file (type png)
 <use ./pictures/John_McCarthy.png>
-Package pdftex.def Info: ./pictures/John_McCarthy.png  used on input line 93.
+Package pdftex.def Info: ./pictures/John_McCarthy.png  used on input line 87.
 (pdftex.def)             Requested size: 142.26378pt x 177.39697pt.
 
 
-[7{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2024
-/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2024/texmf-dist/fonts/enc/
-dvips/lm/lm-mathsy.enc} <./pictures/John_McCarthy.png>]
+[7 <./pictures/John_McCarthy.png>]
 
-[8]
+[8{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2024
+/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2024/texmf-dist/fonts/enc/
+dvips/lm/lm-mathsy.enc}]
+
+[9]
 3. fejezet.
-<./pictures/paint_net.png, id=204, 1288.0622pt x 786.68906pt>
+<./pictures/paint_net.png, id=222, 1288.0622pt x 786.68906pt>
 File: ./pictures/paint_net.png Graphic file (type png)
 <use ./pictures/paint_net.png>
-Package pdftex.def Info: ./pictures/paint_net.png  used on input line 128.
+Package pdftex.def Info: ./pictures/paint_net.png  used on input line 137.
 (pdftex.def)             Requested size: 426.79134pt x 260.66454pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[9
+[10
 
 ]
 
-[10 <./pictures/paint_net.png>]
+[11 <./pictures/paint_net.png>]
 4. fejezet.
-
-
-[11
-
-]
-5. fejezet.
 
 
 [12
 
 ]
+5. fejezet.
+
 
 [13
 
 ]
+
+[14
+
+]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-67.
+76.
  (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Underfull \hbox (badness 10000) in paragraph at lines 166--168
+Underfull \hbox (badness 10000) in paragraph at lines 175--177
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Per-so-na (se-ri-es) []$\T1/lmtt/m
 /n/12 https : / / en . wikipedia . org / wiki / Persona _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+Underfull \hbox (badness 10000) in paragraph at lines 183--185
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Reve-la-tions: Per-so-na []$\T1/lm
 tt/m/n/12 https : / / en . wikipedia . org / wiki /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--188
+Underfull \hbox (badness 10000) in paragraph at lines 195--197
 \T1/lmtt/m/n/12 org / wiki / Computing _ Machinery _ and _ Intelligence$[]\T1/l
 mr/m/n/12 , Meg-te-kin-tés dá-tu-ma:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 198--200
+Underfull \hbox (badness 10000) in paragraph at lines 207--209
+[]\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Já-ték-el-mé-let []$\T1/lmtt/m/n/1
+2 https : / / hu . wikipedia . org / wiki / J % C3 % A1t % C3 %
+ []
+
+
+Underfull \hbox (badness 4995) in paragraph at lines 211--213
+[]\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Game the-ory []$\T1/lmtt/m/n/12 ht
+tps : / / en . wikipedia . org / wiki / Game _ theory$[]\T1/lmr/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 2856) in paragraph at lines 215--217
+\T1/lmr/m/it/12 Be-ha-vi-or\T1/lmr/m/n/12 , 1944. []$\T1/lmtt/m/n/12 https : / 
+/ archive . org / details / in . ernet . dli . 2015 . 215284 /
+ []
+
+
+
+[15
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 224--226
 \T1/lmtt/m/n/12 geeksforgeeks . org / mini-[]max-[]algorithm-[]in-[]artificial-
 []intelligence/$[]\T1/lmr/m/n/12 ,
  []
 
-<nyilatkozat/nyilatkozat.pdf, id=238, 597.50829pt x 845.0471pt>
+<nyilatkozat/nyilatkozat.pdf, id=274, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 207.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 233.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 207.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 233.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<nyilatkozat/nyilatkozat.pdf, id=241, page=1, 597.50829pt x 845.0471pt>
+<nyilatkozat/nyilatkozat.pdf, id=277, page=1, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 207.
+ 233.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 207.
+ 233.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
-[14
-
-]
+[16]
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 207.
+ 233.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 207.
+ 233.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 207.
+ 233.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-[15
+[17
 
  <./nyilatkozat/nyilatkozat.pdf>] (./QAGSVA_2025.aux)
  ***********
@@ -790,16 +812,16 @@ LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-25>
  ***********
 Package rerunfilecheck Info: File `QAGSVA_2025.out' has not changed.
-(rerunfilecheck)             Checksum: A42080FBF282CA9B0231633CDE12B03F;3919.
+(rerunfilecheck)             Checksum: D051C2DEB9FB9AE8629BB81599CEB876;4088.
  ) 
 Here is how much of TeX's memory you used:
- 15061 strings out of 473207
- 241623 string characters out of 5720461
- 665392 words of memory out of 5000000
- 38016 multiletter control sequences out of 15000+600000
+ 15073 strings out of 473207
+ 241789 string characters out of 5720461
+ 667533 words of memory out of 5000000
+ 38021 multiletter control sequences out of 15000+600000
  618759 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,17n,93p,969b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,93p,1012b,589s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024
 /texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/texlive/2024/texmf-dist/fonts
 /type1/public/lm/lmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/l
@@ -808,10 +830,10 @@ e/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/f
 onts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/
 lm/lmsy6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/te
 xlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on QAGSVA_2025.pdf (15 pages, 2658009 bytes).
+Output written on QAGSVA_2025.pdf (17 pages, 2665803 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
- 243 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 369 PDF objects out of 1000 (max. 8388607)
+ 309 compressed objects within 4 object streams
+ 62 named destinations out of 1000 (max. 500000)
+ 251 words of extra memory for PDF output out of 10000 (max. 10000000)
 

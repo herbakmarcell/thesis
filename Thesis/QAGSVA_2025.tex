@@ -45,7 +45,7 @@
 
 \subsection{Játék ötlete}
 
-Szakdolgozatom programjaként egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel szabadidőmet is szívesen töltöm. Választásom végül is egy körökre osztott stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, legfrissebb jelenleg a 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők.\cite{Persona,Persona3}
+Szakdolgozatom programjaként egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel szabadidőmet is szívesen töltöm. Választásom végül is egy körökre osztott stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, jelenleg legfrissebb 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload-tól, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők.\cite{Persona,Persona3}
 
 Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcrendszere (\ref{persona1} ábra) rendelkezett mezőkre felbontott csatatérrel, amelyeknél még a támadásoknak volt egy bizonyos maximális távolsága. Ezek alapján szerettem volna egy olyan játékteret készíteni, ahol a játékosnak nem csak a támadásának a távolságát kell figyelembe vennie, hanem a helyét is a csatatéren. \cite{Persona1,Persona1Gameplay}
 \begin{figure}[h!]
@@ -57,15 +57,9 @@ Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcren
 
 \subsection{Játék szabályok}
 
-A játék egy fixált méretű, négyzetekből álló, 7x10 nagyságú tábla. A játékot kettő játékos tudja játszani, melyből a szakdolgozatomban az egyik játékos a mesterséges intelligencia lesz. Mindegyik játékos rendelkezik karakterekkel, amelynek kezdő mennyisége a játék indítása előtt kiválasztható. Mindkét játékos rendelkezik minimum 1, maximum pedig 3 karakterrel. A karakterek mennyisége játékosonként eltérő lehet, nem szükséges mindkét játékosnak ugyanazzal a karakter mennyiséggel kezdenie. Az egyik játékos karakterei (több karakter esetén függőlegesen egy mező kihagyással) a 2. oszlopban, a másik játékos karakterei pedig a 9. oszlopban kezdenek. A táblán léteznek akadályozó mezők, amelyekre a játékosok nem léphetnek, illetve nem támadhatják meg. 
+A játék egy fixált méretű, négyzetekből álló, 7x10 nagyságú táblán folyik. A játékot kettő játékos tudja játszani, melyből a szakdolgozatomban az egyik játékos a mesterséges intelligencia lesz. Mindegyik játékos rendelkezik karakterekkel, amelynek kezdő mennyisége a játék indítása előtt kiválasztható. Mindkét játékos rendelkezik minimum 1, maximum pedig 3 karakterrel. A karakterek mennyisége játékosonként eltérő lehet, nem szükséges mindkét játékosnak ugyanazzal a karakter mennyiséggel kezdenie. Az egyik játékos karakterei (több karakter esetén függőlegesen egy mező kihagyással) a 2. oszlopban, a másik játékos karakterei pedig a 9. oszlopban kezdenek. A táblán léteznek akadályozó mezők, amelyekre a játékosok nem léphetnek, illetve nem támadhatják meg. 
 
-A játék során a játékosok egymás után jönnek, egy körben az összes karakterükkel végre kell hajtaniuk egy interakciót. Ez a két interakció lehet:
-\begin{itemize}
-	\item Lépés
-	\item Támadás
-\end{itemize}
-
-Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt. A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak.
+A játék során a játékosok egymás után jönnek, egy körben az összes karakterükkel végre kell hajtaniuk egy interakciót. Ez a két interakció \emph{lépés} és \emph{támadás} lehet. Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt. A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak.
 
 Egy karakter, amennyiben elveszíti összes életerejét, eltűnik a tábláról, mezője felszabadul, illetve innentől kezdve azzal nem tud a játékos interakciót végrehajtani és nem hozhatja vissza.
  
@@ -97,9 +91,24 @@ A mesterséges intelligencia története az 1930-as években vett rohamos lépé
 
 McCarthy munkássága jelentős hatással volt a mesterséges intelligencia fejlődésére. Az 1960-as és 1970-es években az MI-kutatás optimizmusa után nehéz időszak jött, amikor a fejlődés lelassult a korlátozott számítási kapacitás és a finanszírozási problémák miatt. Azonban McCarthy és kortársai kitartása hozzájárult ahhoz, hogy az MI napjainkban az egyik legdinamikusabban fejlődő területté váljon. Az utóbbi évtizedekben a gépi tanulás, a neurális hálózatok és a mélytanulás forradalmasították az MI-t, amely ma már számos területen, például az orvostudományban, az iparban és az önvezető autókban is kulcsszerepet játszik. \cite{JohnMcCarthy}
 
-\section{Minimax algoritmus}
+\section{Játékelmélet}
 
-A minimax elv olyan alkalmazott döntési szabály a játékelméletben, ami szerint azt a lehetőséget kell választani, ami minimalizálja a maximális veszteséget. Ezt az elvet felhasználhatjuk a kétfős zéróösszegű játékoknál, ami magába foglalja a két játékos szimultán döntéseit és a felváltva tett lépéseit is. \cite{MiniMaxEnWiki}
+A játékelmélet a matematika egyik, tudományágak közé egyértelműen nehezen besorolható (interdiszciplináris) ága, mely olyan kérdésekkel foglalkozik, hogy mi az ésszerű (racionális) viselkedés olyan helyzetekben, ahol minden résztvevő döntéseinek eredményét befolyásolja a többi résztvevő lehetséges választásai, röviden a stratégiai problémák elmélete. A játékelmélet alapjait Neumann János fektette le ''Zur Theorie der Gesellschaftsspiele'' című 1928-as munkájában \cite{Neumann}, majd Oskar Morgenstern neoklasszikus matematikus-közgazdásszal közösen megírta a „Játékelmélet és gazdasági viselkedés” című (The Theory of Games and Economic Behavior, 1944) művüket. \cite{Jatekelmelet,JatekelmeletEn} Ezen művek alapján a következő fogalmakat tisztáznunk kell \cite{NeumannOskar}:
+
+\begin{itemize}
+	\item A \emph{játék} a játékosok viselkedését és lényeges körülményeket meghatározó szabálysor által leírt folyamat.
+	\item Az információs halmaz (ismeret) meghatározó szerepű. Ez azt jelenti, hogy az információs halmaz alapján különböző típusokat sorolhatunk fel, például a \emph{tökéletes információs} és \emph{véges}, ahol minden résztvevő birtokolja az összes vonatkozó adatot (szabályok, lehetséges és korábbi események).
+	\item Egy játék lehet két- vagy többszemélyes.
+	\item Mikor a játékban a játékosok versengenek egymással, akkor \emph{nem kooperatív} játékról beszélünk.
+	\item Zérusösszegű az a játék, amelyben a játékosok csak az ellenfelük nyereségük csökkentésével növelhetik nyereségüket.
+	\item A játékost győzelemre, de minimum döntetlenre segítő módszere a \emph{stratégia}. Ilyenkor kihasználhatja az ellenfél érzékelt hibáit.
+\end{itemize} 
+
+
+
+\subsection{Minimax algoritmus}
+
+A minimax elv olyan alkalmazott döntési szabály a játékelméletben, ami szerint azt a lehetőséget kell választani, ami minimalizálja a maximális veszteséget. Ezt az elvet felhasználhatjuk a kétfős zérusösszegű játékoknál, ami magába foglalja a két játékos szimultán döntéseit és a felváltva tett lépéseit is. \cite{MiniMaxEnWiki}
 
 Formális definíció szerint a következőképpen tudjuk felírni a számítást:
 
@@ -190,12 +199,29 @@ A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, á
 \textsc{Wikipédia:} \emph{John McCarthy (computer scientist)} 
 \url{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)}, Megtekintés dátuma: 2025.03.19.
 
+\bibitem{Neumann}
+\textsc{Neumann János}: \emph{On the theory of games of strategy}, Sonnya Bargmann fordítása, 1928.
+\url{https://cs.uwaterloo.ca/%7Ey328yu/classics/vonNeumann.pdf}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{Jatekelmelet}
+\textsc{Wikipédia:} \emph{Játékelmélet} 
+\url{https://hu.wikipedia.org/wiki/J%C3%A1t%C3%A9kelm%C3%A9let}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{JatekelmeletEn}
+\textsc{Wikipédia:} \emph{Game theory} 
+\url{https://en.wikipedia.org/wiki/Game_theory}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{NeumannOskar}
+\textsc{Neumann János, Oskar Morgenstern}: \emph{Theory of Games and Economic Behavior}, 1944.
+\url{https://archive.org/details/in.ernet.dli.2015.215284/page/n5/mode/2up}, Megtekintés dátuma: 2025.03.19.
+
+
 \bibitem{MiniMaxEnWiki}
-\textsc{Wikipédia:} \emph{Minimax} 
+\textsc{Wikipédia}: \emph{Minimax} 
 \url{https://en.wikipedia.org/wiki/Minimax}, Megtekintés dátuma: 2025.03.19.
 
 \bibitem{MiniMaxGfG}
-\textsc{GeeksforGeeks:} \emph{Mini-Max Algorithm in Artificial Intelligence} 
+\textsc{GeeksforGeeks}: \emph{Mini-Max Algorithm in Artificial Intelligence} 
 \url{https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/}, Megtekintés dátuma: 2025.03.19.
 
 
