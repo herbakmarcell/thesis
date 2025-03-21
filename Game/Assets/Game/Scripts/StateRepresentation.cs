@@ -54,11 +54,223 @@ public class StateRepresentation : State
         return Status.PLAYING;
     }
 
+    static int WIN = 100;
+    static int LOSE = -100;
+
+
+
     public override int GetHeuristics(Turn player)
     {
-        //TODO
-        //return UnityEngine.Random.Range(0,100);
-        return 1;
+        if (GetStatus() == Status.PLAYERWIN && player == Turn.PLAYER) return WIN;
+        if (GetStatus() == Status.AIWIN && player == Turn.AI) return WIN;
+
+        if (GetStatus() == Status.PLAYERWIN && player != Turn.PLAYER) return LOSE;
+        if (GetStatus() == Status.AIWIN && player != Turn.AI) return LOSE;
+
+        int result = 0;
+
+        List<PlayerObject> playerObjects = ListPlayerObjects(false);
+        List<PlayerObject> AIObjects = ListPlayerObjects(false);
+
+        int playerCount = playerObjects.Count;
+        int AICount = AIObjects.Count;
+
+        if (player == Turn.PLAYER)
+        {
+            result += HealthBonus(player);
+
+            result += AttackBonus(player, playerObjects, AIObjects); 
+
+            result += PlayerCount(player, playerCount, AICount);
+
+            result += BadPosition(player, playerObjects, AIObjects);
+        }
+        else
+        {
+            result += HealthBonus(player);
+
+            result += AttackBonus(player, playerObjects, AIObjects);
+
+            result += PlayerCount(player, playerCount, AICount);
+
+            result += BadPosition(player, playerObjects, AIObjects);
+        }
+
+        return result;
+    }
+
+    int BadPosition(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
+    {
+        int result = 0;
+
+        if (player == Turn.PLAYER)
+        {
+            foreach (PlayerObject playerO in playerObjects)
+            {
+                List<PlayerObject> nearbyEnemies = new List<PlayerObject>();
+                List<PlayerObject> nearbyFriendlies = new List<PlayerObject>();
+                result += CheckPossibleMoves(playerO);
+                if (HasNearbyEnemy(player, playerO, nearbyEnemies))
+                {
+                    result -= 5 * nearbyEnemies.Count;
+                }
+                if (HasNearbyFriendly(player, playerO, nearbyFriendlies))
+                {
+                    result -= 3 * nearbyFriendlies.Count;
+                }
+            }
+        } 
+        else
+        {
+            foreach (PlayerObject playerO in AIObjects)
+            {
+                List<PlayerObject> nearbyEnemies = new List<PlayerObject>();
+                List<PlayerObject> nearbyFriendlies = new List<PlayerObject>();
+                result += CheckPossibleMoves(playerO);
+                if (HasNearbyEnemy(player, playerO, nearbyEnemies))
+                {
+                    result -= 5 * nearbyEnemies.Count;
+                }
+                if (HasNearbyFriendly(player, playerO, nearbyFriendlies))
+                {
+                    result -= 3 * nearbyFriendlies.Count;
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+    int CheckPossibleMoves(PlayerObject player)
+    {
+        int result = 0;
+
+        if (!InvalidPosition(player.position + Vector2.up)) result += 1;
+        else result -= 2;
+        if (!InvalidPosition(player.position + Vector2.down)) result += 1;
+        else result -= 2;
+        if (!InvalidPosition(player.position + Vector2.left)) result += 1;
+        else result -= 2;
+        if (!InvalidPosition(player.position + Vector2.right)) result += 1;
+        else result -= 2;
+
+        return result;
+    }
+
+    bool InvalidPosition(Vector2 position)
+    {
+        if (position.x < 0 || position.x > 9 || position.y < 0 || position.y > 6) return true;
+        return false;
+    }
+
+
+    int PlayerCount(Turn player, int playerCount, int AICount)
+    {
+        if (player == Turn.PLAYER) return 3 * (playerCount - AICount);
+        else return 3 * (AICount - playerCount);
+    }
+
+    int AttackBonus(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
+    {
+        int result = 0;
+
+        List<PlayerObject> nearbyEnemies = new List<PlayerObject>();
+
+        if (player == Turn.PLAYER)
+        {
+            foreach (PlayerObject playerO in playerObjects)
+            {
+                if (HasNearbyEnemy(player, playerO, nearbyEnemies))
+                {
+                    if (playerO.health == 1) result -= 5 * nearbyEnemies.Count;
+                    else result += 3 * (playerO.health - nearbyEnemies.Count);
+                }
+            }
+        } 
+        else
+        {
+            foreach (PlayerObject playerO in AIObjects)
+            {
+                if (HasNearbyEnemy(player, playerO, nearbyEnemies))
+                {
+                    if (playerO.health == 1) result -= 5 * nearbyEnemies.Count;
+                    else result += 3 * (playerO.health - nearbyEnemies.Count);
+                }
+            }
+        }
+        return result;
+    }
+
+    bool HasNearbyEnemy(Turn playerTurn, PlayerObject player, List<PlayerObject> nearbyEnemies)
+    {
+        bool hasEnemyNearby = false;
+        List<PlayerObject> enemies;
+        if (playerTurn == Turn.PLAYER) enemies = ListPlayerObjects(true);
+        else enemies = ListPlayerObjects(false);
+
+
+        foreach (PlayerObject enemy in enemies)
+        {
+            if ((Math.Abs(player.position.x - enemy.position.x) == 1 && player.position.y == enemy.position.y) || 
+                (Math.Abs(player.position.y - enemy.position.y) == 1 && player.position.x == enemy.position.x))
+            {
+                hasEnemyNearby = true;
+                nearbyEnemies.Add(enemy);
+            }
+        }
+
+        return hasEnemyNearby;
+    }
+
+    bool HasNearbyFriendly(Turn playerTurn, PlayerObject player, List<PlayerObject> nearbyFriendlies)
+    {
+        bool hasFriendlyNearby = false;
+        List<PlayerObject> friendlies;
+        if (playerTurn == Turn.PLAYER) friendlies = ListPlayerObjects(false);
+        else friendlies = ListPlayerObjects(true);
+
+
+        foreach (PlayerObject friendly in friendlies)
+        {
+            if ((Math.Abs(player.position.x - friendly.position.x) == 1 && player.position.y == friendly.position.y) ||
+                (Math.Abs(player.position.y - friendly.position.y) == 1 && player.position.x == friendly.position.x))
+            {
+                hasFriendlyNearby = true;
+                nearbyFriendlies.Add(friendly);
+            }
+        }
+
+        return hasFriendlyNearby;
+    }
+
+
+    int HealthBonus(Turn player)
+    {
+        int result = 0;
+        if (player == Turn.PLAYER)
+        {
+            foreach (PlayerObject playerO in ListPlayerObjects(false))
+            {
+                result += playerO.health;
+            }
+            foreach (PlayerObject playerO in ListPlayerObjects(true))
+            {
+                result -= playerO.health;
+            }
+        } 
+        else
+        {
+            foreach (PlayerObject playerO in ListPlayerObjects(true))
+            {
+                result += playerO.health;
+            }
+            foreach (PlayerObject playerO in ListPlayerObjects(false))
+            {
+                result -= playerO.health;
+            }
+        }
+        return result;
     }
 
     void GenerateBoard()
