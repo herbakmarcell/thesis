@@ -37,12 +37,12 @@ public class MenuButtonScripts : MonoBehaviour
         if (Options.playerStarts)
         {
             Options.playerStarts = false;
-            turnText.text = "Ellenfél kezd";
+            turnText.text = "MI";
         }
         else
         {
             Options.playerStarts = true;
-            turnText.text = "Játékos kezd";
+            turnText.text = "Játékos";
         }
     }
 
