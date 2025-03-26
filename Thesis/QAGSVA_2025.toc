@@ -14,14 +14,14 @@
 \select@language {magyar} \contentsline {section}{\numberline {3.2}Megjelenítés}{11}{section.3.2}%
 \select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}MenuScene}{11}{subsection.3.2.1}%
 \select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}GameScene}{12}{subsection.3.2.2}%
-\select@language {magyar} \contentsline {section}{\numberline {3.3}Állapottér}{13}{section.3.3}%
-\select@language {magyar} \contentsline {section}{\numberline {3.4}Operátor}{13}{section.3.4}%
-\select@language {magyar} \contentsline {section}{\numberline {3.5}Operátorok felépítése}{13}{section.3.5}%
-\select@language {magyar} \contentsline {section}{\numberline {3.6}Operátor generálás}{13}{section.3.6}%
-\select@language {magyar} \contentsline {section}{\numberline {3.7}Minimax}{13}{section.3.7}%
-\select@language {magyar} \contentsline {section}{\numberline {3.8}Minimax alfa-béta vágással}{13}{section.3.8}%
-\select@language {magyar} \contentsline {section}{\numberline {3.9}Heurisztika}{13}{section.3.9}%
-\select@language {magyar} \contentsline {chapter}{\numberline {4}Tesztelés}{14}{chapter.4}%
-\select@language {magyar} \contentsline {section}{\numberline {4.1}Manuális tesztelés}{14}{section.4.1}%
-\select@language {magyar} \contentsline {chapter}{Összegzés}{15}{chapter*.2}%
-\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{16}{chapter*.3}%
+\select@language {magyar} \contentsline {section}{\numberline {3.3}Állapottér}{14}{section.3.3}%
+\select@language {magyar} \contentsline {section}{\numberline {3.4}Operátor}{14}{section.3.4}%
+\select@language {magyar} \contentsline {section}{\numberline {3.5}Operátorok felépítése}{14}{section.3.5}%
+\select@language {magyar} \contentsline {section}{\numberline {3.6}Operátor generálás}{14}{section.3.6}%
+\select@language {magyar} \contentsline {section}{\numberline {3.7}Minimax}{14}{section.3.7}%
+\select@language {magyar} \contentsline {section}{\numberline {3.8}Minimax alfa-béta vágással}{14}{section.3.8}%
+\select@language {magyar} \contentsline {section}{\numberline {3.9}Heurisztika}{14}{section.3.9}%
+\select@language {magyar} \contentsline {chapter}{\numberline {4}Tesztelés}{15}{chapter.4}%
+\select@language {magyar} \contentsline {section}{\numberline {4.1}Manuális tesztelés}{15}{section.4.1}%
+\select@language {magyar} \contentsline {chapter}{Összegzés}{16}{chapter*.2}%
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{17}{chapter*.3}%

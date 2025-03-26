@@ -59,7 +59,7 @@ Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcren
 
 A játék egy fixált méretű, négyzetekből álló, 7x10 nagyságú táblán folyik. A játékot kettő játékos tudja játszani, melyből a szakdolgozatomban az egyik játékos a mesterséges intelligencia lesz. Mindegyik játékos rendelkezik karakterekkel, amelynek kezdő mennyisége a játék indítása előtt kiválasztható. Mindkét játékos rendelkezik minimum 1, maximum pedig 3 karakterrel. A karakterek mennyisége játékosonként eltérő lehet, nem szükséges mindkét játékosnak ugyanazzal a karakter mennyiséggel kezdenie. Az egyik játékos karakterei (több karakter esetén függőlegesen egy mező kihagyással) a 2. oszlopban, a másik játékos karakterei pedig a 9. oszlopban kezdenek. A táblán léteznek akadályozó mezők, amelyekre a játékosok nem léphetnek, illetve nem támadhatják meg. 
 
-A játék során a játékosok egymás után jönnek, egy körben az összes karakterükkel végre kell hajtaniuk egy interakciót. Ez a két interakció \emph{lépés} és \emph{támadás} lehet. Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt. A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak.
+A játék során a játékosok egymás után jönnek, egy körben az összes karakterükkel végre kell hajtaniuk egy interakciót. Ez a két interakció \emph{lépés} és \emph{támadás} lehet. Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt. A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak. A játékosoknak minden körben kötelező valamelyik interakciót végrehajtaniuk mindegyik karakterrel végrehajtani, illetve ha egy karakter interakcióját jóvá hagyták, azt vissza már nem vonhatják.
 
 Egy karakter, amennyiben elveszíti összes életerejét, eltűnik a tábláról, mezője felszabadul, illetve innentől kezdve azzal nem tud a játékos interakciót végrehajtani és nem hozhatja vissza.
  
@@ -143,7 +143,7 @@ A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, á
 
 \section{Megjelenítés}
 
-A játék készítésekor törekedtem a minimalista és könnyen vezérelhető kezelőfelületre. A Unity-ben úgynevezett \emph{scene}-ekre lehet osztani az játékot, legközelebbi példaként a \emph{WinForms} alkalmazásokban egy új \emph{form} létrehozásával lehet párhuzamba hozni ezt a megoldást. A játékom három scene-ből áll: \textbf{MenuScene}, \textbf{GameScene} és \textbf{EndScene}.
+A játék készítésekor törekedtem a minimalista és könnyen vezérelhető kezelőfelületre. A Unity-ben úgynevezett \emph{scene}-ekre lehet osztani az játékot, legközelebbi példaként a \emph{WinForms} alkalmazásokban egy új \emph{form} létrehozásával lehet párhuzamba hozni ezt a megoldást. A játékom három scene-ből áll: \emph{MenuScene}, \emph{GameScene} és \emph{EndScene}.
 
 \subsection{MenuScene}
 
@@ -182,6 +182,17 @@ A játék ideje alatt, ahogyan a karakterekkel lépnénk vagy támadnánk, a sza
 	\label{gamemove}
 \end{figure}
 
+A scene másik összetevője egy canvas, amin találhatóak az életerőket tartalmazó vertikális csoportok és a vezérlő gombok. Három gomb közül kettő a játékteret befolyásoló erővel bír, a középső gomb arra szolgál, hogyha a játékos az akció végrehajtása előtt meggondolja magát, tudjon változtatni a műveleten, azonban amint kattintással jóváhagyta a játékos, ez a lehetőség megszűnik, tehát lépést nem lehet vissza vonni.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=14cm]{./pictures/game_health_ui.png}
+	\caption{Játék egyik kezdőállapota}
+	\label{game}
+\end{figure}
+
+A vertikális csoport tartalma a karakterek számától függően változik, tartalmazza a játékos vagy MI karaktereinek képét és két téglalap 2D-s objektummal összerakott életerő csíkot, amely a karakterek életerejét mutatja. Ahogy a játék halad, amennyiben a játékos vagy MI karakterei életerőt vesztenek, a piros téglalap egyre kevesebb részt tölt ki az csíkból. Amennyiben a karakter elveszíti az összes életerejét, a prefab-je eltűnik a sávból.
+
 
 \section{Állapottér} \label{state}
 
@@ -208,6 +219,10 @@ A játék ideje alatt, ahogyan a karakterekkel lépnénk vagy támadnánk, a sza
 
 \begin{thebibliography}{2}
 \addcontentsline{toc}{chapter}{\bibname}
+
+\bibitem{Project}
+\textsc{Github:} \emph{thesis} 
+\url{https://github.com/herbakmarcell/thesis}
 
 \bibitem{Persona}
 \textsc{Wikipédia:} \emph{Persona (series)} 
@@ -252,7 +267,6 @@ A játék ideje alatt, ahogyan a karakterekkel lépnénk vagy támadnánk, a sza
 \bibitem{NeumannOskar}
 \textsc{Neumann János, Oskar Morgenstern}: \emph{Theory of Games and Economic Behavior}, 1944.
 \url{https://archive.org/details/in.ernet.dli.2015.215284/page/n5/mode/2up}, Megtekintés dátuma: 2025.03.19.
-
 
 \bibitem{MiniMaxEnWiki}
 \textsc{Wikipédia}: \emph{Minimax} 
