@@ -46,7 +46,6 @@ public class GameButtonScript : MonoBehaviour
     {
         GameManager.Instance.actionSelected = ActionSelected.NONE;
         EnableTurnButtons();
-        cancelButton.gameObject.SetActive(false);
     }
 
     void DisableTurnButtons()
@@ -55,7 +54,7 @@ public class GameButtonScript : MonoBehaviour
         moveTurnButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(true);
     }
-    void EnableTurnButtons()
+    public void EnableTurnButtons()
     {
         attackTurnButton.gameObject.SetActive(true);
         moveTurnButton.gameObject.SetActive(true);

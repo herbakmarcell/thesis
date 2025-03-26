@@ -45,6 +45,7 @@ public class TileSelector : MonoBehaviour
                     GameManager.Instance.friendlies[GameManager.Instance.activePlayer].GetComponent<EntityStat>().position = SetNewObjectPosition(GameManager.Instance.actionDirection);
                     GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position = tilemap.GetCellCenterWorld(currentCell);
                     GameManager.Instance.ProgressGame();
+                    GameObject.Find("Canvas").GetComponent<GameButtonScript>().EnableTurnButtons();
                 }
             }
             else if (GameManager.Instance.actionSelected == ActionSelected.ATTACK)
@@ -65,6 +66,7 @@ public class TileSelector : MonoBehaviour
                         Destroy(enemy);
                     }
                     GameManager.Instance.ProgressGame();
+                    GameObject.Find("Canvas").GetComponent<GameButtonScript>().EnableTurnButtons();
                 }
             }
         }
