@@ -110,7 +110,7 @@ public class TurnOperator : Operator
 
     bool IsApplicableMove(StateRepresentation state, PlayerAction action)
     {
-        Debug.Log("Lista hossza: " + state.ListAllPlayerObjects().Count);
+        //Debug.Log("Lista hossza: " + state.ListAllPlayerObjects().Count);
         //Debug.Log("0. elem: " + state.ListAllPlayerObjects()[0].id);
         //Debug.Log("1. elem: " + state.ListAllPlayerObjects()[1].id);
         //Debug.Log("Action ID:" + action.playerId);
