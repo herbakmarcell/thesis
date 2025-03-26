@@ -145,7 +145,7 @@ A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, á
 
 A játék készítésekor törekedtem a minimalista és könnyen vezérelhető kezelőfelületre. A Unity-ben úgynevezett \emph{scene}-ekre lehet osztani az játékot, legközelebbi példaként a \emph{WinForms} alkalmazásokban egy új \emph{form} létrehozásával lehet párhuzamba hozni ezt a megoldást. A játékom három scene-ből áll: \emph{MenuScene}, \emph{GameScene} és \emph{EndScene}.
 
-\subsection{MenuScene}
+\subsection{MenuScene} \label{menusection}
 
 \begin{figure}[h!]
 	\centering
@@ -193,14 +193,35 @@ A scene másik összetevője egy canvas, amin találhatóak az életerőket tart
 
 A vertikális csoport tartalma a karakterek számától függően változik, tartalmazza a játékos vagy MI karaktereinek képét és két téglalap 2D-s objektummal összerakott életerő csíkot, amely a karakterek életerejét mutatja. Ahogy a játék halad, amennyiben a játékos vagy MI karakterei életerőt vesztenek, a piros téglalap egyre kevesebb részt tölt ki az csíkból. Amennyiben a karakter elveszíti az összes életerejét, a prefab-je eltűnik a sávból.
 
-
 \section{Állapottér} \label{state}
+
+Az állapotterét kidolgozását a \emph{StateRepresentation} nevű osztályban oldottam meg. Ez az osztály tartalmaz egy \emph{FieldObject} típusú, hétszer tízes mátrixot. Ez az osztály az ősosztálya minden táblán szereplő entitásnak, ez alatt értendők az üres mezők, karakterek vagy akadályok. Az osztály példányai rendelkeznek egy azonosítóval és egy \emph{Vector2} típusú pozícióval. Az osztály ezen kívül implementálja az \emph{ICloneable} interfészt, ezáltal mély klónozással \aref{minimax} szekcióban tárgyalt minimax algoritmus fel tudja használni. Ebből az osztályból származik a \emph{PlayerObject} osztály, amely már a játékos karakterek reprezentációját képezik a táblán. Ez az osztály az ősosztálybéli mezőkkel együtt tartalmazza még a karakterek életerejét, támadási erejét és egy logikai változót, amely a könnyű beazonosíthatóság érdekében eltárolja, hogy azt a karaktert az MI irányítja vagy sem.
+
+Az állapottér osztálya ezen kívül tartalmaz még a működéshez szükséges metódusokat. A \emph{ChangeTurn()} eljárás az állapottér aktuális körét átállítja meghívás után a másik játékoséra. A \emph{GetStatus()} \emph{Status} felsorolás elemmel visszatérő függvény a játékosok karaktereinek száma alapján visszaad egy aktuális állapotot\footnote{Nem összekeverendő az állapottér reprezentáció és minimax algoritmus által visszaadott állapottal.}, amely szerint a játék jelenleg melyik fázisban tart. Lehetséges, hogy a \emph{játékos} vagy \emph{MI} nyert, valamint még folyamatban van a játék.
+
+A működést befolyásoló metódusok közül az egyik legfontosabb a \emph{GetHeruistrics()} függvény, amely visszatért a paraméterben megadott játékos állapotának heurisztikai értékével. A függvény működéséről részletesebben \aref{heuristics} szekcióban olvashat. Ezeken kívül található több, a táblán különböző objektumok lekérdezésére szolgáló, PlayerObject és FieldObject listával visszatérő metódusok, amely a többi osztály számára elengedhetetlen.
+
+Az állapottér példányosítása során a konstruktor elindít több eljárást is, ezek végzik a tábla és akadályok generálását, a játékos és MI karakterek hozzáadását a táblához, illetve a kezdő játékos beállítását. Ezek az információk elérhetőek az \emph{Options} statikus osztály mezőinek lekérésével. Az Options osztály értékeit \aref{menusection} alszekcióban kifejtett, a beviteli mezőkkel és gombbal tudja a felhasználó a játék indítása előtt befolyásolni.
 
 \section{Operátor} \label{operator}
 
-\section{Operátorok felépítése} \label{operatorbuild}
+Az operátorokat a \emph{TurnOperator} osztályban valósítottam meg, ami implementálja az \emph{Operator} interfészt, melyben kettő metódus, egy logikai változóval visszatérő \emph{IsApplicable()} és egy állapottal visszatérő \emph{Apply()} függvény található. Mindkét metódus paraméterként egy állapotot kér be.
 
-\section{Operátor generálás} \label{operatorgen}
+A játékszabályok alapján a két interakciót, a lépést és támadást egyértelműen be tudjuk sorolni az operátorok közé, mivel lépést nem lehet kihagyni, ezért ''üres'' operátort nem használhatunk a játék során. Elsősorban az IsApplicable() függvény megvizsgálja, hogy a paraméterként adott állapot valódi állapot-e, azaz hogy a típusa StateRepresentation, amennyiben igen, típuskényszerítéssel eltároljuk, így későbbiekben könnyebben felhasználhatjuk. Ezután az összes \emph{PlayerAction} listaelemet megvizsgálva ellenőrizzük, hogy létező karakterre próbálunk alkalmazni egy operátort. Ennek az osztálynak felépítésről és működéséről \aref{operatorimp} alszekcióban részletesebben kitérek. Miután ebből az osztályból kiderült, hogy lépésről vagy támadásról volt-e szó, meghívja az interakciónak megfelelő segédfüggvényét, amely vagy IsApplicableMove() vagy IsApplicableAttack() logikai függvény lesz.
+
+Az \emph{IsApplicableMove()} függvény a lehetséges lépéseket vizsgálja, hogy az alkalmazható-e operátorként. Ez a metódus a lépés leendő pozícióját vizsgálja, azaz, hogy a táblán van-e a lépés. Megvizsgálja, hogy megfelelő karakterrel lép-e, nehogy véletlenül másnak a karakterét, esetleg másik saját karaktert rakna arrébb az operátor. Megnézi, hogy az adott cella, amelyre szeretnénk lépni nem tartalmaz másik, nem ''\emph{EMPTY}'' azonosítójú FieldObject objektumot. Végezetül eldönti, hogy az adott játékosnak a köre van vagy sem. Amennyiben ez a függvény hamis értékkel tér vissza, az IsApplicable metódusban tárolt \emph{illegalAction} mezőt igazra állítja, ebben az esetben a teljes függvény kiértékelése hamis lesz. Amennyiben hamis értéket ad az illegalAction, még nincs vége az ellenőrzésnek, még megvizsgáljuk, hogy esetleg az alkalmazható operátorok végkoordinátája ugyanarra esnek, amennyiben igen, a kiértékelés hamis lesz. Erről szintén részletesebben \aref{operatorimp} olvashat.
+
+Az \emph{IsApplicableAttack()} hasonlóan a lépéshez megvizsgálja segédfüggvényekkel, hogy a célzott mező a tábla területén belül található, a végrehajtó karakter megegyezik a PlayerAction objektumban tárolt karakter azonosítójával, megfelelő körben szeretnék ezt az operátort végrehajtani, azonban különbség, hogy megvizsgálja a cellán található karaktert, hogy az ellenfelé-e, így kiszűrve, hogy bármelyik játékos a saját karakterét megtámadja. A teljes függvény végkiértékelése megegyezik a lépésével, azaz amennyiben ez a függvény hamis értéket ad vissza, az illegalAction mező igaz lesz, tehát az IsApplicable függvény végértéke hamis lesz. Bár ugyanúgy lefut a HasSamePosition függvény, benne egy elágazás védi, hogy támadás esetén ne szűrje, az ugyanarra mezőre indított támadásokat.
+
+\subsection{Operátorok felépítése} \label{operatorimp}
+
+A játékszabályok megkötik, hogy egy játékos körében az összes karakterével végre kell hajtania valamilyen interakciót, emiatt a klasszikus ,,egyszer Te, egyszer Én'' felosztás kibővül a karakterek által, egyenként végrehajtható akciókkal, amely a \emph{PlayerAction} osztályban foglal helyet. A \emph{PlayerAction} osztály rendelkezik egy játékos azonosító mezővel, egy \emph{ActionType} és egy \emph{ActionDirection} felsorolás mezővel. Az \emph{ActionType} mező tartalma lehet \emph{MOVE}, azaz lépés vagy \emph{ATTACK}, azaz támadás. Az \emph{ActionType} pedig felsorolja a négy irányt, amely a fel, le, balra és jobbra. Amikor egy \emph{PlayerAction} típusú objektumot létrehozunk, akkor a következőképpen tesszük: megadjuk a karakter azonosítóját, amivel szeretnénk az akciót végrehajtani, az akció típusát és az akció irányát. 
+
+Ezáltal, hogy az interakciókat listaszerűen felsoroljuk az operátorokban, erőforrást spórolunk meg, ugyanis így nem szükséges minden karakter körében a játékfát újragenerálnunk, hanem elég csupán a végrehajtott operátor után újraszámítanunk, hiszen összességében, ha minden karakterre külön alkalmaznánk az operátorokat, ugyanarra az állapotra jutnánk, mint az egybe alkalmazott akciókkal.
+
+Ezzel a megoldással azonban feljöttek hibalehetőségek, mégpedig, hogy \aref{minimax} szekcióban kifejtett minimax algoritmus azt vélte a legjobb lépésnek, hogyha két karakterét is ugyanarra a koordinátára helyezi. Ezzel viszont adatvesztést ért el az állapottérben, hiszen az egyik karakter felül lett írva a később a mezőjét elfoglaló karakter által, így szükség volt egy ellenőrző függvényre, amely megvizsgálja, hogy az operátorokban lépés esetén ne lehessen két vagy több azonos végkoordináta, ennek segítségül szolgál a \emph{HasSamePosition()} függvény. A függvény az aktuális játékos körétől függően kilistázza az operátor által elmozdított karaktereket. Ezeket klónozással elmozdítja az operátorban foglalt irányba és ezután ezen karakterek koordinátáját összehasonlítja. Amennyiben vannak egyező koordináták, az adatvesztést jelent, hiszen akkor egyik karakter felülírta a másikat, így ezt jelzi igaz értékkel. Amennyiben nincs egyezés, hamis értékkel tér vissza.
+
+\subsection{Operátor generálás} \label{operatorgen}
 
 \section{Minimax} \label{minimax}
 
@@ -208,6 +229,7 @@ A vertikális csoport tartalma a karakterek számától függően változik, tar
 
 \section{Heurisztika} \label{heuristics}
 
+A heurisztika talán a másik legnehezebben implementálható komponense a játéknak, hiszen nem csak tisztában kell lennünk a szabályokkal, és az azzal előnyt vagy hátrányt jelentő tényezőivel, hanem tudnunk kell, hogy az ilyen típusú játékoknál mely pozíciók, szituációk, akciók okoznak nagyobb fölényt vagy visszaesést az adott játékosnak. 
 
 \chapter{Tesztelés}
 
