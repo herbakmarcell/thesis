@@ -28,6 +28,7 @@ public class PlayerHealthUI : MonoBehaviour
         foreach (var friendly in friendlies)
         {
             GameObject singleHealthBar = Instantiate(playerGroupPrefab, transform);
+            
             healthList.Add(singleHealthBar);
             singleHealthBar.GetComponent<PlayerGroupManager>().SetBar(friendly.GetComponent<EntityStat>().health);
         }
