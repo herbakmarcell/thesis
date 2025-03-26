@@ -55,7 +55,7 @@ Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcren
 	\label{persona1}
 \end{figure}
 
-\subsection{Játék szabályok}
+\subsection{Játék szabályok} \label{rules}
 
 A játék egy fixált méretű, négyzetekből álló, 7x10 nagyságú táblán folyik. A játékot kettő játékos tudja játszani, melyből a szakdolgozatomban az egyik játékos a mesterséges intelligencia lesz. Mindegyik játékos rendelkezik karakterekkel, amelynek kezdő mennyisége a játék indítása előtt kiválasztható. Mindkét játékos rendelkezik minimum 1, maximum pedig 3 karakterrel. A karakterek mennyisége játékosonként eltérő lehet, nem szükséges mindkét játékosnak ugyanazzal a karakter mennyiséggel kezdenie. Az egyik játékos karakterei (több karakter esetén függőlegesen egy mező kihagyással) a 2. oszlopban, a másik játékos karakterei pedig a 9. oszlopban kezdenek. A táblán léteznek akadályozó mezők, amelyekre a játékosok nem léphetnek, illetve nem támadhatják meg. 
 
@@ -122,15 +122,13 @@ Egy kétszemélyes játékban az egyik játékos a maximalizáló, aki a saját 
 
 \subsection{Minimax alfa-béta vágással}
 
-\chapter{Technológiák}
+\chapter{Implementáció}
 
-\section{Játékmotor}
+\section{Technológiák}
+
+\subsection{Játékmotor}
 
 A szakdolgozatom megvalósításához a Unity-t (korábban Unity3D) használom. A Unity egy világszerte ismert és használt videójáték-motor, amelyet a Unity Technologies fejleszt 2005 óta. A motor támogat több különböző platformot, például PC, videójáték konzolok és okostelefonok. Különösen kedvelik a kezdő játékfejlesztők a letisztult felülete és egyszerű használata miatt. Választásom azért esett a Unity-re, mert a szkriptekhez natívan támogatja a C\# nyelvet. A szakdolgozatomban a Unity-nek a 2022.3.32f1-es verzióját használom.
-
-\section{Grafikus szerkesztő}
-
-A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, általam készített pixelábrákat használok a karakterek képeként, amelyekhez a Paint.NET szoftvert használtam. A Paint.NET egy szabad licenszű, rasztergrafikus alkalmazás, amelyet a dotPDN fejleszt. A szakdolgozatom készítésekor 5.1.2 verzióját használtam a szoftvernek.
 
 \begin{figure}[h!]
 	\centering
@@ -139,30 +137,70 @@ A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, á
 	\label{PaintNET}
 \end{figure}
 
-\chapter{Implementáció}
+\subsection{Grafikus szerkesztő}
 
-\section{Játék megvalósítása}
+A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, általam készített pixelábrákat használok a karakterek képeként, amelyekhez a Paint.NET szoftvert használtam. A Paint.NET egy szabad licenszű, rasztergrafikus alkalmazás, amelyet a dotPDN fejleszt. A szakdolgozatom készítésekor 5.1.2 verzióját használtam a szoftvernek.
 
-\subsection{Megjelenítés}
+\section{Megjelenítés}
 
-\subsection{Állapottér}
+A játék készítésekor törekedtem a minimalista és könnyen vezérelhető kezelőfelületre. A Unity-ben úgynevezett \emph{scene}-ekre lehet osztani az játékot, legközelebbi példaként a \emph{WinForms} alkalmazásokban egy új \emph{form} létrehozásával lehet párhuzamba hozni ezt a megoldást. A játékom három scene-ből áll: \textbf{MenuScene}, \textbf{GameScene} és \textbf{EndScene}.
 
-\subsection{Operátor}
+\subsection{MenuScene}
 
-\subsection{Operátorok felépítése}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=15cm]{./pictures/game_menu.png}
+	\caption{A játék menüjének felépítése}
+	\label{menuscene}
+\end{figure}
 
-\subsection{Operátor generálás}
+A \emph{MenuScene} az alap \emph{Camera} objektumon kívül tartalmaz egy \emph{Canvas} 2D-s objektumot. Ezen a felületen találhatóak a különböző funkciókat betöltő objektumok, a kép bal alsó sarkában található az \emph{ExitButton} nevű gomb objektum, amely névéhez illően kilép az alkalmazásból, felette található a \emph{PlayButton} gomb, amely a felhasználó által kiválasztott beállítások alapján elindítja a játékot. A képernyő jobb oldalán lehet találni a beállításokat módosító gombokat és karakterek számát kiválasztó \emph{Dropdown} listák. A gomb megnyomásával kiválaszthatja a játékos, hogy Önmaga szeretné kezdeni a játékot vagy átadja a kezdés jogát a gépnek. A listákban a játékos ki tudja választani, hogy hány karakterrel induljon a játék, amely a korábban \aref{rules} szekcióban említett szabályok alapján egytől négy karakterig lehetséges. A \emph{MenuScene} felépítése \aref{menuscene} ábrán látható.
 
-\subsection{Minimax}
+\subsection{GameScene}
 
-\subsection{Minimax alfa-béta vágással}
+A \emph{GameScene} a szakdolgozatom fénypontja, az alkalmazás magja. A scene tartalmaz kettő objektumot: \emph{GridObjectPrefab} nevű \emph{prefab}-et és egy canvas-t. 
 
-\subsection{Heurisztika}
+A \emph{prefab} \emph{GameObject}-ek egyvelege, amelyben a programozó tárolhat konfigurációt, mező értékeket illetve gyermek GameObject-eket. Természetesen ezeket újra fel lehet használni, akár kódból példányosítani, illetve törölni is lehet őket a scene-ből. \cite{UnityDocsPrefab} 
+
+Ebben a prefab-ben található a későbbi \ref{state} szekcióban tárgyalt állapottér megjelenítése, amelynek reprezentációs mátrixát egy \emph{Grid} objektummal implementálom. A grid objektum magában még nem a megjelenítést oldja meg, csupán a mátrix értékeit adom át a komponensnek átalakítva, ehhez még szükséges úgynevezett \emph{Tileset} objektumot létrehoznom. Ez a tileset objektum \emph{Tile} objektumokból áll, ami pedig kétféle négyzet 2D-s \emph{sprite} felületet vehet fel, ez függ a koordinátájától, így sakktábla (\ref{gamegrid}~ábra) hatást keltve jelenik meg. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=15cm]{./pictures/game_grid.png}
+	\caption{A játéktábla karakterek nélkül}
+	\label{gamegrid}
+\end{figure}
+
+A játék indulása során az állapottérből lekérdezett pozíciók alapján ezen prefab gyermekobjektumaként példányosítom a játékos és MI karakterek prefab-jeit. Ezek a prefab-ek tárolják magukban az állapottérben is tárolt adatokat (név, életerő, pozíció), illetve a karakter tulajdonosától függő sprite-ot.
+
+A játék ideje alatt, ahogyan a karakterekkel lépnénk vagy támadnánk, a szabályoknak megfelelő módon a végrehajtható művelet céljának négyzete zöld színt kap, amennyiben ez nem lehetséges, piros színt kap árnyalatnak (\ref{gamemove}~ábra). Amikor a játékos a felületen kurzorát mozgatja művelet kiválasztása nélkül, a négyzet, amelyen a kurzor található, szürke árnyalatot kap.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=6cm]{./pictures/game_move_tile.png}
+	\caption{Példa helyes és helytelen lépésre}
+	\label{gamemove}
+\end{figure}
 
 
+\section{Állapottér} \label{state}
+
+\section{Operátor} \label{operator}
+
+\section{Operátorok felépítése} \label{operatorbuild}
+
+\section{Operátor generálás} \label{operatorgen}
+
+\section{Minimax} \label{minimax}
+
+\section{Minimax alfa-béta vágással} \label{minimaxalphabeta}
+
+\section{Heurisztika} \label{heuristics}
 
 
 \chapter{Tesztelés}
+
+\section{Manuális tesztelés}
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
@@ -224,9 +262,9 @@ A szakdolgozatomat a Unity-be beépített színeken és objektumokon kívül, á
 \textsc{GeeksforGeeks}: \emph{Mini-Max Algorithm in Artificial Intelligence} 
 \url{https://www.geeksforgeeks.org/mini-max-algorithm-in-artificial-intelligence/}, Megtekintés dátuma: 2025.03.19.
 
-
-
-
+\bibitem{UnityDocsPrefab}
+\textsc{Unity Documentation}: \emph{Prefabs} 
+\url{https://docs.unity3d.com/2022.3/Documentation/Manual/Prefabs.html/}, Megtekintés dátuma: 2025.03.26.
 \end{thebibliography}
 
 % Aláírt, szkennelt nyilatkozat beillesztése a szakdolgozat végére
