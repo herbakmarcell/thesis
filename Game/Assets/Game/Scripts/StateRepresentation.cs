@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -54,8 +55,8 @@ public class StateRepresentation : State
         return Status.PLAYING;
     }
 
-    static int WIN = 100;
-    static int LOSE = -100;
+    static int WIN = 1000;
+    static int LOSE = -1000;
 
 
 
@@ -70,7 +71,7 @@ public class StateRepresentation : State
         int result = 0;
 
         List<PlayerObject> playerObjects = ListPlayerObjects(false);
-        List<PlayerObject> AIObjects = ListPlayerObjects(false);
+        List<PlayerObject> AIObjects = ListPlayerObjects(true);
 
         int playerCount = playerObjects.Count;
         int AICount = AIObjects.Count;
@@ -83,6 +84,8 @@ public class StateRepresentation : State
 
             result += PlayerCount(player, playerCount, AICount);
 
+            result += CheckPossibleMoves(playerObjects);
+
             result += BadPosition(player, playerObjects, AIObjects);
         }
         else
@@ -92,6 +95,8 @@ public class StateRepresentation : State
             result += AttackBonus(player, playerObjects, AIObjects);
 
             result += PlayerCount(player, playerCount, AICount);
+
+            result += CheckPossibleMoves(AIObjects);
 
             result += BadPosition(player, playerObjects, AIObjects);
         }
@@ -109,7 +114,7 @@ public class StateRepresentation : State
             {
                 List<PlayerObject> nearbyEnemies = new List<PlayerObject>();
                 List<PlayerObject> nearbyFriendlies = new List<PlayerObject>();
-                result += CheckPossibleMoves(playerO);
+                //result += CheckPossibleMoves(playerO);
                 if (HasNearbyEnemy(player, playerO, nearbyEnemies))
                 {
                     result -= 5 * nearbyEnemies.Count;
@@ -126,7 +131,7 @@ public class StateRepresentation : State
             {
                 List<PlayerObject> nearbyEnemies = new List<PlayerObject>();
                 List<PlayerObject> nearbyFriendlies = new List<PlayerObject>();
-                result += CheckPossibleMoves(playerO);
+                //result += CheckPossibleMoves(playerO);
                 if (HasNearbyEnemy(player, playerO, nearbyEnemies))
                 {
                     result -= 5 * nearbyEnemies.Count;
@@ -142,19 +147,22 @@ public class StateRepresentation : State
     }
 
 
-    int CheckPossibleMoves(PlayerObject player)
+    int CheckPossibleMoves(List<PlayerObject> players)
     {
         int result = 0;
 
-        if (!InvalidPosition(player.position + Vector2.up)) result += 1;
-        else result -= 2;
-        if (!InvalidPosition(player.position + Vector2.down)) result += 1;
-        else result -= 2;
-        if (!InvalidPosition(player.position + Vector2.left)) result += 1;
-        else result -= 2;
-        if (!InvalidPosition(player.position + Vector2.right)) result += 1;
-        else result -= 2;
-
+        foreach (var player in players)
+        {
+            if (!InvalidPosition(player.position + Vector2.up)) result += 1;
+            else result -= 2;
+            if (!InvalidPosition(player.position + Vector2.down)) result += 1;
+            else result -= 2;
+            if (!InvalidPosition(player.position + Vector2.left)) result += 1;
+            else result -= 2;
+            if (!InvalidPosition(player.position + Vector2.right)) result += 1;
+            else result -= 2;
+        }
+        
         return result;
     }
 
@@ -209,6 +217,7 @@ public class StateRepresentation : State
         if (playerTurn == Turn.PLAYER) enemies = ListPlayerObjects(true);
         else enemies = ListPlayerObjects(false);
 
+        if (enemies.Count == 0) return hasEnemyNearby;
 
         foreach (PlayerObject enemy in enemies)
         {
@@ -216,7 +225,7 @@ public class StateRepresentation : State
                 (Math.Abs(player.position.y - enemy.position.y) == 1 && player.position.x == enemy.position.x))
             {
                 hasEnemyNearby = true;
-                nearbyEnemies.Add(enemy);
+                nearbyEnemies.Add(enemy.Clone() as PlayerObject);
             }
         }
 
@@ -230,6 +239,7 @@ public class StateRepresentation : State
         if (playerTurn == Turn.PLAYER) friendlies = ListPlayerObjects(false);
         else friendlies = ListPlayerObjects(true);
 
+        if (friendlies.Count == 0) return hasFriendlyNearby;
 
         foreach (PlayerObject friendly in friendlies)
         {
@@ -308,7 +318,7 @@ public class StateRepresentation : State
         {
             int i = ((x + 3) - (enemyCount - x)) - 1;
 
-            PlayerObject newEnemy = new PlayerObject("ENEMY" + x, new Vector2(j, i), 10, 1, true);
+            PlayerObject newEnemy = new PlayerObject("ENEMY" + x, new Vector2(j, i), 10, 10, true);
             board[i, j] = newEnemy;
         }
     }

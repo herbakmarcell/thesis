@@ -39,7 +39,7 @@ public class TurnOperator : Operator
                 newState.board[(int)player.position.y, (int)player.position.x] = new FieldObject("EMPTY", player.position);
 
                 Vector2 newPos = ActionPosition(playerAction, player);
-                Debug.Log($"{player.id} {newPos.x} {newPos.y}");
+                //Debug.Log($"{player.id} {newPos.x} {newPos.y}");
                 newState.board[(int)newPos.y, (int)newPos.x] = player;
                 player.position = newPos;
             }
@@ -49,24 +49,32 @@ public class TurnOperator : Operator
 
                 PlayerObject player = newState.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
                 Vector2 actionPos = ActionPosition(playerAction, player);
-                List<PlayerObject> playerObjects = newState.ListAllPlayerObjects();
-                PlayerObject target = playerObjects.Find(x => x.position == actionPos);
 
+                List<PlayerObject> playerObjects;
+                if (playerAction.playerId.Contains("PLAYER")) playerObjects = newState.ListPlayerObjects(true);
+                else playerObjects = newState.ListPlayerObjects(false);
+
+                PlayerObject target = playerObjects.Find(x => x.position == actionPos);
                 if (target == null)
                 {
-                    continue;
-                }
-
-                PlayerObject targetClone = target.Clone() as PlayerObject;
-                targetClone.health -= player.attack;
-                if (targetClone.health <= 0)
-                {
-                    newState.board[(int)targetClone.position.y, (int)targetClone.position.x] = new FieldObject("EMPTY", targetClone.position);
-                }
+                    newState.board[(int)player.position.y, (int)player.position.x] = new FieldObject("EMPTY", player.position);
+                    Vector2 newPos = ActionPosition(playerAction, player);
+                    newState.board[(int)newPos.y, (int)newPos.x] = player;
+                    player.position = newPos;
+                } 
                 else
                 {
-                    newState.board[(int)targetClone.position.y, (int)targetClone.position.x] = targetClone;
-                }
+                    PlayerObject targetClone = target.Clone() as PlayerObject;
+                    targetClone.health -= player.attack;
+                    if (targetClone.health <= 0)
+                    {
+                        newState.board[(int)targetClone.position.y, (int)targetClone.position.x] = new FieldObject("EMPTY", targetClone.position);
+                    }
+                    else
+                    {
+                        newState.board[(int)targetClone.position.y, (int)targetClone.position.x] = targetClone;
+                    }
+                }  
             }
         }
         //playerActions.Clear();
@@ -84,13 +92,11 @@ public class TurnOperator : Operator
         bool illegalAction = false;
         foreach (PlayerAction playerAction in playerActions)
         {
-            if (stateRepresentation.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId) == null)
+            PlayerObject player = stateRepresentation.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId);
+            if (player == null)
             {
                 continue;
             }
-            //PlayerObject player = stateRepresentation.ListAllPlayerObjects().Find(x => x.id == playerAction.playerId).Clone() as PlayerObject;
-            //Vector2 actionPos = ActionPosition(playerAction, player);
-            //if (playerAction.actionType == ActionType.ATTACK && (stateRepresentation.ListAllPlayerObjects().Find(x => x.position == actionPos) == null)) continue;
 
             if (playerAction.actionType == ActionType.MOVE)
             {
@@ -99,6 +105,8 @@ public class TurnOperator : Operator
             }
             else if (playerAction.actionType == ActionType.ATTACK)
             {
+                //Vector2 actionPos = ActionPosition(playerAction, player);
+                //if (stateRepresentation.ListAllPlayerObjects().Find(x => x.position == actionPos) == null) return false;
                 illegalAction = !IsApplicableAttack(stateRepresentation, playerAction);
             } 
 

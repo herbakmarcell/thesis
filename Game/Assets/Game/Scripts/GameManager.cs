@@ -68,6 +68,9 @@ public class GameManager
     AIHealthUI aiHealthUI;
     PlayerHealthUI playerHealthUI;
 
+    int aiCount;
+    int playerCount;
+
     public void ProgressGame()
     {
         Operator o;
@@ -76,14 +79,18 @@ public class GameManager
         {
             if (activePlayer < friendlies.Count)
             {
+                if (activePlayer == 0)
+                {
+                    aiCount = (stateRepresentation as StateRepresentation).ListPlayerObjects(true).Count;
+                }
                 PlayerAction playerAction = null;
                 switch (actionSelected)
                 {
                     case ActionSelected.MOVE:
-                        playerAction = new PlayerAction("PLAYER" + (activePlayer + 1), ActionType.MOVE, actionDirection);
+                        playerAction = new PlayerAction(friendlies[activePlayer].GetComponent<EntityStat>().id, ActionType.MOVE, actionDirection);
                         break;
                     case ActionSelected.ATTACK:
-                        playerAction = new PlayerAction("PLAYER" + (activePlayer + 1), ActionType.ATTACK, actionDirection);
+                        playerAction = new PlayerAction(friendlies[activePlayer].GetComponent<EntityStat>().id, ActionType.ATTACK, actionDirection);
                         break;
                     case ActionSelected.NONE:
                     default:
@@ -101,12 +108,13 @@ public class GameManager
                 actionSelected = ActionSelected.NONE;
                 activePlayer++;
             }
-            if(activePlayer >= friendlies.Count)
+            
+            if (activePlayer >= friendlies.Count)
             {
                 o = new TurnOperator(actions);
                 stateRepresentation = o.Apply(stateRepresentation);
-                PlayerObject player = (stateRepresentation as StateRepresentation).ListAllPlayerObjects().Find(x => x.id.Contains("PLAYER"));
-                Debug.Log($"Name: {player.id} " + $"X: {player.position.x} " + $"Y: {player.position.y} ");
+                //PlayerObject player = (stateRepresentation as StateRepresentation).ListAllPlayerObjects().Find(x => x.id.Contains("PLAYER"));
+                //Debug.Log($"Name: {player.id} " + $"X: {player.position.x} " + $"Y: {player.position.y} ");
                 activePlayer = 0;
                 actionSelected = ActionSelected.NONE;
                 playerTurn = false;
@@ -118,9 +126,16 @@ public class GameManager
             currentStatus = Status.PLAYERWIN;
             SceneManager.LoadScene("EndScene");
         }
+
+        if (aiCount != (stateRepresentation as StateRepresentation).ListPlayerObjects(true).Count)
+        {
+            StateRepresentation s = GameManager.Instance.stateRepresentation as StateRepresentation;
+            solver = new MiniMaxWithAlphaBetaPruning(new TurnOperatorGenerator(s.ListPlayerObjects(false), s.ListPlayerObjects(true)), 2);
+        }
+
         if (!playerTurn) 
         {
-            
+            playerCount = (stateRepresentation as StateRepresentation).ListPlayerObjects(false).Count;
             stateRepresentation = solver.NextMove(stateRepresentation);
 
             if (CheckStatus(stateRepresentation))
@@ -130,6 +145,11 @@ public class GameManager
             }
             else
             {
+                if (playerCount != (stateRepresentation as StateRepresentation).ListPlayerObjects(true).Count)
+                {
+                    StateRepresentation s = GameManager.Instance.stateRepresentation as StateRepresentation;
+                    solver = new MiniMaxWithAlphaBetaPruning(new TurnOperatorGenerator(s.ListPlayerObjects(false), s.ListPlayerObjects(true)), 2);
+                }
                 RedrawTable();
                 playerTurn = true;
             }            
