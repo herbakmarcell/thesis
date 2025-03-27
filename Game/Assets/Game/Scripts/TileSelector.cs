@@ -38,8 +38,6 @@ public class TileSelector : MonoBehaviour
             Vector3Int playerCell = tilemap.WorldToCell(GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position);
             if (GameManager.Instance.actionSelected == ActionSelected.MOVE)
             {
-                
-
                 if (IsValidMove(currentCell, playerCell))
                 {
                     GameManager.Instance.actionDirection = GetDirection(currentCell, playerCell);
