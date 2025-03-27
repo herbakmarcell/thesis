@@ -26,7 +26,7 @@ public class GameManager
         }
     }
 
-    public GameManager()
+    private GameManager()
     {
         friendlies = new List<GameObject>();
         enemies = new List<GameObject>();
@@ -47,7 +47,6 @@ public class GameManager
         //ProgressGame();
     }
 
-    [SerializeField]
     public State stateRepresentation;
     public Solver solver;
 

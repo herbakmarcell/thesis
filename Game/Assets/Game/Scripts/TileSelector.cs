@@ -30,14 +30,15 @@ public class TileSelector : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
+            worldPos.z = 0;
+
+            Vector3Int currentCell = tilemap.WorldToCell(worldPos);
+            Vector3Int playerCell = tilemap.WorldToCell(GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position);
             if (GameManager.Instance.actionSelected == ActionSelected.MOVE)
             {
-                Vector2 mousePos = Mouse.current.position.ReadValue();
-                Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
-                worldPos.z = 0;
-
-                Vector3Int currentCell = tilemap.WorldToCell(worldPos);
-                Vector3Int playerCell = tilemap.WorldToCell(GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position);
+                
 
                 if (IsValidMove(currentCell, playerCell))
                 {
@@ -50,11 +51,6 @@ public class TileSelector : MonoBehaviour
             }
             else if (GameManager.Instance.actionSelected == ActionSelected.ATTACK)
             {
-                Vector2 mousePos = Mouse.current.position.ReadValue();
-                Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
-                worldPos.z = 0;
-                Vector3Int currentCell = tilemap.WorldToCell(worldPos);
-                Vector3Int playerCell = tilemap.WorldToCell(GameManager.Instance.friendlies[GameManager.Instance.activePlayer].transform.position);
                 if (IsValidAttack(currentCell, playerCell))
                 {
                     GameObject enemy = SelectEnemy(currentCell);
