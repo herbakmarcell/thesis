@@ -11,7 +11,7 @@
 \usepackage[T1]{fontenc}
 \PassOptionsToPackage{defaults=hu-min}{magyar.ldf}
 \usepackage[magyar]{babel}
-\usepackage{mathtools,amssymb,amsthm,pdfpages}
+\usepackage{listingsutf8,mathtools,amssymb,amsthm,pdfpages,caption,array}
 \footnotestyle{rule=fourth}
 
 \newtheorem{tetel}{Tétel}[chapter]
@@ -19,6 +19,25 @@
 \newtheorem{definicio}[tetel]{Definíció}
 \theoremstyle{remark}
 \newtheorem{megjegyzes}[tetel]{Megjegyzés}
+
+\lstset{
+	language=[Sharp]C,
+	inputencoding=utf8/latin2,
+	basicstyle=\footnotesize\ttfamily,
+	columns=fullflexible,
+	numbers=left,
+	breaklines,
+	xleftmargin=0.7cm,
+	xrightmargin=0.7cm,
+	frame=ltrb,
+	rulecolor=\color{blue!80!black},
+	backgroundcolor=\color{gray!30},
+	commentstyle=\color{green!60!black},
+	keywordstyle=\color{blue},
+	morekeywords={using,public,class,int,void,new,for,bool,false,true,if},
+}
+
+\renewcommand{\lstlistingname}{Kód}
 
 \begin{document}
 
@@ -45,7 +64,7 @@
 
 \subsection{Játék ötlete}
 
-Szakdolgozatom programjaként egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel szabadidőmet is szívesen töltöm. Választásom végül is egy körökre osztott stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, jelenleg legfrissebb 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload-tól, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők.\cite{Persona,Persona3}
+Szakdolgozatom programjaként \cite{Project} egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel szabadidőmet is szívesen töltöm. Választásom végül is egy körökre osztott stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, jelenleg legfrissebb 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload-tól, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők.\cite{Persona,Persona3}
 
 Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcrendszere (\ref{persona1} ábra) rendelkezett mezőkre felbontott csatatérrel, amelyeknél még a támadásoknak volt egy bizonyos maximális távolsága. Ezek alapján szerettem volna egy olyan játékteret készíteni, ahol a játékosnak nem csak a támadásának a távolságát kell figyelembe vennie, hanem a helyét is a csatatéren. \cite{Persona1,Persona1Gameplay}
 \begin{figure}[h!]
@@ -104,22 +123,6 @@ A játékelmélet a matematika egyik, tudományágak közé egyértelműen nehez
 	\item A játékost győzelemre, de minimum döntetlenre segítő módszere a \emph{stratégia}. Ilyenkor kihasználhatja az ellenfél érzékelt hibáit.
 \end{itemize} 
 
-\subsection{Minimax algoritmus}
-
-A minimax elv olyan alkalmazott döntési szabály a játékelméletben, ami szerint azt a lehetőséget kell választani, ami minimalizálja a maximális veszteséget. Ezt az elvet felhasználhatjuk a kétfős zérusösszegű játékoknál, ami magába foglalja a két játékos szimultán döntéseit és a felváltva tett lépéseit is. \cite{MiniMaxEnWiki}
-
-Formális definíció szerint a következőképpen tudjuk felírni a számítást:
-
-\begin{equation*}
-\overline{v_{i}}=\underset{{a_{-i}}}{\min} \underset{{a_{i}}}{\max} v_{i}(a_{i}, a_{-i})
-\end{equation*}
-
-A minimax érték azt fejezi ki, hogy egy játékos legrosszabb esetben mekkora értéket érhet el, ha a többi játékos a számára legkedvezőtlenebb stratégiát követi. Másképpen megfogalmazva, ez az a legnagyobb érték, amelyet a játékos garantáltan megszerezhet, ha ismeri a többi játékos lépéseit. 
-
-Egy kétszemélyes játékban az egyik játékos a maximalizáló, aki a saját pontszámának maximalizálására törekszik, míg a másik a minimalizáló, aki a maximalizáló pontszámának minimalizálására törekszik. Az algoritmus úgy működik, hogy kiértékeli az összes lehetséges lépést mindkét játékos számára, előrejelzi az ellenfél válaszait, és kiválasztja az optimális lépést annak érdekében, hogy a lehető legjobb eredményt biztosítsa. \cite{MiniMaxGfG}
-
-\subsection{Minimax alfa-béta vágással}
-
 \chapter{Implementáció}
 
 \section{Technológiák}
@@ -164,7 +167,7 @@ A \emph{prefab} akár több \emph{GameObject}\footnote{A GameObject lényegében
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=15cm]{./pictures/game_grid.png}
+	\includegraphics[width=13cm]{./pictures/game_grid.png}
 	\caption{A játéktábla karakterek nélkül}
 	\label{gamegrid}
 \end{figure}
@@ -184,14 +187,14 @@ A játék ideje alatt, ahogyan a karakterekkel lépnénk vagy támadnánk, a sza
 
 A scene másik összetevője egy canvas, amin találhatóak az életerőket tartalmazó vertikális csoportok és a vezérlő gombok. Három gomb közül kettő a játékteret befolyásoló erővel bír, a középső gomb arra szolgál, hogyha a játékos az akció végrehajtása előtt meggondolja magát, tudjon változtatni a műveleten, azonban amint kattintással jóváhagyta a játékos, ez a lehetőség megszűnik, tehát lépést nem lehet vissza vonni.
 
+A vertikális csoport tartalma a karakterek számától függően változik, tartalmazza a játékos vagy MI karaktereinek képét és két téglalap alakú 2D-s objektummal összerakott életerő csíkot, amely a karakterek életerejét mutatja. Ahogy a játék halad, amennyiben a játékos vagy MI karakterei életerőt vesztenek, a piros téglalap arányosan egyre kevesebb részt tölt ki az csíkból. Amennyiben a karakter elveszíti az összes életerejét, a prefab-je eltűnik a sávból.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=14cm]{./pictures/game_health_ui.png}
 	\caption{Játék egyik kezdőállapota}
 	\label{game}
 \end{figure}
-
-A vertikális csoport tartalma a karakterek számától függően változik, tartalmazza a játékos vagy MI karaktereinek képét és két téglalap alakú 2D-s objektummal összerakott életerő csíkot, amely a karakterek életerejét mutatja. Ahogy a játék halad, amennyiben a játékos vagy MI karakterei életerőt vesztenek, a piros téglalap arányosan egyre kevesebb részt tölt ki az csíkból. Amennyiben a karakter elveszíti az összes életerejét, a prefab-je eltűnik a sávból.
 
 \section{Állapottér} \label{state}
 
@@ -225,16 +228,47 @@ Ezzel a megoldással azonban feljöttek hibalehetőségek, mégpedig, hogy \aref
 
 \Aref{operator} szekcióban és \aref{operatorimp} alszekcióban tárgyalt operátorokat elérhetővé kell tenni a megoldó algoritmusunk számára. Emiatt szükség van az operátorok generálására, amelyet a \emph{TurnOperatorGenerator} osztályban oldottam meg. Az osztály egy \emph{OperatorGenerator} interfészt implementál, amely egy \emph{Operator} lista csak olvasható mezőt tartalmaz, ebben tároljuk el az összes operátorunkat.
 
-Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy ismételve annyiszor, ahány játékos karakterünk van, egy másik listába, a \emph{playerActionI} listában eltároljuk a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezekkel a listaelemekkel, leszűkítve az interakciókig, Descartes-szorzás segítségével létrehozunk a játékos karaktereinek egy végrehajtató operátorát. Végezetül ezt eltároljuk az \emph{operators} listába. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
+Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy ismételve annyiszor, ahány játékos karakterünk van, egy másik listába, a \emph{playerActionI} listában eltároljuk a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezekkel a listaelemekkel, leszűkítve az interakciókig, Descartes-szorzás segítségével létrehozunk a játékos karaktereinek egy végrehajtató operátorát. Végezetül ezt eltároljuk az \emph{operators} listába. A generálás kódját megtekintheti \aref{operatorgen-code} kódrészletben. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
 
-Játék közben megtörténhet, hogy az egyik karakter elveszíti az életerejét, így eltávolítva a tábláról az operátoraink kiértékelésének ideje -- amelyről \aref{minimaxalphabeta} szekcióban olvashat -- exponenciálisan megnő, hiszen innentől kezdve minden operátort meg kell vizsgálnia, amelyben az eltávolított karakter is szerepel. Ez annyit jelent, hogyha bár két karakter maradt a táblán a háromból, az operátor továbbra is várja a már nem létező operátorra a műveletet. Ehhez nyújt segítséget a körönként ellenőrzött karakterszám vizsgálat. Erről bővebben \aref{gamemanager} szekcióban olvashat. Ebben az esetben, ha a kör végén a karaktereknek számában csökkenést tapasztalunk, akkor a megmaradt karakterekre új operátorokat generálunk. Ez lényegében az operátor generálás metódusának túltöltése, ebben az esetben csak az állapottérben tárolt karakterekre generáljuk le újra az operátorokat, ezzel megoldva a szükséges interakciók számát is.
+Játék közben megtörténhet, hogy az egyik karakter elveszíti az életerejét, így eltávolítva a tábláról az operátoraink kiértékelésének ideje -- amelyről \aref{minimax} szekcióban olvashat -- exponenciálisan megnő, hiszen innentől kezdve minden operátort meg kell vizsgálnia, amelyben az eltávolított karakter is szerepel. Ez annyit jelent, hogyha bár két karakter maradt a táblán a háromból, az operátor továbbra is várja a már nem létező operátorra a műveletet. Ehhez nyújt segítséget a körönként ellenőrzött karakterszám vizsgálat. Erről bővebben \aref{gamemanager} szekcióban olvashat. Ebben az esetben, ha a kör végén a karaktereknek számában csökkenést tapasztalunk, akkor a megmaradt karakterekre új operátorokat generálunk. Ez lényegében az operátor generálás metódusának túltöltése, ebben az esetben csak az állapottérben tárolt karakterekre generáljuk le újra az operátorokat, ezzel megoldva a szükséges interakciók számát is.
+
+\lstinputlisting[caption=Operátorok létrehozása a játék elején, label=operatorgen-code]{./codes/TurnOperatorGenerator.cs}
 
 \section{Minimax} \label{minimax}
 
+A minimax elv olyan alkalmazott döntési szabály a játékelméletben, ami szerint azt a lehetőséget kell választani, ami minimalizálja a maximális veszteséget. Ezt az elvet felhasználhatjuk a kétfős zérusösszegű játékoknál, ami magába foglalja a két játékos szimultán döntéseit és a felváltva tett lépéseit is. \cite{MiniMaxEnWiki}
+
+Formális definíció szerint a következőképpen tudjuk felírni a számítást:
+
+\begin{equation*}
+	\overline{v_{i}}=\underset{{a_{-i}}}{\min} \underset{{a_{i}}}{\max} v_{i}(a_{i}, a_{-i})
+\end{equation*}
+
+A minimax érték azt fejezi ki, hogy egy játékos legrosszabb esetben mekkora értéket érhet el, ha a többi játékos a számára legkedvezőtlenebb stratégiát követi. Másképpen megfogalmazva, ez az a legnagyobb érték, amelyet a játékos garantáltan megszerezhet, ha ismeri a többi játékos lépéseit. 
+
+Egy kétszemélyes játékban az egyik játékos a maximalizáló, aki a saját pontszámának maximalizálására törekszik, míg a másik a minimalizáló, aki a maximalizáló pontszámának minimalizálására törekszik. Az algoritmus úgy működik, hogy kiértékeli az összes lehetséges lépést mindkét játékos számára, előrejelzi az ellenfél válaszait, és kiválasztja az optimális lépést annak érdekében, hogy a lehető legjobb eredményt biztosítsa. \cite{MiniMaxGfG}
+
+A MiniMax megoldó algoritmus implementációját a \emph{MiniMaxBase} osztályba rendeztem, amely gyermekosztálya a \emph{Solver} absztrakt osztálynak. Ez a \emph{Solver} osztály tartalmaz egy operátorokat tartalmazó listát és egy absztrakt, állapot paramétert bekérő \emph{NextMove()} metódust. A \emph{NextMove()} állapottal visszatérő függvény fog a későbbiekben a megoldó algoritmusnak megfelelően egy állapotot a játékfának kiértékelése után visszaadni.
+
+Esetünkben, a MiniMax algoritmus alapján a paraméterként megadott állapotot eltároljuk egy \emph{Node} osztályba. A \emph{Node} osztály egy példánya lényegében a játékfának egy csomópontja, amely tartalmaz egy állapotot, a saját mélységét, a szülőcsomópontját és gyermekcsomópontok listáját, amennyiben azok léteznek. Továbbá ez a \emph{Node} osztály az állapottérből le tudja kérdezi a játék állását. A \emph{GetHeuristics()} metódus, amennyiben a csomópontnak nincs gyermeke, a saját állapotteréből, egyébként meg a legelső gyermekcsomópont \emph{GetHeruistics()} függvényéből kérdezi le az állapottér heurisztikáját. 
+
+A MiniMax algoritmusnak szüksége van még egy segédfüggvényre a csomópontokhoz, amely ezeket rendezi a megfelelő módon, ez a \emph{SortChildrenMiniMax()} eljárás. A paraméterben megadott kör alapján, és a másodlagos opcionális paraméter alapján eldönti, hogy a nyereséget maximalizálni vagy  az ellenfél nyereségét szeretnénk minimalizálni, mindezt rekurzívan meghívva minden egyes csomópontra, amíg van gyermekcsomópontjuk.
+
+Ezek alapján a felülírt \emph{NextMove()} metódus egy csomópontban eltárolja a paraméterben megadott állapotot, majd ezt kiterjeszti az \emph{ExtendNode()} eljárás. Ez megnézi a csomópontban, hogy a játék még folyamatban van-e vagy elérte-e már a maximális mélységet, amennyiben igaz, nem terjesszük ki tovább. Ezután minden operátornál megnézzük, hogy alkalmazhatóak-e, amennyiben igen, egy új állapotba alkalmazzuk. Ezt eltároljuk egy új csomópontba, és felvesszük az eredeti csomópont gyermekelemei közé. A létrehozott csomópontot végezetül rekurzívan tovább kiterjesztjük.
+
 \section{Minimax alfa-béta vágással} \label{minimaxalphabeta}
 
-\section{Heurisztika} \label{heuristics}
+Az MiniMax alfa-béta vágásos verzióját a \emph{MiniMaxAlphaBetaPruning} osztályban valósítottam meg. A lényeges eltérés az ExtendNode() metódus változtatása okozza, amely innentől egy egész értékkel tér vissza. Az alap MiniMax algoritmushoz hasonlóan a függvény ellenőrzi a játék folyamatban van-e vagy a mélység eléri-e a kívánt mélységet, ha valamelyik igaz, akkor visszaadja a csomópont heurisztikai értékét. Továbbra is minden operátort megvizsgálunk, amennyiben alkalmazható az állapotra, az operátor alkalmazása után az új állapotot eltároljuk egy új csomópontként, ezt szintén felvesszük az eredeti csomópont gyermekelemei közé és azokat rendszerezzük.
 
+A gyermekelemek kiterjesztése pedig alkalmazza az alfa-béta vágás módszerét, amely egy-egy csúcs kiterjesztését szakíthatja félbe. Attól függően, hogy az aktuális csomópontunk minimalizáló vagy maximalizáló körben van, összehasonlítjuk az ebből kiterjesztett részfa legmélyebb csomópontjának értékével. 
+
+Alfa-vágás esetén a részfa és az aktuális csomópont értéke közül kiválasztjuk a minimum értéket. A következő részfa indulásakor szintén kiválasztjuk az aktuális és a részfa minimumát, azonban a további részfák kiterjesztését félbeszakítjuk, ha a csúcsban eddig kiszámolt minimum kisebbé válik, mint a szülőben eddig kiszámolt maximum. Ebben az esetben a többi részfa kiterjesztése irreleváns, hiszen a szülő maximumának legkisebb értéke nagyobb, mint az aktuális csúcs minimumának legnagyobb értéke. \cite{kusper} A kiterjesztés logikáját \aref{minimaxalphabeta-code} kódrészletben találja.
+
+\lstinputlisting[caption=Csomópont kiterjesztése alfa-béta vágással, label=minimaxalphabeta-code]{./codes/ExtendNodeAlphaBeta.cs}
+
+
+\section{Heurisztika} \label{heuristics}
+% Ez a rész még kidolgozás alatt van.
 A heurisztika talán a másik legnehezebben implementálható komponense a játéknak, hiszen nem csak tisztában kell lennünk a szabályokkal, és az azzal előnyt vagy hátrányt jelentő tényezőivel, hanem tudnunk kell, hogy az ilyen típusú játékoknál mely pozíciók, szituációk, akciók okoznak nagyobb fölényt vagy visszaesést az adott játékosnak. 
 
 \section{További fontosabb osztályok} 
@@ -257,13 +291,21 @@ Ez az osztály végzi az interakciókhoz tartozó koordináták kiválasztását
 
 Természetesen, mint az operátoroknál, a felületen is vizsgálni kell, hogy a felhasználó legális lépéseket vagy támadásokat akar-e végrehajtani, így kizárólag csak azokat a műveleteket engedélyezem interakcióként elfogadni, amelyek a játék szabályainak megfelelnek.
 
+\lstinputlisting[caption=Cella kiválasztása és továbbítása, label=tileselector-code]{./codes/TileSelector.cs}
+
 \chapter{Tesztelés}
 
-\section{Manuális tesztelés}
+Egy alkalmazás fejlesztése során elengedhetetlen a különböző funkciók, algoritmusok és kódrészletek tesztelése. A tesztelés tökéletes módja, hogy ellenőrizzük a programunk működését, az üzemi kód eredményei a követelményekben megfogalmazott értékeket adják, valamint javítási lehetőségek találására. Általában a legegyszerűbb módja a tesztelésnek a manuális tesztelés. Ebben az esetben a fejlesztőnek a felhasználó szemszögéből használjuk az alkalmazásunkat, és tesszük próbára különböző szituációkban.
+
+% Ez a rész még kidolgozás alatt van.
+A Unity keretein belül a különböző metódusok és szkriptek tesztelésére az egységtesztek alkalmazása körülményes, ezért az alkalmazásom tesztelése javarészt manuálisan, próba-hiba módszerrel történt. Amikor megírtam egy metódust, megnéztem hogyan reagál a játék, ha valami elromlott, akkor a Unity-be beépített \emph{Debug} osztály \emph{Log()} metódusát alkalmaztam, amelyet a konzolra kiírt különböző változókat és eredményeket.
+
+% Tervezek közösségi tesztet végrehajtani, ahol a felhasználók Google Forms kérdőíven keresztül leírhatják a véleményüket.
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
 
+% Összességében..., vélemények, javítani valók
 
 \begin{thebibliography}{2}
 \addcontentsline{toc}{chapter}{\bibname}
@@ -339,6 +381,10 @@ Természetesen, mint az operátoroknál, a felületen is vizsgálni kell, hogy a
 \bibitem{UnityDocsVector2}
 \textsc{Unity Documentation}: \emph{Vector2} 
 \url{https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Vector2.html}, Megtekintés dátuma: 2025.03.27.
+
+\bibitem{kusper}
+\textsc{Dr. Kovásznai Gergely és Dr. Kusper Gábor}: \emph{A MESTERSÉGES INTELLIGENCIA KÉRDÉSEI A KÖZÉPISKOLAI OKTATÁSBAN} 
+\url{https://aries.ektf.hu/~gkusper/mesterseges_intelligencia.v.1.0.4.pdf}, Megtekintés dátuma: 2025.03.28.
 
 
 \end{thebibliography}

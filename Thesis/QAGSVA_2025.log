@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  27 MAR 2025 23:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  28 MAR 2025 19:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -288,20 +288,51 @@ Package babel Info: Making ` an active character on input line 2819.
 Package babel Info: Importing font and identification data for magyar
 (babel)             from babel-hu.ini. Reported on input line 11.
 )
+(c:/texlive/2024/texmf-dist/tex/latex/listingsutf8/listingsutf8.sty
+Package: listingsutf8 2019-12-10 v1.5 Allow UTF-8 in listings input (HO)
+
+(c:/texlive/2024/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count291
+\lst@gtempboxa=\box52
+\lst@token=\toks19
+\lst@length=\count292
+\lst@currlwidth=\dimen157
+\lst@column=\count293
+\lst@pos=\count294
+\lst@lostspace=\dimen158
+\lst@width=\dimen159
+\lst@newlines=\count295
+\lst@lineno=\count296
+\lst@maxwidth=\dimen160
+
+(c:/texlive/2024/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+(c:/texlive/2024/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count297
+\lst@skipnumbers=\count298
+\lst@framebox=\box53
+)
+(c:/texlive/2024/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+)
 (c:/texlive/2024/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
 
 (c:/texlive/2024/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count291
-\calc@Bcount=\count292
-\calc@Adimen=\dimen157
-\calc@Bdimen=\dimen158
+\calc@Acount=\count299
+\calc@Bcount=\count300
+\calc@Adimen=\dimen161
+\calc@Bdimen=\dimen162
 \calc@Askip=\skip52
 \calc@Bskip=\skip53
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count293
+\calc@Ccount=\count301
 \calc@Cskip=\skip54
 )
 (c:/texlive/2024/texmf-dist/tex/latex/mathtools/mhsetup.sty
@@ -317,75 +348,75 @@ Package: amstext 2021/08/26 v2.01 AMS text
 
 (c:/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks19
-\ex@=\dimen159
+\@emptytoks=\toks20
+\ex@=\dimen163
 ))
 (c:/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen160
+\pmbraise@=\dimen164
 )
 (c:/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count294
+\inf@bad=\count302
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count295
-\leftroot@=\count296
+\uproot@=\count303
+\leftroot@=\count304
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count297
-\DOTSCASE@=\count298
+\classnum@=\count305
+\DOTSCASE@=\count306
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box52
-\strutbox@=\box53
+\Mathstrutbox@=\box54
+\strutbox@=\box55
 LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen161
+\big@size=\dimen165
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count299
+\macc@depth=\count307
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count300
+\c@MaxMatrixCols=\count308
 \dotsspace@=\muskip18
-\c@parentequation=\count301
-\dspbrk@lvl=\count302
-\tag@help=\toks20
-\row@=\count303
-\column@=\count304
-\maxfields@=\count305
-\andhelp@=\toks21
-\eqnshift@=\dimen162
-\alignsep@=\dimen163
-\tagshift@=\dimen164
-\tagwidth@=\dimen165
-\totwidth@=\dimen166
-\lineht@=\dimen167
-\@envbody=\toks22
+\c@parentequation=\count309
+\dspbrk@lvl=\count310
+\tag@help=\toks21
+\row@=\count311
+\column@=\count312
+\maxfields@=\count313
+\andhelp@=\toks22
+\eqnshift@=\dimen166
+\alignsep@=\dimen167
+\tagshift@=\dimen168
+\tagwidth@=\dimen169
+\totwidth@=\dimen170
+\lineht@=\dimen171
+\@envbody=\toks23
 \multlinegap=\skip56
 \multlinetaggap=\skip57
-\mathdisplay@stack=\toks23
+\mathdisplay@stack=\toks24
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
-\g_MT_multlinerow_int=\count306
-\l_MT_multwidth_dim=\dimen168
+\g_MT_multlinerow_int=\count314
+\l_MT_multwidth_dim=\dimen172
 \origjot=\skip58
-\l_MT_shortvdotswithinadjustabove_dim=\dimen169
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen170
-\l_MT_above_intertext_sep=\dimen171
-\l_MT_below_intertext_sep=\dimen172
-\l_MT_above_shortintertext_sep=\dimen173
-\l_MT_below_shortintertext_sep=\dimen174
-\xmathstrut@box=\box54
-\xmathstrut@dim=\dimen175
+\l_MT_shortvdotswithinadjustabove_dim=\dimen173
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen174
+\l_MT_above_intertext_sep=\dimen175
+\l_MT_below_intertext_sep=\dimen176
+\l_MT_above_shortintertext_sep=\dimen177
+\l_MT_below_shortintertext_sep=\dimen178
+\xmathstrut@box=\box56
+\xmathstrut@dim=\dimen179
 )
 (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
@@ -400,15 +431,15 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 (c:/texlive/2024/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks24
-\thm@bodyfont=\toks25
-\thm@headfont=\toks26
-\thm@notefont=\toks27
-\thm@headpunct=\toks28
+\thm@style=\toks25
+\thm@bodyfont=\toks26
+\thm@headfont=\toks27
+\thm@notefont=\toks28
+\thm@headpunct=\toks29
 \thm@preskip=\skip59
 \thm@postskip=\skip60
 \thm@headsep=\skip61
-\dth@everypar=\toks29
+\dth@everypar=\toks30
 )
 (c:/texlive/2024/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2024/10/28 v0.6c Insert pages of external PDF documents (AM)
@@ -418,8 +449,8 @@ Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
 (c:/texlive/2024/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
-\ESO@tempdima=\dimen176
-\ESO@tempdimb=\dimen177
+\ESO@tempdima=\dimen180
+\ESO@tempdimb=\dimen181
 
 (c:/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
@@ -440,24 +471,59 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 ))
-\AM@pagewidth=\dimen178
-\AM@pageheight=\dimen179
-\AM@fboxrule=\dimen180
+\AM@pagewidth=\dimen182
+\AM@pageheight=\dimen183
+\AM@fboxrule=\dimen184
 
 (c:/texlive/2024/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2024/10/28 v0.6c Pdfpages driver for pdfTeX (AM)
 )
-\pdfpages@includegraphics@status=\count307
-\AM@pagebox=\box55
-\AM@global@opts=\toks30
-\AM@pagecnt=\count308
-\AM@toc@title=\toks31
-\AM@lof@heading=\toks32
-\c@AM@survey=\count309
-\AM@templatesizebox=\box56
+\pdfpages@includegraphics@status=\count315
+\AM@pagebox=\box57
+\AM@global@opts=\toks31
+\AM@pagecnt=\count316
+\AM@toc@title=\toks32
+\AM@lof@heading=\toks33
+\c@AM@survey=\count317
+\AM@templatesizebox=\box58
 )
-\c@tetel=\count310
+(c:/texlive/2024/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
+(c:/texlive/2024/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen185
+\captionmargin=\dimen186
+\caption@leftmargin=\dimen187
+\caption@rightmargin=\dimen188
+\caption@width=\dimen189
+\caption@indent=\dimen190
+\caption@parindent=\dimen191
+\caption@hangindent=\dimen192
+Package caption Info: Standard document class detected.
+Package caption Info: hungarian babel package is loaded.
+)
+\c@caption@flags=\count318
+\c@continuedfloat=\count319
+Package caption Info: hungarian babel package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+)
+(c:/texlive/2024/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen193
+\ar@mcellbox=\box59
+\extrarowheight=\dimen194
+\NC@list=\toks34
+\extratabsurround=\skip62
+\backup@length=\skip63
+\ar@cellbox=\box60
+)
+\c@tetel=\count320
+
+(c:/texlive/2024/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
 (c:/texlive/2024/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
@@ -467,31 +533,31 @@ Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 ))
 (c:/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count311
-\l__pdf_internal_box=\box57
+\l__color_backend_stack_int=\count321
+\l__pdf_internal_box=\box61
 )
 (./QAGSVA_2025.aux)
 \openout1 = `QAGSVA_2025.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-Package hyperref Info: Link coloring OFF on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+Package hyperref Info: Link coloring OFF on input line 42.
  (./QAGSVA_2025.out) (./QAGSVA_2025.out)
 \@outlinefile=\write3
 \openout3 = `QAGSVA_2025.out'.
@@ -531,65 +597,65 @@ Package hyperref Info: Link coloring OFF on input line 23.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-3.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
+2.
 (c:/texlive/2024/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-3.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
+2.
 
 (c:/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-23.
+42.
 
 (c:/texlive/2024/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-23.
+42.
 
 (c:/texlive/2024/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 23.
+(Font)              <12> on input line 42.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 23.
+(Font)              <8> on input line 42.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 23.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 23.
+(Font)              <6> on input line 42.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
 
 
 (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 23.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
 
 
 (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 23.
+(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 42.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 23.
+(Font)                  OMX/lmex/m/n --> OMX/cmex/m/n on input line 42.
 
 (c:/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count312
-\scratchdimen=\dimen181
-\scratchbox=\box58
-\nofMPsegments=\count313
-\nofMParguments=\count314
-\everyMPshowfont=\toks33
-\MPscratchCnt=\count315
-\MPscratchDim=\dimen182
-\MPnumerator=\count316
-\makeMPintoPDFobject=\count317
-\everyMPtoPDFconversion=\toks34
+\scratchcounter=\count322
+\scratchdimen=\dimen195
+\scratchbox=\box62
+\nofMPsegments=\count323
+\nofMParguments=\count324
+\everyMPshowfont=\toks35
+\MPscratchCnt=\count325
+\MPscratchDim=\dimen196
+\MPnumerator=\count326
+\makeMPintoPDFobject=\count327
+\everyMPtoPDFconversion=\toks36
 ) (c:/texlive/2024/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -599,6 +665,13 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+\c@lstlisting=\count328
+
+(c:/texlive/2024/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks37
+\inpenc@posthook=\toks38
+)
 (c:/texlive/2024/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
 
@@ -611,14 +684,17 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
 (c:/texlive/2024/texmf-dist/tex/latex/base/report.cls
 LaTeX Info: Redefining \cal on input line 577.
 LaTeX Info: Redefining \mit on input line 578.
 )
-<eszterhazy-logo-hu.pdf, id=124, 256.07971pt x 88.04292pt>
+<eszterhazy-logo-hu.pdf, id=112, 256.07971pt x 88.04292pt>
 File: eszterhazy-logo-hu.pdf Graphic file (type pdf)
 <use eszterhazy-logo-hu.pdf>
-Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 31.
+Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 50.
 (pdftex.def)             Requested size: 256.07907pt x 88.0427pt.
 
 
@@ -627,100 +703,94 @@ Package pdftex.def Info: eszterhazy-logo-hu.pdf  used on input line 31.
 
 {c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2024/
 texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} <c:/texlive/2024/texmf-dist/tex/latex/
-thesis-ekf/eszterhazy-logo-hu.pdf>] (./QAGSVA_2025.toc
-
-[2
-
-])
+thesis-ekf/eszterhazy-logo-hu.pdf>] (./QAGSVA_2025.toc)
 \tf@toc=\write4
 \openout4 = `QAGSVA_2025.toc'.
 
 
 
-[3]
+[2
+
+]
 1. fejezet.
-<./pictures/persona3_xbox.png, id=178, 1445.4pt x 813.0375pt>
+<./pictures/persona3_xbox.png, id=158, 1445.4pt x 813.0375pt>
 File: ./pictures/persona3_xbox.png Graphic file (type png)
 <use ./pictures/persona3_xbox.png>
-Package pdftex.def Info: ./pictures/persona3_xbox.png  used on input line 41.
+Package pdftex.def Info: ./pictures/persona3_xbox.png  used on input line 60.
 (pdftex.def)             Requested size: 398.33858pt x 224.06363pt.
 
 
-[4
+[3
 
  <./pictures/persona3_xbox.png>]
-<./pictures/persona_psp.png, id=190, 481.8pt x 271.0125pt>
+<./pictures/persona_psp.png, id=173, 481.8pt x 271.0125pt>
 File: ./pictures/persona_psp.png Graphic file (type png)
 <use ./pictures/persona_psp.png>
-Package pdftex.def Info: ./pictures/persona_psp.png  used on input line 53.
+Package pdftex.def Info: ./pictures/persona_psp.png  used on input line 72.
 (pdftex.def)             Requested size: 369.88582pt x 208.06824pt.
 
 
-[5 <./pictures/persona_psp.png (PNG copy)>]
+[4 <./pictures/persona_psp.png (PNG copy)>]
 
-[6]
+[5]
 2. fejezet.
-<./pictures/Alan_Turing.jpg, id=205, 642.4pt x 857.2025pt>
+<./pictures/Alan_Turing.jpg, id=188, 642.4pt x 857.2025pt>
 File: ./pictures/Alan_Turing.jpg Graphic file (type jpg)
 <use ./pictures/Alan_Turing.jpg>
-Package pdftex.def Info: ./pictures/Alan_Turing.jpg  used on input line 76.
+Package pdftex.def Info: ./pictures/Alan_Turing.jpg  used on input line 95.
 (pdftex.def)             Requested size: 199.16928pt x 265.76927pt.
 
 
-[7
+[6
 
  <./pictures/Alan_Turing.jpg>]
-<./pictures/John_McCarthy.png, id=216, 307.90031pt x 383.93437pt>
+<./pictures/John_McCarthy.png, id=198, 307.90031pt x 383.93437pt>
 File: ./pictures/John_McCarthy.png Graphic file (type png)
 <use ./pictures/John_McCarthy.png>
-Package pdftex.def Info: ./pictures/John_McCarthy.png  used on input line 87.
+Package pdftex.def Info: ./pictures/John_McCarthy.png  used on input line 106.
 (pdftex.def)             Requested size: 142.26378pt x 177.39697pt.
 
 
-[8 <./pictures/John_McCarthy.png>]
+[7 <./pictures/John_McCarthy.png>]
 
-[9{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/2024
-/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2024/texmf-dist/fonts/enc/
-dvips/lm/lm-mathsy.enc}]
-
-[10]
+[8]
 3. fejezet.
-<./pictures/paint_net.png, id=251, 1288.0622pt x 786.68906pt>
+<./pictures/paint_net.png, id=220, 1288.0622pt x 786.68906pt>
 File: ./pictures/paint_net.png Graphic file (type png)
 <use ./pictures/paint_net.png>
-Package pdftex.def Info: ./pictures/paint_net.png  used on input line 133.
+Package pdftex.def Info: ./pictures/paint_net.png  used on input line 136.
 (pdftex.def)             Requested size: 426.79134pt x 260.66454pt.
 
 
-[11
+[9
 
  <./pictures/paint_net.png>]
-<./pictures/game_menu.png, id=260, 1212.78094pt x 676.02562pt>
+<./pictures/game_menu.png, id=229, 1212.78094pt x 676.02562pt>
 File: ./pictures/game_menu.png Graphic file (type png)
 <use ./pictures/game_menu.png>
-Package pdftex.def Info: ./pictures/game_menu.png  used on input line 152.
+Package pdftex.def Info: ./pictures/game_menu.png  used on input line 155.
 (pdftex.def)             Requested size: 426.79134pt x 237.90192pt.
 
 
-[12 <./pictures/game_menu.png>]
-<./pictures/game_grid.png, id=274, 1210.5225pt x 678.28406pt>
+[10 <./pictures/game_menu.png>]
+<./pictures/game_grid.png, id=243, 1210.5225pt x 678.28406pt>
 File: ./pictures/game_grid.png Graphic file (type png)
 <use ./pictures/game_grid.png>
-Package pdftex.def Info: ./pictures/game_grid.png  used on input line 167.
-(pdftex.def)             Requested size: 426.79134pt x 239.14174pt.
+Package pdftex.def Info: ./pictures/game_grid.png  used on input line 170.
+(pdftex.def)             Requested size: 369.88582pt x 207.25409pt.
 
 
-[13 <./pictures/game_grid.png>]
-<./pictures/game_move_tile.png, id=292, 433.62pt x 524.71031pt>
+[11 <./pictures/game_grid.png>]
+<./pictures/game_move_tile.png, id=260, 433.62pt x 524.71031pt>
 File: ./pictures/game_move_tile.png Graphic file (type png)
 <use ./pictures/game_move_tile.png>
-Package pdftex.def Info: ./pictures/game_move_tile.png  used on input line 180.
+Package pdftex.def Info: ./pictures/game_move_tile.png  used on input line 183.
 
 (pdftex.def)             Requested size: 170.71652pt x 206.58176pt.
-<./pictures/game_health_ui.png, id=293, 1211.27531pt x 681.29532pt>
+<./pictures/game_health_ui.png, id=261, 1211.27531pt x 681.29532pt>
 File: ./pictures/game_health_ui.png Graphic file (type png)
 <use ./pictures/game_health_ui.png>
-Package pdftex.def Info: ./pictures/game_health_ui.png  used on input line 189.
+Package pdftex.def Info: ./pictures/game_health_ui.png  used on input line 194.
 
 (pdftex.def)             Requested size: 398.33858pt x 224.04846pt.
 
@@ -729,162 +799,207 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[14 <./pictures/game_move_tile.png>]
+[12 <./pictures/game_move_tile.png>]
 
-[15 <./pictures/game_health_ui.png>]
-
-[16]
-Overfull \hbox (1.83392pt too wide) in paragraph at lines 214--215
+[13 <./pictures/game_health_ui.png>]
+Overfull \hbox (1.83392pt too wide) in paragraph at lines 217--218
 []\T1/lmr/m/n/12 Az \T1/lmr/m/it/12 IsApp-lic-ab-le-At-tack() \T1/lmr/m/n/12 ha
 -son-ló-an a lé-pés-hez meg-vizs-gál-ja se-géd-függ-vé-nyek-kel, hogy
  []
 
 
 
-[17]
+[14]
+
+[15]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 235.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
+35.
+ (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+(c:/texlive/2024/texmf-dist/tex/latex/base/latin2.def
+File: latin2.def 2024/02/08 v1.3d Input encoding file
+)
+(c:/texlive/2024/texmf-dist/tex/generic/stringenc/se-utf8.def
+File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
+)
+(c:/texlive/2024/texmf-dist/tex/generic/stringenc/se-iso-8859-2.def
+File: se-iso-8859-2.def 2019/11/29 v1.12 stringenc: ISO-8859-2
+)
+
+[16]
+
+[17{c:/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/texlive/202
+4/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2024/texmf-dist/fonts/enc
+/dvips/lm/lm-mathsy.enc}]
 
 [18]
+Overfull \hbox (2.14641pt too wide) in paragraph at lines 263--264
+[]\T1/lmr/m/n/12 A gyer-mek-ele-mek ki-ter-jesz-té-se pe-dig al-kal-maz-za az a
+lfa-béta vá-gás mód-sze-rét, amely
+ []
+
+(c:/texlive/2024/texmf-dist/tex/latex/base/latin2.def
+File: latin2.def 2024/02/08 v1.3d Input encoding file
+)
 
 [19]
 
 [20]
+
+[21] (c:/texlive/2024/texmf-dist/tex/latex/base/latin2.def
+File: latin2.def 2024/02/08 v1.3d Input encoding file
+)
+
+[22]
+
+[23]
 4. fejezet.
 
 
-[21
+[24
 
 ]
 
-[22
+[25
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-73.
- (c:/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Underfull \hbox (badness 10000) in paragraph at lines 276--278
+Underfull \hbox (badness 10000) in paragraph at lines 318--320
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Per-so-na (se-ri-es) []$\T1/lmtt/m
 /n/12 https : / / en . wikipedia . org / wiki / Persona _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 284--286
+Underfull \hbox (badness 10000) in paragraph at lines 326--328
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Reve-la-tions: Per-so-na []$\T1/lm
 tt/m/n/12 https : / / en . wikipedia . org / wiki /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 296--298
+Underfull \hbox (badness 10000) in paragraph at lines 338--340
 \T1/lmtt/m/n/12 org / wiki / Computing _ Machinery _ and _ Intelligence$[]\T1/l
 mr/m/n/12 , Meg-te-kin-tés dá-tu-ma:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 308--310
+Underfull \hbox (badness 10000) in paragraph at lines 350--352
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Já-ték-el-mé-let []$\T1/lmtt/m/n/1
 2 https : / / hu . wikipedia . org / wiki / J % C3 % A1t % C3 %
  []
 
 
-Underfull \hbox (badness 4995) in paragraph at lines 312--314
+Underfull \hbox (badness 4995) in paragraph at lines 354--356
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Game the-ory []$\T1/lmtt/m/n/12 ht
 tps : / / en . wikipedia . org / wiki / Game _ theory$[]\T1/lmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 2856) in paragraph at lines 316--318
+Underfull \hbox (badness 2856) in paragraph at lines 358--360
 \T1/lmr/m/it/12 Be-ha-vi-or\T1/lmr/m/n/12 , 1944. []$\T1/lmtt/m/n/12 https : / 
 / archive . org / details / in . ernet . dli . 2015 . 215284 /
  []
 
 
 
-[23
+[26
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 324--326
+Underfull \hbox (badness 10000) in paragraph at lines 366--368
 \T1/lmtt/m/n/12 geeksforgeeks . org / mini-[]max-[]algorithm-[]in-[]artificial-
 []intelligence/$[]\T1/lmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--330
+Underfull \hbox (badness 10000) in paragraph at lines 370--372
 []\T1/lmr/m/sc/12 Wikipédia\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Win-dows Forms []$\
 T1/lmtt/m/n/12 https : / / en . wikipedia . org / wiki / Windows _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--334
+Underfull \hbox (badness 10000) in paragraph at lines 374--376
 []\T1/lmr/m/sc/12 Unity Do-cu-men-ta-ti-on\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Pre-
 fabs []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 . 3 /
  []
 
 
-Underfull \hbox (badness 5563) in paragraph at lines 336--338
+Underfull \hbox (badness 5563) in paragraph at lines 378--380
 []\T1/lmr/m/sc/12 Unity Do-cu-men-ta-ti-on\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Ga-m
 e-Ob-ject []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 336--338
+Underfull \hbox (badness 10000) in paragraph at lines 378--380
 \T1/lmtt/m/n/12 3 / Documentation / Manual / class-[]GameObject . html$[]\T1/lm
 r/m/n/12 , Meg-te-kin-tés dá-tu-ma:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 340--342
+Underfull \hbox (badness 10000) in paragraph at lines 382--384
 []\T1/lmr/m/sc/12 Unity Do-cu-men-ta-ti-on\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Vec-
 tor2 []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 340--342
+Underfull \hbox (badness 10000) in paragraph at lines 382--384
 \T1/lmtt/m/n/12 3 / Documentation / ScriptReference / Vector2 . html$[]\T1/lmr/
 m/n/12 , Meg-te-kin-tés dá-tu-ma:
  []
 
-<nyilatkozat/nyilatkozat.pdf, id=387, 597.50829pt x 845.0471pt>
+
+Underfull \hbox (badness 2134) in paragraph at lines 386--388
+\T1/lmr/m/it/12 IN-TEL-LI-GEN-CIA KÉR-DÉ-SEI A KÖ-ZÉP-IS-KO-LAI OK-TA-TÁS-BAN [
+]$\T1/lmtt/m/n/12 https :
+ []
+
+
+Underfull \hbox (badness 4403) in paragraph at lines 386--388
+\T1/lmtt/m/n/12 / / aries . ektf . hu / ~gkusper / mesterseges _ intelligencia 
+. v . 1 . 0 . 4 . pdf$[]\T1/lmr/m/n/12 , Meg-
+ []
+
+<nyilatkozat/nyilatkozat.pdf, id=504, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 347.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 393.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 347.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 393.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<nyilatkozat/nyilatkozat.pdf, id=390, page=1, 597.50829pt x 845.0471pt>
+<nyilatkozat/nyilatkozat.pdf, id=507, page=1, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 347.
+ 393.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 347.
+ 393.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
-[24]
+[27]
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 347.
+ 393.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 347.
+ 393.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 347.
+ 393.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-[25
+[28
 
  <./nyilatkozat/nyilatkozat.pdf>] (./QAGSVA_2025.aux)
  ***********
@@ -892,16 +1007,16 @@ LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-25>
  ***********
 Package rerunfilecheck Info: File `QAGSVA_2025.out' has not changed.
-(rerunfilecheck)             Checksum: 1F342B4F1CEA588D1EAAC8905B9926C1;4862.
+(rerunfilecheck)             Checksum: 6D6D56AC6132D700809F9B89B8C45F02;4244.
  ) 
 Here is how much of TeX's memory you used:
- 15170 strings out of 473207
- 243492 string characters out of 5720461
- 669484 words of memory out of 5000000
- 38083 multiletter control sequences out of 15000+600000
- 631959 words of font info for 94 fonts, out of 8000000 for 9000
+ 18781 strings out of 473207
+ 301962 string characters out of 5720461
+ 1123018 words of memory out of 5000000
+ 41538 multiletter control sequences out of 15000+600000
+ 632278 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,17n,93p,1409b,622s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,93p,1409b,2537s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024
 /texmf-dist/fonts/type1/public/lm/lmcsc10.pfb><c:/texlive/2024/texmf-dist/fonts
 /type1/public/lm/lmmi12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/l
@@ -911,11 +1026,12 @@ onts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/l
 m/lmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texli
 ve/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist
 /fonts/type1/public/lm/lmsy6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public
-/lm/lmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on QAGSVA_2025.pdf (25 pages, 2927709 bytes).
+/lm/lmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/
+texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
+Output written on QAGSVA_2025.pdf (28 pages, 2979023 bytes).
 PDF statistics:
- 505 PDF objects out of 1000 (max. 8388607)
- 423 compressed objects within 5 object streams
- 89 named destinations out of 1000 (max. 500000)
- 311 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 648 PDF objects out of 1000 (max. 8388607)
+ 560 compressed objects within 6 object streams
+ 201 named destinations out of 1000 (max. 500000)
+ 287 words of extra memory for PDF output out of 10000 (max. 10000000)
 

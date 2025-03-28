@@ -1,30 +1,27 @@
-\select@language {magyar} \contentsline {chapter}{\numberline {1}Bevezetés}{4}{chapter.1}%
-\select@language {magyar} \contentsline {section}{\numberline {1.1}Játék ismertetése}{4}{section.1.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {1.1.1}Játék ötlete}{4}{subsection.1.1.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {1.1.2}Játék szabályok}{5}{subsection.1.1.2}%
-\select@language {magyar} \contentsline {chapter}{\numberline {2}Mesterséges intelligencia}{7}{chapter.2}%
-\select@language {magyar} \contentsline {section}{\numberline {2.1}Története}{7}{section.2.1}%
-\select@language {magyar} \contentsline {section}{\numberline {2.2}Játékelmélet}{8}{section.2.2}%
-\select@language {magyar} \contentsline {subsection}{\numberline {2.2.1}Minimax algoritmus}{9}{subsection.2.2.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {2.2.2}Minimax alfa-béta vágással}{10}{subsection.2.2.2}%
-\select@language {magyar} \contentsline {chapter}{\numberline {3}Implementáció}{11}{chapter.3}%
-\select@language {magyar} \contentsline {section}{\numberline {3.1}Technológiák}{11}{section.3.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.1.1}Játékmotor}{11}{subsection.3.1.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.1.2}Grafikus szerkesztő}{12}{subsection.3.1.2}%
-\select@language {magyar} \contentsline {section}{\numberline {3.2}Megjelenítés}{12}{section.3.2}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}MenuScene}{12}{subsection.3.2.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}GameScene}{13}{subsection.3.2.2}%
-\select@language {magyar} \contentsline {section}{\numberline {3.3}Állapottér}{15}{section.3.3}%
-\select@language {magyar} \contentsline {section}{\numberline {3.4}Operátor}{16}{section.3.4}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.4.1}Operátorok felépítése}{17}{subsection.3.4.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.4.2}Operátor generálás}{18}{subsection.3.4.2}%
-\select@language {magyar} \contentsline {section}{\numberline {3.5}Minimax}{19}{section.3.5}%
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Bevezetés}{3}{chapter.1}%
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Játék ismertetése}{3}{section.1.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {1.1.1}Játék ötlete}{3}{subsection.1.1.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {1.1.2}Játék szabályok}{4}{subsection.1.1.2}%
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Mesterséges intelligencia}{6}{chapter.2}%
+\select@language {magyar} \contentsline {section}{\numberline {2.1}Története}{6}{section.2.1}%
+\select@language {magyar} \contentsline {section}{\numberline {2.2}Játékelmélet}{7}{section.2.2}%
+\select@language {magyar} \contentsline {chapter}{\numberline {3}Implementáció}{9}{chapter.3}%
+\select@language {magyar} \contentsline {section}{\numberline {3.1}Technológiák}{9}{section.3.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.1}Játékmotor}{9}{subsection.3.1.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.1.2}Grafikus szerkesztő}{10}{subsection.3.1.2}%
+\select@language {magyar} \contentsline {section}{\numberline {3.2}Megjelenítés}{10}{section.3.2}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.1}MenuScene}{10}{subsection.3.2.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.2.2}GameScene}{11}{subsection.3.2.2}%
+\select@language {magyar} \contentsline {section}{\numberline {3.3}Állapottér}{12}{section.3.3}%
+\select@language {magyar} \contentsline {section}{\numberline {3.4}Operátor}{14}{section.3.4}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.4.1}Operátorok felépítése}{15}{subsection.3.4.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.4.2}Operátor generálás}{16}{subsection.3.4.2}%
+\select@language {magyar} \contentsline {section}{\numberline {3.5}Minimax}{17}{section.3.5}%
 \select@language {magyar} \contentsline {section}{\numberline {3.6}Minimax alfa-béta vágással}{19}{section.3.6}%
-\select@language {magyar} \contentsline {section}{\numberline {3.7}Heurisztika}{19}{section.3.7}%
-\select@language {magyar} \contentsline {section}{\numberline {3.8}További fontosabb osztályok}{19}{section.3.8}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.8.1}GameManager}{19}{subsection.3.8.1}%
-\select@language {magyar} \contentsline {subsection}{\numberline {3.8.2}TileSelector}{20}{subsection.3.8.2}%
-\select@language {magyar} \contentsline {chapter}{\numberline {4}Tesztelés}{21}{chapter.4}%
-\select@language {magyar} \contentsline {section}{\numberline {4.1}Manuális tesztelés}{21}{section.4.1}%
-\select@language {magyar} \contentsline {chapter}{Összegzés}{22}{chapter*.2}%
-\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{23}{chapter*.3}%
+\select@language {magyar} \contentsline {section}{\numberline {3.7}Heurisztika}{20}{section.3.7}%
+\select@language {magyar} \contentsline {section}{\numberline {3.8}További fontosabb osztályok}{20}{section.3.8}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.8.1}GameManager}{20}{subsection.3.8.1}%
+\select@language {magyar} \contentsline {subsection}{\numberline {3.8.2}TileSelector}{21}{subsection.3.8.2}%
+\select@language {magyar} \contentsline {chapter}{\numberline {4}Tesztelés}{24}{chapter.4}%
+\select@language {magyar} \contentsline {chapter}{Összegzés}{25}{chapter*.11}%
+\select@language {magyar} \contentsline {chapter}{Irodalomjegyz\'ek}{26}{chapter*.12}%
