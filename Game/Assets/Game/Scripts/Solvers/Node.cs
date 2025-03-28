@@ -11,7 +11,6 @@ public class Node
         Depth = 0;
         Parent = parent;
         Children = new List<Node>();
-        OperatorIndex = 0;
         if (Parent != null)
         {
             Depth = Parent.Depth + 1;
@@ -22,7 +21,6 @@ public class Node
     public int Depth { get; set; }
     public Node Parent { get; set; }
     public List<Node> Children { get; set; }
-    public int OperatorIndex { get; set; }
 
     public override bool Equals(object? obj)
     {

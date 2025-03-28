@@ -90,7 +90,6 @@ public class TurnOperatorGenerator : OperatorGenerator
                 playerActions.Add(actions[i][indexes[i]]);
             }
             Operators.Add(new TurnOperator(playerActions));
-            //Debug.Log($"[PLAYER] {string.Join('x', lenghts)} = {lenghts.Aggregate(1, (acc, x) => acc * x)} \t Current: {Operators.Count}");
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
                 indexes[i]++;

@@ -17,9 +17,6 @@ public class MiniMaxWithAlphaBetaPruning : Solver
         Node currentNode = new Node(state);
 
         ExtendNode(currentNode, int.MinValue, int.MaxValue, currentNode.State.CurrentTurn);
-        //Debug.Log(currentNode.Children[0].State == null);
-        //Debug.Log((currentNode.Children[0].State as StateRepresentation).ListPlayerObjects(true)[0].position.x);
-        //Debug.Log((currentNode.Children[0].State as StateRepresentation).ListPlayerObjects(true)[0].position.y);
         return currentNode.Children[0].State;
     }
 
@@ -31,7 +28,6 @@ public class MiniMaxWithAlphaBetaPruning : Solver
 
         foreach (Operator op in Operators)
         {
-            
             if (op.IsApplicable(node.State))
             {
                 State newState = op.Apply(node.State);
