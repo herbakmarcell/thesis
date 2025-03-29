@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  8 MAR 2025 18:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  29 MAR 2025 09:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -461,11 +461,11 @@ Here is how much of TeX's memory you used:
  35206 multiletter control sequences out of 15000+600000
  583434 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,5n,93p,349b,448s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,5n,93p,395b,448s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2024
 /texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2024/texmf-dist/fonts/t
 ype1/public/lm/lmri12.pfb>
-Output written on nyilatkozat.pdf (1 page, 65117 bytes).
+Output written on nyilatkozat.pdf (1 page, 69356 bytes).
 PDF statistics:
  30 PDF objects out of 1000 (max. 8388607)
  20 compressed objects within 1 object stream
