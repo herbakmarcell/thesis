@@ -228,9 +228,9 @@ Ezzel a megoldással azonban feljöttek hibalehetőségek, mégpedig, hogy \aref
 
 \Aref{operator} szekcióban és \aref{operatorimp} alszekcióban tárgyalt operátorokat elérhetővé kell tenni a megoldó algoritmusunk számára. Emiatt szükség van az operátorok generálására, amelyet a \emph{TurnOperatorGenerator} osztályban oldottam meg. Az osztály egy \emph{OperatorGenerator} interfészt implementál, amely egy \emph{Operator} lista csak olvasható mezőt tartalmaz, ebben tároljuk el az összes operátorunkat.
 
-Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy ismételve annyiszor, ahány játékos karakterünk van, egy másik listába, a \emph{playerActionI} listában eltároljuk a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezekkel a listaelemekkel, leszűkítve az interakciókig, Descartes-szorzás segítségével létrehozunk a játékos karaktereinek egy végrehajtató operátorát. Végezetül ezt eltároljuk az \emph{operators} listába. A generálás kódját megtekintheti \aref{operatorgen-code} kódrészletben. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
+Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy ismételve annyiszor, ahány játékos karakterünk van, egy másik listába, a \emph{playerActionI} listában eltároljuk a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezen listaelemek Descartes-szorzatával létrehozzuk az összes lehetséges operátort, melyeket az \emph{operators} listában tárolunk el. A generálás kódját megtekintheti \aref{operatorgen-code} kódrészletben. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
 
-Játék közben megtörténhet, hogy az egyik karakter elveszíti az életerejét, így eltávolítva a tábláról az operátoraink kiértékelésének ideje -- amelyről \aref{minimax} szekcióban olvashat -- exponenciálisan megnő, hiszen innentől kezdve minden operátort meg kell vizsgálnia, amelyben az eltávolított karakter is szerepel. Ez annyit jelent, hogyha bár két karakter maradt a táblán a háromból, az operátor továbbra is várja a már nem létező operátorra a műveletet. Ehhez nyújt segítséget a körönként ellenőrzött karakterszám vizsgálat. Erről bővebben \aref{gamemanager} szekcióban olvashat. Ebben az esetben, ha a kör végén a karaktereknek számában csökkenést tapasztalunk, akkor a megmaradt karakterekre új operátorokat generálunk. Ez lényegében az operátor generálás metódusának túltöltése, ebben az esetben csak az állapottérben tárolt karakterekre generáljuk le újra az operátorokat, ezzel megoldva a szükséges interakciók számát is.
+Játék közben megtörténhet, hogy az egyik karakter elveszíti az összes életerejét, ekkor el kell távolítani a tábláról. Az operátoraink kiértékelésének innentől nem lesz optimális, hiszen minden operátort meg kell vizsgálnia, amelyben az eltávolított karakter is szerepel. Ez annyit jelent, hogyha bár két karakter maradt a táblán a háromból, az operátor továbbra is várja a már nem létező operátorra a műveletet. Ehhez nyújt segítséget a körönként ellenőrzött karakterszám vizsgálat. Erről bővebben \aref{gamemanager} szekcióban olvashat. Ebben az esetben, ha a kör végén a karaktereknek számában csökkenést tapasztalunk, akkor a megmaradt karakterekre új operátorokat generálunk. Ez lényegében az operátor generálás metódusának túltöltése, ebben az esetben csak az állapottérben tárolt karakterekre generáljuk le újra az operátorokat, ezzel megoldva a szükséges interakciók számát is.
 
 \lstinputlisting[caption=Operátorok létrehozása a játék elején, label=operatorgen-code]{./codes/TurnOperatorGenerator.cs}
 
@@ -238,7 +238,7 @@ Játék közben megtörténhet, hogy az egyik karakter elveszíti az életerejé
 
 A minimax elv olyan alkalmazott döntési szabály a játékelméletben, ami szerint azt a lehetőséget kell választani, ami minimalizálja a maximális veszteséget. Ezt az elvet felhasználhatjuk a kétfős zérusösszegű játékoknál, ami magába foglalja a két játékos szimultán döntéseit és a felváltva tett lépéseit is. \cite{MiniMaxEnWiki}
 
-Formális definíció szerint a következőképpen tudjuk felírni a számítást:
+Formális definíció szerint a következőképpen tudjuk felírni a számítást: \cite{MiniMaxEnWiki}
 
 \begin{equation*}
 	\overline{v_{i}}=\underset{{a_{-i}}}{\min} \underset{{a_{i}}}{\max} v_{i}(a_{i}, a_{-i})
@@ -246,23 +246,25 @@ Formális definíció szerint a következőképpen tudjuk felírni a számítás
 
 A minimax érték azt fejezi ki, hogy egy játékos legrosszabb esetben mekkora értéket érhet el, ha a többi játékos a számára legkedvezőtlenebb stratégiát követi. Másképpen megfogalmazva, ez az a legnagyobb érték, amelyet a játékos garantáltan megszerezhet, ha ismeri a többi játékos lépéseit. 
 
-Egy kétszemélyes játékban az egyik játékos a maximalizáló, aki a saját pontszámának maximalizálására törekszik, míg a másik a minimalizáló, aki a maximalizáló pontszámának minimalizálására törekszik. Az algoritmus úgy működik, hogy kiértékeli az összes lehetséges lépést mindkét játékos számára, előrejelzi az ellenfél válaszait, és kiválasztja az optimális lépést annak érdekében, hogy a lehető legjobb eredményt biztosítsa. \cite{MiniMaxGfG}
+Egy kétszemélyes játékban az egyik játékos a maximalizáló, aki a saját pontszámának maximalizálására törekszik, míg a másik a minimalizáló, aki a maximalizáló pontszámának minimalizálására törekszik. Az algoritmus úgy működik, hogy kiértékeli az összes lehetséges lépést mindkét játékos számára, előrejelzi az ellenfél válaszait, és a heurisztika alapján kiválasztja az optimális lépést annak érdekében, hogy a lehető legjobb eredményt biztosítsa. \cite{MiniMaxGfG}
 
 A MiniMax megoldó algoritmus implementációját a \emph{MiniMaxBase} osztályba rendeztem, amely gyermekosztálya a \emph{Solver} absztrakt osztálynak. Ez a \emph{Solver} osztály tartalmaz egy operátorokat tartalmazó listát és egy absztrakt, állapot paramétert bekérő \emph{NextMove()} metódust. A \emph{NextMove()} állapottal visszatérő függvény fog a későbbiekben a megoldó algoritmusnak megfelelően egy állapotot a játékfának kiértékelése után visszaadni.
 
 Esetünkben, a MiniMax algoritmus alapján a paraméterként megadott állapotot eltároljuk egy \emph{Node} osztályba. A \emph{Node} osztály egy példánya lényegében a játékfának egy csomópontja, amely tartalmaz egy állapotot, a saját mélységét, a szülőcsomópontját és gyermekcsomópontok listáját, amennyiben azok léteznek. Továbbá ez a \emph{Node} osztály az állapottérből le tudja kérdezi a játék állását. A \emph{GetHeuristics()} metódus, amennyiben a csomópontnak nincs gyermeke, a saját állapotteréből, egyébként meg a legelső gyermekcsomópont \emph{GetHeruistics()} függvényéből kérdezi le az állapottér heurisztikáját. 
 
-A MiniMax algoritmusnak szüksége van még egy segédfüggvényre a csomópontokhoz, amely ezeket rendezi a megfelelő módon, ez a \emph{SortChildrenMiniMax()} eljárás. A paraméterben megadott kör alapján, és a másodlagos opcionális paraméter alapján eldönti, hogy a nyereséget maximalizálni vagy  az ellenfél nyereségét szeretnénk minimalizálni, mindezt rekurzívan meghívva minden egyes csomópontra, amíg van gyermekcsomópontjuk.
+A legkisebb vagy legnagyobb csomópont kiválasztásához szintenként rendezem a fát a \emph{SortChildrenMiniMax()} eljárás segítségével. A paraméterben megadott kör, és a másodlagos opcionális paraméter alapján eldönti, hogy a nyereséget maximalizálni vagy  az ellenfél nyereségét szeretnénk minimalizálni, mindezt rekurzívan meghívva minden egyes csomópontra, amíg van gyermekcsomópontjuk.
 
-Ezek alapján a felülírt \emph{NextMove()} metódus egy csomópontban eltárolja a paraméterben megadott állapotot, majd ezt kiterjeszti az \emph{ExtendNode()} eljárás. Ez megnézi a csomópontban, hogy a játék még folyamatban van-e vagy elérte-e már a maximális mélységet, amennyiben igaz, nem terjesszük ki tovább. Ezután minden operátornál megnézzük, hogy alkalmazhatóak-e, amennyiben igen, egy új állapotba alkalmazzuk. Ezt eltároljuk egy új csomópontba, és felvesszük az eredeti csomópont gyermekelemei közé. A létrehozott csomópontot végezetül rekurzívan tovább kiterjesztjük.
+Ezek alapján a felülírt \emph{NextMove()} metódus egy csomópontban eltárolja a paraméterben megadott állapotot, majd ezt kiterjeszti az \emph{ExtendNode()} eljárás. Ez megnézi a csomópontban, hogy a játék még folyamatban van-e vagy elérte-e már a maximális mélységet, amennyiben igaz, nem terjesszük ki tovább. Ezután minden operátornál megnézzük, hogy alkalmazhatóak-e, amennyiben igen, úgy alkalmazzuk, és létrehozzuk az új állapotot. Ezt eltároljuk egy új csomópontba, és felvesszük az eredeti csomópont gyermekelemei közé. A létrehozott csomópontot végezetül rekurzívan tovább kiterjesztjük. Ezek után tudjuk felhasználni a fentebb említett \emph{SortChildrenMiniMax()} függvényt.
 
 \section{Minimax alfa-béta vágással} \label{minimaxalphabeta}
 
-Az MiniMax alfa-béta vágásos verzióját a \emph{MiniMaxAlphaBetaPruning} osztályban valósítottam meg. A lényeges eltérés az ExtendNode() metódus változtatása okozza, amely innentől egy egész értékkel tér vissza. Az alap MiniMax algoritmushoz hasonlóan a függvény ellenőrzi a játék folyamatban van-e vagy a mélység eléri-e a kívánt mélységet, ha valamelyik igaz, akkor visszaadja a csomópont heurisztikai értékét. Továbbra is minden operátort megvizsgálunk, amennyiben alkalmazható az állapotra, az operátor alkalmazása után az új állapotot eltároljuk egy új csomópontként, ezt szintén felvesszük az eredeti csomópont gyermekelemei közé és azokat rendszerezzük.
+Az MiniMax alfa-béta vágásos verzióját a \emph{MiniMaxAlphaBetaPruning} osztályban valósítottam meg. A lényeges eltérés az \emph{ExtendNode()} metódus törzsének változtatása okozza, illetve a rekurzió használata miatt innentől egy egész értékkel tér vissza. Az alap MiniMax algoritmushoz hasonlóan a függvény ellenőrzi a játék folyamatban van-e vagy a mélység eléri-e a kívánt mélységet, ha valamelyik igaz, akkor visszaadja a csomópont heurisztikai értékét és leállítja a kiterjesztést. Továbbra is minden operátort megvizsgálunk, amennyiben alkalmazható az állapotra, az operátor alkalmazása után az új állapotot eltároljuk egy új csomópontként, ezt szintén felvesszük az eredeti csomópont gyermekelemei közé és azokat rendszerezzük.
 
-A gyermekelemek kiterjesztése pedig alkalmazza az alfa-béta vágás módszerét, amely egy-egy csúcs kiterjesztését szakíthatja félbe. Attól függően, hogy az aktuális csomópontunk minimalizáló vagy maximalizáló körben van, összehasonlítjuk az ebből kiterjesztett részfa legmélyebb csomópontjának értékével. 
+A gyermekelemek kiterjesztése pedig alkalmazza az alfa-béta vágás módszerét, amely egy-egy csúcs kiterjesztését szakíthatja félbe. Ez azért ajánlatos, mert nagy lehet a játékfa és exponenciálisan felrobbanhat, így a kiértékelés rengeteg erőforrást és időt vehet igénybe. A módszer lényegében az első részfa kiértékelése után meg tudja állapítani, hogy a következő részfák esetleg nem fognak optimális megoldásra jutni, így azokat ,,levágjuk'' a játékfáról.
 
-Alfa-vágás esetén a részfa és az aktuális csomópont értéke közül kiválasztjuk a minimum értéket. A következő részfa indulásakor szintén kiválasztjuk az aktuális és a részfa minimumát, azonban a további részfák kiterjesztését félbeszakítjuk, ha a csúcsban eddig kiszámolt minimum kisebbé válik, mint a szülőben eddig kiszámolt maximum. Ebben az esetben a többi részfa kiterjesztése irreleváns, hiszen a szülő maximumának legkisebb értéke nagyobb, mint az aktuális csúcs minimumának legnagyobb értéke. \cite{kusper} A kiterjesztés logikáját \aref{minimaxalphabeta-code} kódrészletben találja.
+Attól függően, hogy az aktuális csomópontunk minimalizáló vagy maximalizáló körben van, összehasonlítjuk az ebből kiterjesztett részfa legmélyebb csomópontjának értékével. \emph{Alfa-vágás} esetén a részfa és az aktuális csomópont értéke közül kiválasztjuk a minimum értéket. A következő részfa indulásakor szintén kiválasztjuk az aktuális és a részfa minimumát, azonban a további részfák kiterjesztését félbeszakítjuk, ha a csúcsban eddig kiszámolt minimum kisebbé válik, mint a szülőben eddig kiszámolt maximum. Ebben az esetben a többi részfa kiterjesztése irreleváns, hiszen a szülő maximumának legkisebb értéke nagyobb, mint az aktuális csúcs minimumának legnagyobb értéke. \cite[5.6. fejezet]{KovasznaiKusper} 
+
+A kiterjesztés logikáját \aref{minimaxalphabeta-code} kódrészletben találja.
 
 \lstinputlisting[caption=Csomópont kiterjesztése alfa-béta vágással, label=minimaxalphabeta-code]{./codes/ExtendNodeAlphaBeta.cs}
 
@@ -297,8 +299,10 @@ Természetesen, mint az operátoroknál, a felületen is vizsgálni kell, hogy a
 
 Egy alkalmazás fejlesztése során elengedhetetlen a különböző funkciók, algoritmusok és kódrészletek tesztelése. A tesztelés tökéletes módja, hogy ellenőrizzük a programunk működését, az üzemi kód eredményei a követelményekben megfogalmazott értékeket adják, valamint javítási lehetőségek találására. Általában a legegyszerűbb módja a tesztelésnek a manuális tesztelés. Ebben az esetben a fejlesztőnek a felhasználó szemszögéből használjuk az alkalmazásunkat, és tesszük próbára különböző szituációkban.
 
+A manuális tesztelésnek is több fajtáját használjuk. \emph{Feketedobozos} tesztnek nevezzük, amikor a specifikációnak megfelelő bevitelre, a meghatározott eredményt kapjuk-e, eközben pedig nem foglalkozunk a forráskóddal, illetve hogy az futási időben hogyan futott a kívánt eredményre. \emph{Fehérdobozos} tesztnek nevezzük, mikor a forráskód felépítését, futási időben pedig működését vizsgáljuk. \emph{Szürkedobozos} tesztek az előző kettő technikáját vegyíti, szakdolgozatom írása során javarészt ezt a technikát alkalmaztam. \cite{BlackboxEn,WhiteboxEn,GrayboxEn}
+
 % Ez a rész még kidolgozás alatt van.
-A Unity keretein belül a különböző metódusok és szkriptek tesztelésére az egységtesztek alkalmazása körülményes, ezért az alkalmazásom tesztelése javarészt manuálisan, próba-hiba módszerrel történt. Amikor megírtam egy metódust, megnéztem hogyan reagál a játék, ha valami elromlott, akkor a Unity-be beépített \emph{Debug} osztály \emph{Log()} metódusát alkalmaztam, amelyet a konzolra kiírt különböző változókat és eredményeket.
+A Unity keretein belül a különböző metódusok és szkriptek tesztelésére az egységtesztek alkalmazása körülményes, ezért az alkalmazásom tesztelése javarészt manuálisan, próba-hiba módszerrel történt. Amikor megírtam egy metódust, megnéztem hogyan reagál a játék, ha valami elromlott, akkor a Unity-be beépített \emph{Debug} osztály \emph{Log()} metódusát alkalmaztam, amelyet a konzolra kiírt különböző változókat és eredményeket. \cite{UnityDocsDebug}
 
 % Tervezek közösségi tesztet végrehajtani, ahol a felhasználók Google Forms kérdőíven keresztül leírhatják a véleményüket.
 
@@ -382,9 +386,25 @@ A Unity keretein belül a különböző metódusok és szkriptek tesztelésére 
 \textsc{Unity Documentation}: \emph{Vector2} 
 \url{https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Vector2.html}, Megtekintés dátuma: 2025.03.27.
 
-\bibitem{kusper}
+\bibitem{KovasznaiKusper}
 \textsc{Dr. Kovásznai Gergely és Dr. Kusper Gábor}: \emph{A MESTERSÉGES INTELLIGENCIA KÉRDÉSEI A KÖZÉPISKOLAI OKTATÁSBAN} 
 \url{https://aries.ektf.hu/~gkusper/mesterseges_intelligencia.v.1.0.4.pdf}, Megtekintés dátuma: 2025.03.28.
+
+\bibitem{BlackboxEn}
+\textsc{Wikipédia}: \emph{Black-box testing} 
+\url{https://en.wikipedia.org/wiki/Black-box_testing}, Megtekintés dátuma: 2025.03.29.
+
+\bibitem{WhiteboxEn}
+\textsc{Wikipédia}: \emph{White-box testing} 
+\url{https://en.wikipedia.org/wiki/White-box_testing}, Megtekintés dátuma: 2025.03.29.
+
+\bibitem{GrayboxEn}
+\textsc{Wikipédia}: \emph{Gray-box testing} 
+\url{https://en.wikipedia.org/wiki/Gray-box_testing}, Megtekintés dátuma: 2025.03.29.
+
+\bibitem{UnityDocsDebug}
+\textsc{Unity Documentation}: \emph{Debug} 
+\url{https://docs.unity3d.com/2022.3/Documentation/Manual/class-Debug.html}, Megtekintés dátuma: 2025.03.29.
 
 
 \end{thebibliography}

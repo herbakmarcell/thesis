@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  28 MAR 2025 19:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  29 MAR 2025 09:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -866,37 +866,37 @@ File: latin2.def 2024/02/08 v1.3d Input encoding file
 [25
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 318--320
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Per-so-na (se-ri-es) []$\T1/lmtt/m
 /n/12 https : / / en . wikipedia . org / wiki / Persona _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 326--328
+Underfull \hbox (badness 10000) in paragraph at lines 330--332
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Reve-la-tions: Per-so-na []$\T1/lm
 tt/m/n/12 https : / / en . wikipedia . org / wiki /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--340
+Underfull \hbox (badness 10000) in paragraph at lines 342--344
 \T1/lmtt/m/n/12 org / wiki / Computing _ Machinery _ and _ Intelligence$[]\T1/l
 mr/m/n/12 , Meg-te-kin-tés dá-tu-ma:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 350--352
+Underfull \hbox (badness 10000) in paragraph at lines 354--356
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Já-ték-el-mé-let []$\T1/lmtt/m/n/1
 2 https : / / hu . wikipedia . org / wiki / J % C3 % A1t % C3 %
  []
 
 
-Underfull \hbox (badness 4995) in paragraph at lines 354--356
+Underfull \hbox (badness 4995) in paragraph at lines 358--360
 []\T1/lmr/m/sc/12 Wikipédia: \T1/lmr/m/it/12 Game the-ory []$\T1/lmtt/m/n/12 ht
 tps : / / en . wikipedia . org / wiki / Game _ theory$[]\T1/lmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 2856) in paragraph at lines 358--360
+Underfull \hbox (badness 2856) in paragraph at lines 362--364
 \T1/lmr/m/it/12 Be-ha-vi-or\T1/lmr/m/n/12 , 1944. []$\T1/lmtt/m/n/12 https : / 
 / archive . org / details / in . ernet . dli . 2015 . 215284 /
  []
@@ -906,78 +906,90 @@ Underfull \hbox (badness 2856) in paragraph at lines 358--360
 [26
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 366--368
+Underfull \hbox (badness 10000) in paragraph at lines 370--372
 \T1/lmtt/m/n/12 geeksforgeeks . org / mini-[]max-[]algorithm-[]in-[]artificial-
 []intelligence/$[]\T1/lmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 370--372
+Underfull \hbox (badness 10000) in paragraph at lines 374--376
 []\T1/lmr/m/sc/12 Wikipédia\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Win-dows Forms []$\
 T1/lmtt/m/n/12 https : / / en . wikipedia . org / wiki / Windows _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--376
+Underfull \hbox (badness 10000) in paragraph at lines 378--380
 []\T1/lmr/m/sc/12 Unity Do-cu-men-ta-ti-on\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Pre-
 fabs []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 . 3 /
  []
 
 
-Underfull \hbox (badness 5563) in paragraph at lines 378--380
+Underfull \hbox (badness 5563) in paragraph at lines 382--384
 []\T1/lmr/m/sc/12 Unity Do-cu-men-ta-ti-on\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Ga-m
 e-Ob-ject []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 378--380
+Underfull \hbox (badness 10000) in paragraph at lines 382--384
 \T1/lmtt/m/n/12 3 / Documentation / Manual / class-[]GameObject . html$[]\T1/lm
 r/m/n/12 , Meg-te-kin-tés dá-tu-ma:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
+Underfull \hbox (badness 10000) in paragraph at lines 386--388
 []\T1/lmr/m/sc/12 Unity Do-cu-men-ta-ti-on\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Vec-
 tor2 []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
+Underfull \hbox (badness 10000) in paragraph at lines 386--388
 \T1/lmtt/m/n/12 3 / Documentation / ScriptReference / Vector2 . html$[]\T1/lmr/
 m/n/12 , Meg-te-kin-tés dá-tu-ma:
  []
 
 
-Underfull \hbox (badness 2134) in paragraph at lines 386--388
+Underfull \hbox (badness 2134) in paragraph at lines 390--392
 \T1/lmr/m/it/12 IN-TEL-LI-GEN-CIA KÉR-DÉ-SEI A KÖ-ZÉP-IS-KO-LAI OK-TA-TÁS-BAN [
 ]$\T1/lmtt/m/n/12 https :
  []
 
 
-Underfull \hbox (badness 4403) in paragraph at lines 386--388
+Underfull \hbox (badness 4403) in paragraph at lines 390--392
 \T1/lmtt/m/n/12 / / aries . ektf . hu / ~gkusper / mesterseges _ intelligencia 
 . v . 1 . 0 . 4 . pdf$[]\T1/lmr/m/n/12 , Meg-
  []
 
-<nyilatkozat/nyilatkozat.pdf, id=504, 597.50829pt x 845.0471pt>
+
+Underfull \hbox (badness 3803) in paragraph at lines 402--404
+[]\T1/lmr/m/sc/12 Wikipédia\T1/lmr/m/n/12 : \T1/lmr/m/it/12 Gray-box test-ing [
+]$\T1/lmtt/m/n/12 https : / / en . wikipedia . org / wiki / Gray-[]box _
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 406--408
+[]\T1/lmr/m/sc/12 Unity Do-cu-men-ta-ti-on\T1/lmr/m/n/12 : \T1/lmr/m/it/12 De-b
+ug []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 . 3 /
+ []
+
+<nyilatkozat/nyilatkozat.pdf, id=516, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 393.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 413.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
-Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 393.
+Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 413.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<nyilatkozat/nyilatkozat.pdf, id=507, page=1, 597.50829pt x 845.0471pt>
+<nyilatkozat/nyilatkozat.pdf, id=519, page=1, 597.50829pt x 845.0471pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 393.
+ 413.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 393.
+ 413.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
@@ -985,19 +997,19 @@ Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 393.
+ 413.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 393.
+ 413.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 
 
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
- 393.
+ 413.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 [28
 
@@ -1010,10 +1022,10 @@ Package rerunfilecheck Info: File `QAGSVA_2025.out' has not changed.
 (rerunfilecheck)             Checksum: 6D6D56AC6132D700809F9B89B8C45F02;4244.
  ) 
 Here is how much of TeX's memory you used:
- 18781 strings out of 473207
- 301962 string characters out of 5720461
- 1123018 words of memory out of 5000000
- 41538 multiletter control sequences out of 15000+600000
+ 18789 strings out of 473207
+ 302094 string characters out of 5720461
+ 1109018 words of memory out of 5000000
+ 41542 multiletter control sequences out of 15000+600000
  632278 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,17n,93p,1409b,2537s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1028,10 +1040,10 @@ ve/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist
 /fonts/type1/public/lm/lmsy6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public
 /lm/lmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/
 texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on QAGSVA_2025.pdf (28 pages, 2979023 bytes).
+Output written on QAGSVA_2025.pdf (28 pages, 2981183 bytes).
 PDF statistics:
- 648 PDF objects out of 1000 (max. 8388607)
- 560 compressed objects within 6 object streams
- 201 named destinations out of 1000 (max. 500000)
+ 665 PDF objects out of 1000 (max. 8388607)
+ 577 compressed objects within 6 object streams
+ 205 named destinations out of 1000 (max. 500000)
  287 words of extra memory for PDF output out of 10000 (max. 10000000)
 
