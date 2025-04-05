@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+//using System.Numerics;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -86,7 +87,13 @@ public class StateRepresentation : State
 
             result += CheckPossibleMoves(playerObjects);
 
+            result += MaxCoverageBonus(player, playerObjects);
+
             result += BadPosition(player, playerObjects, AIObjects);
+
+            result += CentralControl(player, playerObjects, AIObjects);
+
+            result += ConfrontationMovement(player, playerObjects, AIObjects);
         }
         else
         {
@@ -98,10 +105,110 @@ public class StateRepresentation : State
 
             result += CheckPossibleMoves(AIObjects);
 
+            result += MaxCoverageBonus(player, AIObjects);
+
             result += BadPosition(player, playerObjects, AIObjects);
+
+            result += CentralControl(player, playerObjects, AIObjects);
+
+            result += ConfrontationMovement(player, playerObjects, AIObjects);
         }
 
         return result;
+    }
+
+    int MaxCoverageBonus(Turn playerTurn, List<PlayerObject> playerObjects)
+    {
+        int result = 0;
+
+        foreach (var playerO in playerObjects)
+        {
+            result += DistanceValue(playerTurn, playerO);
+        }
+
+        return result;
+    }
+
+    int DistanceValue(Turn playerTurn, PlayerObject player)
+    {
+        int result = 0;
+        List<PlayerObject> playerObjects = ListPlayerObjects(!(playerTurn == Turn.PLAYER));
+        foreach (var friendly in playerObjects)
+        {
+            if ((Math.Abs(player.position.x - friendly.position.x) == 2 && player.position.y == friendly.position.y) ||
+                (Math.Abs(player.position.y - friendly.position.y) == 2 && player.position.x == friendly.position.x))
+            {
+                result += 3;
+            }
+            if ((Math.Abs(player.position.x - friendly.position.x) == 3 && player.position.y == friendly.position.y) ||
+                (Math.Abs(player.position.y - friendly.position.y) == 3 && player.position.x == friendly.position.x))
+            {
+                result += 6;
+            }
+            if((Math.Abs(player.position.x - friendly.position.x) == 2 && Math.Abs(player.position.y - friendly.position.y) == 2))
+            {
+                result += 8;
+            }
+        }
+        
+        return result;
+    }
+
+    int ConfrontationMovement(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
+    {
+        
+        int averagePlayerX = (int)(playerObjects.Sum(x => x.position.x) / playerObjects.Count);
+        int averageAIX = (int)(AIObjects.Sum(x => x.position.x) / playerObjects.Count);
+
+        int defaultDistance = 6;
+        int distance = Mathf.Abs(averagePlayerX - averageAIX);
+
+        return (defaultDistance - distance) * distance;
+    }
+
+    int CentralControl(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
+    {
+        int result = 0;
+
+        if (player == Turn.PLAYER)
+        {
+            foreach (PlayerObject playerO in playerObjects)
+            {
+                if ((playerO.position.x >= 4 && playerO.position.x <= 6) && 
+                    (playerO.position.y >= 2 && playerO.position.y <= 4))
+                {
+                    result += 5;
+                }
+            }
+            foreach (PlayerObject playerO in AIObjects)
+            {
+                if ((playerO.position.x >= 4 && playerO.position.x <= 6) &&
+                    (playerO.position.y >= 2 && playerO.position.y <= 4))
+                {
+                    result -= 5;
+                }
+            }
+        } 
+        else
+        {
+            foreach (PlayerObject playerO in AIObjects)
+            {
+                if ((playerO.position.x >= 4 && playerO.position.x <= 6) &&
+                    (playerO.position.y >= 2 && playerO.position.y <= 4))
+                {
+                    result += 5;
+                }
+            }
+            foreach (PlayerObject playerO in playerObjects)
+            {
+                if ((playerO.position.x >= 4 && playerO.position.x <= 6) &&
+                    (playerO.position.y >= 2 && playerO.position.y <= 4))
+                {
+                    result -= 5;
+                }
+            }
+        }
+            return result;
     }
 
     int BadPosition(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
