@@ -53,7 +53,9 @@
 
 \chapter{Bevezetés}
 
-\section{Játék ismertetése}
+A teljes szakdolgozati projektem elérhető a következő linken: \url{https://github.com/herbakmarcell/thesis}
+
+Szakdolgozatom témájának kiválasztása nem okozott számomra fejtörést, ugyanis amióta az eszemet tudom, valamilyen formában játszottam már számítógépes játékokkal. Emlékszek, amikor nagyapám 5. születésnapomra egy számítógép adott ajándékba, még akkor Windows 2000-es operációs rendszerrel. Bár egy ideig utána abbahagytam a számítógépes játékokat, általános iskola 4. osztályában az osztálytársakkal elkezdtünk Minecraft-ozni, és onnantól kezdve töretlenül szeretek mindig valamilyen játékkal elütni az időt. 
 
 \begin{figure}[h!]
 	\centering
@@ -62,11 +64,8 @@
 	\label{persona3}
 \end{figure}
 
-\subsection{Játék ötlete}
+Éppen ezért szakdolgozatom programjaként egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel jól szórakozok és szabadidőmet is szívesen töltöm. Választásom végül is egy véges, körökre osztott, zérusösszegű stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, jelenleg legfrissebb 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload-tól, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők. \cite{Persona,Persona3}
 
-Szakdolgozatom programjaként \cite{Project} egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel szabadidőmet is szívesen töltöm. Választásom végül is egy körökre osztott stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, jelenleg legfrissebb 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload-tól, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők.\cite{Persona,Persona3}
-
-Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcrendszere (\ref{persona1} ábra) rendelkezett mezőkre felbontott csatatérrel, amelyeknél még a támadásoknak volt egy bizonyos maximális távolsága. Ezek alapján szerettem volna egy olyan játékteret készíteni, ahol a játékosnak nem csak a támadásának a távolságát kell figyelembe vennie, hanem a helyét is a csatatéren. \cite{Persona1,Persona1Gameplay}
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=13cm]{./pictures/persona_psp.png}
@@ -74,11 +73,15 @@ Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcren
 	\label{persona1}
 \end{figure}
 
-\subsection{Játék szabályok} \label{rules}
+Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcrendszere (\ref{persona1} ábra) rendelkezett mezőkre felbontott csatatérrel, amelyeknél még a támadásoknak volt egy bizonyos maximális távolsága. Ezek alapján szerettem volna egy olyan játékteret készíteni, ahol a játékosnak nem csak a támadásának a távolságát kell figyelembe vennie, hanem a helyét is a csatatéren. \cite{Persona1,Persona1Gameplay}
+
+\section{Játék szabályok} \label{rules}
 
 A játék egy fixált méretű, négyzetekből álló, 7x10 nagyságú táblán folyik. A játékot kettő játékos tudja játszani, melyből a szakdolgozatomban az egyik játékos a mesterséges intelligencia lesz. Mindegyik játékos rendelkezik karakterekkel, amelynek kezdő mennyisége a játék indítása előtt kiválasztható. Mindkét játékos rendelkezik minimum 1, maximum pedig 3 karakterrel. A karakterek mennyisége játékosonként eltérő lehet, nem szükséges mindkét játékosnak ugyanazzal a karakter mennyiséggel kezdenie. Az egyik játékos karakterei (több karakter esetén függőlegesen egy mező kihagyással) a 2. oszlopban, a másik játékos karakterei pedig a 9. oszlopban kezdenek. A táblán léteznek akadályozó mezők, amelyekre a játékosok nem léphetnek, illetve nem támadhatják meg. 
 
-A játék során a játékosok egymás után jönnek, egy körben az összes karakterükkel végre kell hajtaniuk egy interakciót. Ez a két interakció \emph{lépés} és \emph{támadás} lehet. Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt. A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak. A játékosoknak minden körben kötelező valamelyik interakciót végrehajtaniuk mindegyik karakterrel végrehajtani, illetve ha egy karakter interakcióját jóvá hagyták, azt vissza már nem vonhatják.
+A játék során a játékosok egymás után jönnek, egy körben az összes karakterükkel végre kell hajtaniuk egy interakciót. Ez a két interakció \emph{lépés} és \emph{támadás} lehet. Lépés során a karakterükkel egy mezőt léphetnek a négy irány közül valamelyik irányba: fel, le, balra vagy jobbra. A játékos karaktere nem léphet olyan mezőre, amelyen már áll egy másik saját karakter, egy ellenfél karakter vagy egy akadály. Támadás során a játékos egy mezőn belül támadhat négy irány közül valamelyik irányba. A játékos karaktere nem támadhatja meg a saját karakterét, illetve nem támadhat üres vagy akadály mezőt.
+
+A karakterek rendelkeznek életerővel, minden karakter a játék kezdésekor 10 életerőponttal kezd. Támadás során a megtámadott karakter elveszít 1 életerő pontot. Amennyiben a játékos minden karakterére végrehajtott egy interakciót, a játékos átadja a körét a másik játékosnak. A játékosoknak minden körben kötelező valamelyik interakciót végrehajtaniuk mindegyik karakterrel végrehajtani, illetve ha egy karakter interakcióját jóvá hagyták, azt vissza már nem vonhatják.
 
 Egy karakter, amennyiben elveszíti összes életerejét, eltűnik a tábláról, mezője felszabadul, illetve innentől kezdve azzal nem tud a játékos interakciót végrehajtani és nem hozhatja vissza.
  
@@ -226,13 +229,14 @@ Ezzel a megoldással azonban feljöttek hibalehetőségek, mégpedig, hogy \aref
 
 \subsection{Operátor generálás} \label{operatorgen}
 
-\Aref{operator} szekcióban és \aref{operatorimp} alszekcióban tárgyalt operátorokat elérhetővé kell tenni a megoldó algoritmusunk számára. Emiatt szükség van az operátorok generálására, amelyet a \emph{TurnOperatorGenerator} osztályban oldottam meg. Az osztály egy \emph{OperatorGenerator} interfészt implementál, amely egy \emph{Operator} lista csak olvasható mezőt tartalmaz, ebben tároljuk el az összes operátorunkat.
+\Aref{operator} szekcióban és \aref{operatorimp} alszekcióban tárgyalt operátorokat elérhetővé kell tenni a megoldó algoritmusunk számára. Emiatt szükség van az operátorok generálására, amelyet a \emph{TurnOperatorGenerator} osztályban oldottam meg. Az osztály egy \emph{OperatorGenerator} interfészt implementál, amely egy \emph{Operator} lista csak olvasható mezőt tartalmaz, ebben tároljuk el az összes operátorunkat. A generálás kódját megtekintheti \aref{operatorgen-code} kódrészletben.
 
-Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy ismételve annyiszor, ahány játékos karakterünk van, egy másik listába, a \emph{playerActionI} listában eltároljuk a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezen listaelemek Descartes-szorzatával létrehozzuk az összes lehetséges operátort, melyeket az \emph{operators} listában tárolunk el. A generálás kódját megtekintheti \aref{operatorgen-code} kódrészletben. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
+Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy ismételve annyiszor, ahány játékos karakterünk van, egy másik listába, a \emph{playerActionI} listában eltároljuk a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezen listaelemek Descartes-szorzatával létrehozzuk az összes lehetséges operátort, melyeket az \emph{operators} listában tárolunk el. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
+
+\lstinputlisting[caption=Operátorok létrehozása a játék elején, label=operatorgen-code]{./codes/TurnOperatorGenerator.cs}
 
 Játék közben megtörténhet, hogy az egyik karakter elveszíti az összes életerejét, ekkor el kell távolítani a tábláról. Az operátoraink kiértékelésének innentől nem lesz optimális, hiszen minden operátort meg kell vizsgálnia, amelyben az eltávolított karakter is szerepel. Ez annyit jelent, hogyha bár két karakter maradt a táblán a háromból, az operátor továbbra is várja a már nem létező operátorra a műveletet. Ehhez nyújt segítséget a körönként ellenőrzött karakterszám vizsgálat. Erről bővebben \aref{gamemanager} szekcióban olvashat. Ebben az esetben, ha a kör végén a karaktereknek számában csökkenést tapasztalunk, akkor a megmaradt karakterekre új operátorokat generálunk. Ez lényegében az operátor generálás metódusának túltöltése, ebben az esetben csak az állapottérben tárolt karakterekre generáljuk le újra az operátorokat, ezzel megoldva a szükséges interakciók számát is.
 
-\lstinputlisting[caption=Operátorok létrehozása a játék elején, label=operatorgen-code]{./codes/TurnOperatorGenerator.cs}
 
 \section{Minimax} \label{minimax}
 
@@ -250,28 +254,46 @@ Egy kétszemélyes játékban az egyik játékos a maximalizáló, aki a saját 
 
 A MiniMax megoldó algoritmus implementációját a \emph{MiniMaxBase} osztályba rendeztem, amely gyermekosztálya a \emph{Solver} absztrakt osztálynak. Ez a \emph{Solver} osztály tartalmaz egy operátorokat tartalmazó listát és egy absztrakt, állapot paramétert bekérő \emph{NextMove()} metódust. A \emph{NextMove()} állapottal visszatérő függvény fog a későbbiekben a megoldó algoritmusnak megfelelően egy állapotot a játékfának kiértékelése után visszaadni.
 
+\lstinputlisting[caption=Következő lépés logikája alfa-béta vágásnál, label=minimaxnextmove-code]{./codes/NextMoveAlphaBeta.cs}
+
 Esetünkben, a MiniMax algoritmus alapján a paraméterként megadott állapotot eltároljuk egy \emph{Node} osztályba. A \emph{Node} osztály egy példánya lényegében a játékfának egy csomópontja, amely tartalmaz egy állapotot, a saját mélységét, a szülőcsomópontját és gyermekcsomópontok listáját, amennyiben azok léteznek. Továbbá ez a \emph{Node} osztály az állapottérből le tudja kérdezi a játék állását. A \emph{GetHeuristics()} metódus, amennyiben a csomópontnak nincs gyermeke, a saját állapotteréből, egyébként meg a legelső gyermekcsomópont \emph{GetHeruistics()} függvényéből kérdezi le az állapottér heurisztikáját. 
 
 A legkisebb vagy legnagyobb csomópont kiválasztásához szintenként rendezem a fát a \emph{SortChildrenMiniMax()} eljárás segítségével. A paraméterben megadott kör, és a másodlagos opcionális paraméter alapján eldönti, hogy a nyereséget maximalizálni vagy  az ellenfél nyereségét szeretnénk minimalizálni, mindezt rekurzívan meghívva minden egyes csomópontra, amíg van gyermekcsomópontjuk.
+
+\lstinputlisting[caption=Kiértékelt fa rendezésének logikája, label=sortchildren-code]{./codes/SortChildren.cs}
 
 Ezek alapján a felülírt \emph{NextMove()} metódus egy csomópontban eltárolja a paraméterben megadott állapotot, majd ezt kiterjeszti az \emph{ExtendNode()} eljárás. Ez megnézi a csomópontban, hogy a játék még folyamatban van-e vagy elérte-e már a maximális mélységet, amennyiben igaz, nem terjesszük ki tovább. Ezután minden operátornál megnézzük, hogy alkalmazhatóak-e, amennyiben igen, úgy alkalmazzuk, és létrehozzuk az új állapotot. Ezt eltároljuk egy új csomópontba, és felvesszük az eredeti csomópont gyermekelemei közé. A létrehozott csomópontot végezetül rekurzívan tovább kiterjesztjük. Ezek után tudjuk felhasználni a fentebb említett \emph{SortChildrenMiniMax()} függvényt.
 
 \section{Minimax alfa-béta vágással} \label{minimaxalphabeta}
 
-Az MiniMax alfa-béta vágásos verzióját a \emph{MiniMaxAlphaBetaPruning} osztályban valósítottam meg. A lényeges eltérés az \emph{ExtendNode()} metódus törzsének változtatása okozza, illetve a rekurzió használata miatt innentől egy egész értékkel tér vissza. Az alap MiniMax algoritmushoz hasonlóan a függvény ellenőrzi a játék folyamatban van-e vagy a mélység eléri-e a kívánt mélységet, ha valamelyik igaz, akkor visszaadja a csomópont heurisztikai értékét és leállítja a kiterjesztést. Továbbra is minden operátort megvizsgálunk, amennyiben alkalmazható az állapotra, az operátor alkalmazása után az új állapotot eltároljuk egy új csomópontként, ezt szintén felvesszük az eredeti csomópont gyermekelemei közé és azokat rendszerezzük.
+Az MiniMax alfa-béta vágásos verzióját a \emph{MiniMaxAlphaBetaPruning} osztályban valósítottam meg. A kiterjesztés logikáját \aref{minimaxalphabeta-code} kódrészletben találja. A lényeges eltérés az \emph{ExtendNode()} metódus törzsének változtatása okozza, illetve a rekurzió használata miatt innentől egy egész értékkel tér vissza. Az alap MiniMax algoritmushoz hasonlóan a függvény ellenőrzi a játék folyamatban van-e vagy a mélység eléri-e a kívánt mélységet, ha valamelyik igaz, akkor visszaadja a csomópont heurisztikai értékét és leállítja a kiterjesztést. Továbbra is minden operátort megvizsgálunk, amennyiben alkalmazható az állapotra, az operátor alkalmazása után az új állapotot eltároljuk egy új csomópontként, ezt szintén felvesszük az eredeti csomópont gyermekelemei közé és azokat rendszerezzük.
 
 A gyermekelemek kiterjesztése pedig alkalmazza az alfa-béta vágás módszerét, amely egy-egy csúcs kiterjesztését szakíthatja félbe. Ez azért ajánlatos, mert nagy lehet a játékfa és exponenciálisan felrobbanhat, így a kiértékelés rengeteg erőforrást és időt vehet igénybe. A módszer lényegében az első részfa kiértékelése után meg tudja állapítani, hogy a következő részfák esetleg nem fognak optimális megoldásra jutni, így azokat ,,levágjuk'' a játékfáról.
 
-Attól függően, hogy az aktuális csomópontunk minimalizáló vagy maximalizáló körben van, összehasonlítjuk az ebből kiterjesztett részfa legmélyebb csomópontjának értékével. \emph{Alfa-vágás} esetén a részfa és az aktuális csomópont értéke közül kiválasztjuk a minimum értéket. A következő részfa indulásakor szintén kiválasztjuk az aktuális és a részfa minimumát, azonban a további részfák kiterjesztését félbeszakítjuk, ha a csúcsban eddig kiszámolt minimum kisebbé válik, mint a szülőben eddig kiszámolt maximum. Ebben az esetben a többi részfa kiterjesztése irreleváns, hiszen a szülő maximumának legkisebb értéke nagyobb, mint az aktuális csúcs minimumának legnagyobb értéke. \cite[5.6. fejezet]{KovasznaiKusper} 
-
-A kiterjesztés logikáját \aref{minimaxalphabeta-code} kódrészletben találja.
-
 \lstinputlisting[caption=Csomópont kiterjesztése alfa-béta vágással, label=minimaxalphabeta-code]{./codes/ExtendNodeAlphaBeta.cs}
 
+Attól függően, hogy az aktuális csomópontunk minimalizáló vagy maximalizáló körben van, összehasonlítjuk az ebből kiterjesztett részfa legmélyebb csomópontjának értékével. \emph{Alfa-vágás} esetén a részfa és az aktuális csomópont értéke közül kiválasztjuk a minimum értéket. A következő részfa indulásakor szintén kiválasztjuk az aktuális és a részfa minimumát, azonban a további részfák kiterjesztését félbeszakítjuk, ha a csúcsban eddig kiszámolt minimum kisebbé válik, mint a szülőben eddig kiszámolt maximum. Ebben az esetben a többi részfa kiterjesztése irreleváns, hiszen a szülő maximumának legkisebb értéke nagyobb, mint az aktuális csúcs minimumának legnagyobb értéke. \cite[5.6. fejezet]{KovasznaiKusper} 
 
 \section{Heurisztika} \label{heuristics}
-% Ez a rész még kidolgozás alatt van.
+
 A heurisztika talán a másik legnehezebben implementálható komponense a játéknak, hiszen nem csak tisztában kell lennünk a szabályokkal, és az azzal előnyt vagy hátrányt jelentő tényezőivel, hanem tudnunk kell, hogy az ilyen típusú játékoknál mely pozíciók, szituációk, akciók okoznak nagyobb fölényt vagy visszaesést az adott játékosnak. 
+
+A heurisztikai értéket a \emph{StateRepresentation} osztályból a \emph{GetHeuristics()} egész értékkel visszatérő függvényből lehet elérni. Ez a függvény látja el a MiniMaxhoz szükséges heurisztikai értékkel a megoldó algoritmust. Ez a metódus több kisebb függvényekből áll, amelyek módosítják a benne lokális, \emph{result} néven tárolt változót, amely maga a heurisztika értéke lesz. 
+
+A függvény törzse elágazásokkal kezdődik, amely vizsgálja, hogy az állapottér státusza alapján valamelyik játékos megnyerte-e a játékot. Nyilván, ez a játékfa kiterjesztése esetén hasznos, ugyanis az előre vetített lépéseknél megtörténhet, hogy egy játékos a következő lépéssel megnyeri a játékot. Mivel a játékosnak a legfontosabb nyerni, ezért mindennél több pontot kap a nyertes és veszít a másik játékos. Amennyiben a játék még folyamatban van, úgy a további kisebb számítási függvények futnak le. Attól függően, hogy éppen az MI játékos saját magára vagy az ellenfelére számolja a heurisztikát, az elágazás azon ága fut le.
+
+Ezek a függvények az állapottér helyzetéből, azaz a játékosok pozíciójából, életerejéből és lehetséges lépéseiből számítja ki a heurisztikát a következőképpen: 
+
+\begin{itemize}
+	\item \emph{HealthBonus}: A játékos minden karakterének életerejének száma után kap 1 pontot, illetve minden ellenfél karakterének életerejének száma után veszít 1 pontot
+	\item \emph{AttackBonus}: A játékost jutalmazzuk, amiért próbálja az ellenfelének karaktereit eltüntetni, azonban figyelembe kell venni azt, hogy akkor ne támadjon, ha leütnék utána, ezzel hosszútávon vesztésre állna, ezért a negatív ponttal nyomatékosítjuk ilyenkor. Minden más esetben mérlegelje a támadásnak kockázatát. Ha több életereje van, mint ahány ellenfél karakter mellette, akkor nem tudnák leütni egyből, ha az ellenfelek között maradna sem. Abban az esetben lesz negatív az érték, ha olyan karakterrel szeretnénk támadni, ami veszélyesen közel van, hogy leüssék, azaz annyi életereje van vagy kevesebb, ahány ellenfél éppen körbeveszi.
+	\item \emph{PlayerCount}: Megvizsgálja, hogy a játékosnak mennyi karaktere van az ellenfeléhez képest. Legtöbb esetben több karakterrel könnyebb megnyerni a játékot, hiszen több lehetőség áll rendelkezésre, ezért a több karakterrel rendelkező játékost jutalmazzuk az ellenfelével szemben.
+	\item \emph{CheckPossibleMoves}: Minden lehetséges lépés további pontokat ér, amennyiben egy vagy több irányba nem tud lépni, az negatív pontot ér, mivel a játékos korlátozza karakterét. Legrosszabb lehetőség, ha valamelyik sarokba visszük a karakterünket.
+	\item \emph{MaxCoverageBonus}: A karakterek mindig maguk mellett 1 egység távolságra tudnak támadni. Ha a karakterek egymástól csak 2 egységre vannak, akkor két karakter tud támadni egy négyzetet, amely támadás esetén hasznos, viszont pozicionálás szempontjából megadja a lehetőséget az ellenfélnek menekülésre. Ezért érdemes inkább 3 négyzet távolságra lenni egymástól x és y koordináta szerint, hiszen ilyenkor már 2 négyzetet fedünk le minimum a támadásunkkal. Amennyiben átlósan 1 négyzet választ el, és a két karakter között egy ellenfél megállna, akkor a legoptimálisabb lépése is egy lehetséges támadásba belépése volna.
+	\item \emph{BadPosition}: Amennyiben a játékos karaktere mellett közvetlenül található ellenfél, az ellenfelek számától függően negatív pont. Amennyiben saját karakter is található, az további negatív pont, hiszen korlátozza mindkét karakter mozgását ezzel.
+	\item \emph{CentralControl}: Ez az előnyt a sakkban is szokták alkalmazni, ugyanis aki a tábla közepén tartózkodik a karakterével, annak van a legtöbb lehetősége taktikázni, azaz agresszívabban támadhat, esetleg védekezhet, visszavonulhat, átrendezheti a karaktereit.
+	\item \emph{ConfrontationMovement}: A játék előrehaladása érdekében jutalmazzuk a játékost, ha próbál harcot kezdeményezni, illetve távolságot minimalizálni az ellenfele között. Figyelembe kell azonban venni, hogy nem mindig maradjunk közel ellenfelünkhöz, ezért kevesebb pontot adunk, mint az \emph{AttackBonus}-ért.
+\end{itemize}
 
 \section{További fontosabb osztályok} 
 
@@ -308,15 +330,31 @@ A Unity keretein belül a különböző metódusok és szkriptek tesztelésére 
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
+% Ez a rész még kidolgozás alatt van.
 
-% Összességében..., vélemények, javítani valók
+A szakdolgozatomban megvalósítottam az általam elképzelt játékot, amely egy remek kihívás volt, az eddig autodidakta módon tanult Unity tudásom teszteléséhez. Bár nem a legmélyebb komponensekbe nyúltam bele, így is tökéletesen mutatja, hogy játékfejlesztéshez elég ez a minimális tudás és ambíció.
+
+A játékról összességében az emberek a közösségi teszt alatt jól vélekedtek, legtöbbet említett hibának a nehezen megkülönböztethető karaktereket említették, ezt mindenképpen szeretném a jövőben javítani.
+
+A játék készítése során pár váratlan problémába is ütköztem, de ezek a problémák rávilágítottak a szakmai hiányosságaimra, illetve a problémamegoldó képességemet tették próbára. Jó érzés volt, hogy nem mindig ugyanazok a problémák merültek fel, esetleg egy megoldása után felmerült egy másik, de ez szükséges volt ahhoz, hogy egy rendben működő programot tudjak létrehozni.
+
+Ez azonban nem azt jelenti, hogy hibátlan a játék. A jövőben tervezem a heurisztikát finomítani, tökéletesíteni, hogy az MI interakciói a lehető legjobbak legyenek, valamint a kódban már előkészített, különböző típusú ellenfelek implementálását is, amelyet eltérő \emph{sprite}-juk alapján lehet megkülönböztetni.
+
 
 \begin{thebibliography}{2}
 \addcontentsline{toc}{chapter}{\bibname}
 
-\bibitem{Project}
-\textsc{Github:} \emph{thesis} 
-\url{https://github.com/herbakmarcell/thesis}
+\bibitem{NeumannOskar}
+\textsc{Neumann János, Oskar Morgenstern}: \emph{Theory of Games and Economic Behavior}, 1944.
+\url{https://archive.org/details/in.ernet.dli.2015.215284/page/n5/mode/2up}, Megtekintés dátuma: 2025.03.19.
+
+\bibitem{KovasznaiKusper}
+\textsc{Dr. Kovásznai Gergely és Dr. Kusper Gábor}: \emph{A MESTERSÉGES INTELLIGENCIA KÉRDÉSEI A KÖZÉPISKOLAI OKTATÁSBAN} 
+\url{https://aries.ektf.hu/~gkusper/mesterseges_intelligencia.v.1.0.4.pdf}, Megtekintés dátuma: 2025.03.28.
+
+\bibitem{Neumann}
+\textsc{Neumann János}: \emph{On the theory of games of strategy}, Sonnya Bargmann fordítása, 1928.
+\url{https://cs.uwaterloo.ca/%7Ey328yu/classics/vonNeumann.pdf}, Megtekintés dátuma: 2025.03.19.
 
 \bibitem{Persona}
 \textsc{Wikipédia:} \emph{Persona (series)} 
@@ -346,10 +384,6 @@ A Unity keretein belül a különböző metódusok és szkriptek tesztelésére 
 \textsc{Wikipédia:} \emph{John McCarthy (computer scientist)} 
 \url{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)}, Megtekintés dátuma: 2025.03.19.
 
-\bibitem{Neumann}
-\textsc{Neumann János}: \emph{On the theory of games of strategy}, Sonnya Bargmann fordítása, 1928.
-\url{https://cs.uwaterloo.ca/%7Ey328yu/classics/vonNeumann.pdf}, Megtekintés dátuma: 2025.03.19.
-
 \bibitem{Jatekelmelet}
 \textsc{Wikipédia:} \emph{Játékelmélet} 
 \url{https://hu.wikipedia.org/wiki/J%C3%A1t%C3%A9kelm%C3%A9let}, Megtekintés dátuma: 2025.03.19.
@@ -357,10 +391,6 @@ A Unity keretein belül a különböző metódusok és szkriptek tesztelésére 
 \bibitem{JatekelmeletEn}
 \textsc{Wikipédia:} \emph{Game theory} 
 \url{https://en.wikipedia.org/wiki/Game_theory}, Megtekintés dátuma: 2025.03.19.
-
-\bibitem{NeumannOskar}
-\textsc{Neumann János, Oskar Morgenstern}: \emph{Theory of Games and Economic Behavior}, 1944.
-\url{https://archive.org/details/in.ernet.dli.2015.215284/page/n5/mode/2up}, Megtekintés dátuma: 2025.03.19.
 
 \bibitem{MiniMaxEnWiki}
 \textsc{Wikipédia}: \emph{Minimax} 
@@ -385,10 +415,6 @@ A Unity keretein belül a különböző metódusok és szkriptek tesztelésére 
 \bibitem{UnityDocsVector2}
 \textsc{Unity Documentation}: \emph{Vector2} 
 \url{https://docs.unity3d.com/2022.3/Documentation/ScriptReference/Vector2.html}, Megtekintés dátuma: 2025.03.27.
-
-\bibitem{KovasznaiKusper}
-\textsc{Dr. Kovásznai Gergely és Dr. Kusper Gábor}: \emph{A MESTERSÉGES INTELLIGENCIA KÉRDÉSEI A KÖZÉPISKOLAI OKTATÁSBAN} 
-\url{https://aries.ektf.hu/~gkusper/mesterseges_intelligencia.v.1.0.4.pdf}, Megtekintés dátuma: 2025.03.28.
 
 \bibitem{BlackboxEn}
 \textsc{Wikipédia}: \emph{Black-box testing} 
