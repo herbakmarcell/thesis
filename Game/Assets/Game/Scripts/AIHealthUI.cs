@@ -15,6 +15,11 @@ public class AIHealthUI : MonoBehaviour
         GenerateHealthUI();
     }
 
+    void Start()
+    {
+        UpdateHealthUI();
+    }
+
     public void UpdateHealthUI()
     {
         ClearHealthUI();
