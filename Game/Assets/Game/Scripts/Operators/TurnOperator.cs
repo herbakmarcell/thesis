@@ -104,8 +104,6 @@ public class TurnOperator : Operator
             }
             else if (playerAction.actionType == ActionType.ATTACK)
             {
-                //Vector2 actionPos = ActionPosition(playerAction, player);
-                //if (stateRepresentation.ListAllPlayerObjects().Find(x => x.position == actionPos) == null) return false;
                 illegalAction = !IsApplicableAttack(stateRepresentation, playerAction);
             } 
 
