@@ -10,16 +10,25 @@ public class MenuButtonScripts : MonoBehaviour
 {
     public TMP_Dropdown playerDropdown;
     public TMP_Dropdown enemyDropdown;
+    public TMP_Dropdown obstacleDropdown;
     public TMP_Text turnText;
 
     private void Start()
     {
         playerDropdown.ClearOptions();
         enemyDropdown.ClearOptions();
+        obstacleDropdown.ClearOptions();
         playerDropdown.AddOptions(new List<string> { "1", "2", "3", "4" });
         playerDropdown.onValueChanged.AddListener(OnPlayerDropdownChanged);
         enemyDropdown.AddOptions(new List<string> { "1", "2", "3", "4" });
         enemyDropdown.onValueChanged.AddListener(OnEnemyDropdownChanged);
+        obstacleDropdown.AddOptions(new List<string> { "0", "1", "2", "3", "4", "5", "6" });
+        obstacleDropdown.onValueChanged.AddListener(OnObstacleDropdownChanged);
+    }
+
+    void OnObstacleDropdownChanged(int obstacleCount)
+    {
+        Options.obstacleCount = int.Parse(obstacleDropdown.options[obstacleCount].text);
     }
 
     void OnPlayerDropdownChanged(int playerCount)
@@ -34,14 +43,13 @@ public class MenuButtonScripts : MonoBehaviour
 
     public void ChangeStartingTurn()
     {
-        if (Options.playerStarts)
+        Options.playerStarts = !Options.playerStarts;
+        if (!Options.playerStarts)
         {
-            Options.playerStarts = false;
             turnText.text = "MI";
         }
         else
         {
-            Options.playerStarts = true;
             turnText.text = "Játékos";
         }
     }

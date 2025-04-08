@@ -39,7 +39,6 @@ public class TurnOperator : Operator
                 newState.board[(int)player.position.y, (int)player.position.x] = new FieldObject("EMPTY", player.position);
 
                 Vector2 newPos = ActionPosition(playerAction, player);
-                //Debug.Log($"{player.id} {newPos.x} {newPos.y}");
                 newState.board[(int)newPos.y, (int)newPos.x] = player;
                 player.position = newPos;
             }
@@ -118,16 +117,10 @@ public class TurnOperator : Operator
 
     bool IsApplicableMove(StateRepresentation state, PlayerAction action)
     {
-        //Debug.Log("Lista hossza: " + state.ListAllPlayerObjects().Count);
-        //Debug.Log("0. elem: " + state.ListAllPlayerObjects()[0].id);
-        //Debug.Log("1. elem: " + state.ListAllPlayerObjects()[1].id);
-        //Debug.Log("Action ID:" + action.playerId);
-        //Debug.Log(state.ListAllPlayerObjects().Find(x => x.id == action.playerId));
         PlayerObject player = state.ListAllPlayerObjects().Find(x => x.id == action.playerId);
 
         return  isValidState(state) &&
                 IsOnBoard(action, player) &&
-                //HasSamePosition(state) &&
                 IsCharacterThePlayer(state, player) &&
                 IsEmpty(state, action, player) &&
                 IsPlayerTurn(state, player);
@@ -145,7 +138,6 @@ public class TurnOperator : Operator
 
     Vector2 ActionPosition(PlayerAction playerAction, PlayerObject player)
     {
-        //Debug.Log(player);
         switch (playerAction.actionDirection)
         {
             case ActionDirection.UP:

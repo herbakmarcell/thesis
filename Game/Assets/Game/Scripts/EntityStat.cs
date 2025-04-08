@@ -10,13 +10,4 @@ public class EntityStat : MonoBehaviour
     public int health;
     public int attack;
     public bool isAI;
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Debug.Log("Dead");
-        }
-    }
 }

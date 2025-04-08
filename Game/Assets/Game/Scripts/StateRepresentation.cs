@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public enum Turn
 {
@@ -138,16 +137,16 @@ public class StateRepresentation : State
             if ((Math.Abs(player.position.x - friendly.position.x) == 2 && player.position.y == friendly.position.y) ||
                 (Math.Abs(player.position.y - friendly.position.y) == 2 && player.position.x == friendly.position.x))
             {
-                result += 3;
+                result += 2;
             }
             if ((Math.Abs(player.position.x - friendly.position.x) == 3 && player.position.y == friendly.position.y) ||
                 (Math.Abs(player.position.y - friendly.position.y) == 3 && player.position.x == friendly.position.x))
             {
-                result += 6;
+                result += 4;
             }
             if((Math.Abs(player.position.x - friendly.position.x) == 2 && Math.Abs(player.position.y - friendly.position.y) == 2))
             {
-                result += 8;
+                result += 7;
             }
         }
         
@@ -156,14 +155,13 @@ public class StateRepresentation : State
 
     int ConfrontationMovement(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
     {
-        
         int averagePlayerX = (int)(playerObjects.Sum(x => x.position.x) / playerObjects.Count);
         int averageAIX = (int)(AIObjects.Sum(x => x.position.x) / playerObjects.Count);
 
         int defaultDistance = 6;
         int distance = Mathf.Abs(averagePlayerX - averageAIX);
 
-        return (defaultDistance - distance) * distance;
+        return (defaultDistance - distance) * defaultDistance;
     }
 
     int CentralControl(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
@@ -177,7 +175,7 @@ public class StateRepresentation : State
                 if ((playerO.position.x >= 4 && playerO.position.x <= 6) && 
                     (playerO.position.y >= 2 && playerO.position.y <= 4))
                 {
-                    result += 5;
+                    result += 2;
                 }
             }
             foreach (PlayerObject playerO in AIObjects)
@@ -185,7 +183,7 @@ public class StateRepresentation : State
                 if ((playerO.position.x >= 4 && playerO.position.x <= 6) &&
                     (playerO.position.y >= 2 && playerO.position.y <= 4))
                 {
-                    result -= 5;
+                    result -= 1;
                 }
             }
         } 
@@ -196,7 +194,7 @@ public class StateRepresentation : State
                 if ((playerO.position.x >= 4 && playerO.position.x <= 6) &&
                     (playerO.position.y >= 2 && playerO.position.y <= 4))
                 {
-                    result += 5;
+                    result += 2;
                 }
             }
             foreach (PlayerObject playerO in playerObjects)
@@ -204,7 +202,7 @@ public class StateRepresentation : State
                 if ((playerO.position.x >= 4 && playerO.position.x <= 6) &&
                     (playerO.position.y >= 2 && playerO.position.y <= 4))
                 {
-                    result -= 5;
+                    result -= 1;
                 }
             }
         }
@@ -282,8 +280,8 @@ public class StateRepresentation : State
 
     int PlayerCount(Turn player, int playerCount, int AICount)
     {
-        if (player == Turn.PLAYER) return 3 * (playerCount - AICount);
-        else return 3 * (AICount - playerCount);
+        if (player == Turn.PLAYER) return 9 * (playerCount - AICount);
+        else return 9 * (AICount - playerCount);
     }
 
     int AttackBonus(Turn player, List<PlayerObject> playerObjects, List<PlayerObject> AIObjects)
@@ -298,8 +296,8 @@ public class StateRepresentation : State
             {
                 if (HasNearbyEnemy(player, playerO, nearbyEnemies))
                 {
-                    if (playerO.health == 1) result -= 5 * nearbyEnemies.Count;
-                    else result += 3 * (playerO.health - nearbyEnemies.Count);
+                    if (playerO.health == 1) result -= 4 * nearbyEnemies.Count;
+                    else result += 4 * (playerO.health - nearbyEnemies.Count);
                 }
             }
         } 
@@ -310,7 +308,7 @@ public class StateRepresentation : State
                 if (HasNearbyEnemy(player, playerO, nearbyEnemies))
                 {
                     if (playerO.health == 1) result -= 5 * nearbyEnemies.Count;
-                    else result += 3 * (playerO.health - nearbyEnemies.Count);
+                    else result += 4 * (playerO.health - nearbyEnemies.Count);
                 }
             }
         }
@@ -411,7 +409,7 @@ public class StateRepresentation : State
             int i = ((x + 3) - (friendlyCount - x)) - 1;
             
 
-            PlayerObject newFriendly = new PlayerObject("PLAYER" + x, new Vector2(j, i), 10, 10, false);
+            PlayerObject newFriendly = new PlayerObject("PLAYER" + x, new Vector2(j, i), 10, 1, false);
             board[i, j] = newFriendly;
         }
     }
@@ -425,7 +423,7 @@ public class StateRepresentation : State
         {
             int i = ((x + 3) - (enemyCount - x)) - 1;
 
-            PlayerObject newEnemy = new PlayerObject("ENEMY" + x, new Vector2(j, i), 10, 10, true);
+            PlayerObject newEnemy = new PlayerObject("ENEMY" + x, new Vector2(j, i), 10, 1, true);
             board[i, j] = newEnemy;
         }
     }

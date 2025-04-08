@@ -17,6 +17,12 @@ public class MapGenerator : MonoBehaviour
         GenerateFriendlyGameObjects();
         GenerateEnemyGameObjects();
         GenerateObstacles();
+
+        if (GameManager.Instance.firstTurn && !GameManager.Instance.playerTurn)
+        {
+            GameManager.Instance.firstTurn = false;
+            GameManager.Instance.ProgressGame();
+        }
     }
 
     void GenerateFriendlyGameObjects()

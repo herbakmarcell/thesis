@@ -10,7 +10,7 @@ public class PlayerHealthUI : MonoBehaviour
     public GameObject playerGroupPrefab;
     public List<GameObject> healthList = new List<GameObject>();
 
-    void Start()
+    void Awake()
     {
         GenerateHealthUI();
     }

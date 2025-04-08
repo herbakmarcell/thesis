@@ -7,7 +7,6 @@ public class TileSelector : MonoBehaviour
 {
     public Tilemap tilemap;
 
-    private Vector3Int previousCell = new Vector3Int(int.MaxValue, int.MaxValue, int.MaxValue);
     private Camera cam;
 
     public static bool playerActionDone = false;

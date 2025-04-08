@@ -44,13 +44,17 @@ public class GameManager
         playerTurn = Options.playerStarts;
         activePlayer = 0;
 
-        //ProgressGame();
+        aiCount = Options.enemyCount;
+        playerCount = Options.friendlyCount;
+
+        firstTurn = true;
     }
 
     public State stateRepresentation;
     public Solver solver;
 
-    public bool playerTurn = true;
+    public bool playerTurn;
+    public bool firstTurn;
     public int activePlayer;
 
     public Status currentStatus;
@@ -76,6 +80,11 @@ public class GameManager
 
         if (playerTurn)
         {
+            if (!firstTurn)
+            {
+                firstTurn = false;
+                RedrawTable();
+            }
             if (activePlayer < friendlies.Count)
             {
                 if (activePlayer == 0)
@@ -100,9 +109,10 @@ public class GameManager
                 {
                     currentStatus = Status.PLAYERWIN;
                     SceneManager.LoadScene("EndScene");
+                    SceneManager.UnloadSceneAsync("GameScene");
                 }
                 RedrawTable();
-                
+
                 actions.Add(playerAction);
                 actionSelected = ActionSelected.NONE;
                 activePlayer++;
@@ -112,8 +122,6 @@ public class GameManager
             {
                 o = new TurnOperator(actions);
                 stateRepresentation = o.Apply(stateRepresentation);
-                //PlayerObject player = (stateRepresentation as StateRepresentation).ListAllPlayerObjects().Find(x => x.id.Contains("PLAYER"));
-                //Debug.Log($"Name: {player.id} " + $"X: {player.position.x} " + $"Y: {player.position.y} ");
                 activePlayer = 0;
                 actionSelected = ActionSelected.NONE;
                 playerTurn = false;
@@ -124,6 +132,7 @@ public class GameManager
         {
             currentStatus = Status.PLAYERWIN;
             SceneManager.LoadScene("EndScene");
+            SceneManager.UnloadSceneAsync("GameScene");
         }
 
         if (aiCount != (stateRepresentation as StateRepresentation).ListPlayerObjects(true).Count)
@@ -141,6 +150,7 @@ public class GameManager
             {
                 currentStatus = Status.AIWIN;
                 SceneManager.LoadScene("EndScene");
+                SceneManager.UnloadSceneAsync("GameScene");
             }
             else
             {
@@ -149,9 +159,9 @@ public class GameManager
                     StateRepresentation s = GameManager.Instance.stateRepresentation as StateRepresentation;
                     solver = new MiniMaxWithAlphaBetaPruning(new TurnOperatorGenerator(s.ListPlayerObjects(false), s.ListPlayerObjects(true)), 2);
                 }
-                RedrawTable();
                 playerTurn = true;
-            }            
+            }
+            RedrawTable();
         }
 
     }
@@ -173,7 +183,7 @@ public class GameManager
         return false;
     }
 
-    void RedrawTable()
+    public void RedrawTable()
     {
         StateRepresentation stateRepresentation = GameManager.Instance.stateRepresentation as StateRepresentation;
 
@@ -216,7 +226,7 @@ public class GameManager
 
         enemies.ForEach(enemy =>
         {
-            enemy.GetComponent<EntityStat>().health = enemyObjects.Find(x => x.id == enemy.GetComponent<EntityStat>().id).health;
+            enemy.GetComponent<EntityStat>().health = enemies.Find(x => x.GetComponent<EntityStat>().id == enemy.GetComponent<EntityStat>().id).GetComponent<EntityStat>().health;
         });
 
         friendlies.ForEach(friendly =>
@@ -238,16 +248,10 @@ public class GameManager
             });
         }
 
-        //This the problem :(
         foreach (var enemy in enemies)
         {
             enemy.transform.position = new Vector3(enemy.GetComponent<EntityStat>().position.x - 4.5f, enemy.GetComponent<EntityStat>().position.y - 3f, 0);
         }
-        //for (int i = 0; i < enemyObjects.Count; i++)
-        //{
-        //    GameObject enemy = enemies[i];
-        //    enemy.transform.position = new Vector3(enemyObjects[i].position.x - 4.5f, enemyObjects[i].position.y - 3f, 0);
-        //}
     }
 }
 

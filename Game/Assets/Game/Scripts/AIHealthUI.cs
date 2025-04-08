@@ -10,7 +10,7 @@ public class AIHealthUI : MonoBehaviour
     public GameObject aiGroupPrefab;
     public List<GameObject> healthList = new List<GameObject>();
 
-    void Start()
+    void Awake()
     {
         GenerateHealthUI();
     }
