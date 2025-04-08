@@ -42,7 +42,7 @@
 \begin{document}
 
 \institute{Matematikai és Informatikai Intézet}
-\title{Mesterséges intelligencia számítógépes játékokban}
+\title{Körökre osztott stratégiai játék készítése mesterséges intelligenciával}
 \author{Herbák Marcell\\Programtervező Informatikus BSc}
 \supervisor{Dr. Kovásznai Gergely\\Egyetemi docens}
 \city{Eger}
@@ -53,18 +53,26 @@
 
 \chapter{Bevezetés}
 
+Szakdolgozatom témájának kiválasztása nem okozott számomra fejtörést, ugyanis amióta az eszemet tudom, valamilyen formában játszottam már számítógépes játékokkal. Emlékszek, amikor nagyapám 5. születésnapomra egy számítógép adott ajándékba, még akkor Windows 2000-es operációs rendszerrel. Bár egy ideig utána abbahagytam a számítógépes játékokat, általános iskola 4. osztályában az osztálytársakkal elkezdtünk Minecraft-ozni, és onnantól kezdve töretlenül szeretek mindig valamilyen játékkal elütni az időt. 
+
+A szakdolgozatom tervezése során a olyan játékot szerettem volna készíteni, amelynek stílusát ismerem, játszottam már olyannal és szeretek is vele játszani. Ennek az elképzelt játék stílusával, alapszabályaival \aref{dev-game}. fejezetben foglalkozok. Ebben a játékban az ellenfeleket egy mesterséges intelligencia irányítja gráfkereső algoritmus segítségével. Az MI történeti áttekintéséről és játékelméletről \aref{ai}. fejezetben olvashat. A játékot Unity játékmotorban képzeltem el az elejétől kezdve, saját készítésű karakterrajzokkal. \Aref{implementation}. fejezetben részletesebben olvashat erről.
+
 A teljes szakdolgozati projektem elérhető a következő linken: \url{https://github.com/herbakmarcell/thesis}
 
-Szakdolgozatom témájának kiválasztása nem okozott számomra fejtörést, ugyanis amióta az eszemet tudom, valamilyen formában játszottam már számítógépes játékokkal. Emlékszek, amikor nagyapám 5. születésnapomra egy számítógép adott ajándékba, még akkor Windows 2000-es operációs rendszerrel. Bár egy ideig utána abbahagytam a számítógépes játékokat, általános iskola 4. osztályában az osztálytársakkal elkezdtünk Minecraft-ozni, és onnantól kezdve töretlenül szeretek mindig valamilyen játékkal elütni az időt. 
+\chapter{A fejlesztendő játék} \label{dev-game}
+
+Mint a bevezetésben említettem, szakdolgozatom programjaként egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel jól szórakozok és szabadidőmet is szívesen töltöm. Választásom végül is egy véges, körökre osztott, zérusösszegű stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. \cite{Persona}
+
+Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, jelenleg legfrissebb 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload-tól, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező karakterekkel, úgynevezett Personákkal harcolnak a különböző szereplők. \cite{Persona3}
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=14cm]{./pictures/persona3_xbox.png}
+	\includegraphics[width=15cm]{./pictures/persona3_xbox.png}
 	\caption{Persona 3 Reload}
 	\label{persona3}
 \end{figure}
 
-Éppen ezért szakdolgozatom programjaként egy olyan játékot szerettem volna készíteni, amely nem csak jól implementálható, hanem amivel jól szórakozok és szabadidőmet is szívesen töltöm. Választásom végül is egy véges, körökre osztott, zérusösszegű stratégiai játék elkészítésére esett. Ötletadónak, az általam kedvelt videójáték szériát, a Persona játékokat választottam. Az első Persona játék közel 30 éve jelent meg a Shin Megami Tensei szériának spin--off-jaként, így a játékok működésben és történetben bár eltérőek a modern megjelenésektől, jelenleg legfrissebb 2024-ben kiadott (\ref{persona3} ábra) Persona 3 Reload-tól, a játék fő mechanikája nem változott: a játékos karakterei csatába kerülnek egy fix számú, hasonló képességű ellenfelekkel szembe. Ezekben a játékokban, különleges képességekkel rendelkező, úgynevezett Personákkal harcolnak a különböző szereplők. \cite{Persona,Persona3}
+Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcrendszere (\ref{persona1} ábra) rendelkezett mezőkre felbontott csatatérrel, amelyeknél még a támadásoknak volt egy bizonyos maximális távolsága. Ezek alapján szerettem volna egy olyan játékteret készíteni, ahol a játékosnak nem csak a támadásának a távolságát kell figyelembe vennie, hanem a helyét is a csatatéren. \cite{Persona1,Persona1Gameplay}
 
 \begin{figure}[h!]
 	\centering
@@ -72,8 +80,6 @@ Szakdolgozatom témájának kiválasztása nem okozott számomra fejtörést, ug
 	\caption{Revelations: Persona}
 	\label{persona1}
 \end{figure}
-
-Bár a modern játékokban nem alkalmazzák már, a Revelations: Persona harcrendszere (\ref{persona1} ábra) rendelkezett mezőkre felbontott csatatérrel, amelyeknél még a támadásoknak volt egy bizonyos maximális távolsága. Ezek alapján szerettem volna egy olyan játékteret készíteni, ahol a játékosnak nem csak a támadásának a távolságát kell figyelembe vennie, hanem a helyét is a csatatéren. \cite{Persona1,Persona1Gameplay}
 
 \section{Játék szabályok} \label{rules}
 
@@ -87,7 +93,7 @@ Egy karakter, amennyiben elveszíti összes életerejét, eltűnik a tábláról
  
 A játékos célja, hogy ellenfele összes karakterét eltüntesse a tábláról. A játékot az a játékos nyeri, akinek marad legalább 1 karaktere a táblán, legalább 1 életerővel.
 
-\chapter{Mesterséges intelligencia}
+\chapter{Mesterséges intelligencia} \label{ai}
 
 \section{Története}
 
@@ -113,20 +119,22 @@ A mesterséges intelligencia története az 1930-as években vett rohamos lépé
 
 McCarthy munkássága jelentős hatással volt a mesterséges intelligencia fejlődésére. Az 1960-as és 1970-es években az MI-kutatás optimizmusa után nehéz időszak jött, amikor a fejlődés lelassult a korlátozott számítási kapacitás és a finanszírozási problémák miatt. Azonban McCarthy és kortársai kitartása hozzájárult ahhoz, hogy az MI napjainkban az egyik legdinamikusabban fejlődő területté váljon. Az utóbbi évtizedekben a gépi tanulás, a neurális hálózatok és a mélytanulás forradalmasították az MI-t, amely ma már számos területen, például az orvostudományban, az iparban és az önvezető autókban is kulcsszerepet játszik. \cite{JohnMcCarthy}
 
-\section{Játékelmélet}
+\section{Játékelmélet} \label{game-theory}
 
-A játékelmélet a matematika egyik, tudományágak közé egyértelműen nehezen besorolható (interdiszciplináris) ága, mely olyan kérdésekkel foglalkozik, hogy mi az ésszerű (racionális) viselkedés olyan helyzetekben, ahol minden résztvevő döntéseinek eredményét befolyásolja a többi résztvevő lehetséges választásai, röviden a stratégiai problémák elmélete. A játékelmélet alapjait Neumann János fektette le ''Zur Theorie der Gesellschaftsspiele'' című 1928-as munkájában \cite{Neumann}, majd Oskar Morgenstern neoklasszikus matematikus-közgazdásszal közösen megírta a „Játékelmélet és gazdasági viselkedés” című (The Theory of Games and Economic Behavior, 1944) művüket. \cite{Jatekelmelet,JatekelmeletEn} Ezen művek alapján a következő fogalmakat tisztáznunk kell \cite{NeumannOskar}:
+A játékelmélet a matematika egyik, tudományágak közé egyértelműen nehezen besorolható, interdiszciplináris ága, mely olyan kérdésekkel foglalkozik, hogy mi az ésszerű (racionális) viselkedés olyan helyzetekben, ahol minden résztvevő döntéseinek eredményét befolyásolja a többi résztvevő lehetséges választásai, röviden a stratégiai problémák elmélete. A játékelmélet alapjait Neumann János fektette le ''Zur Theorie der Gesellschaftsspiele'' című 1928-as munkájában \cite{Neumann}, majd Oskar Morgenstern neoklasszikus matematikus-közgazdásszal közösen megírta a „Játékelmélet és gazdasági viselkedés” című (The Theory of Games and Economic Behavior, 1944) művüket. \cite{Jatekelmelet,JatekelmeletEn} Ezen művek alapján a következő fogalmakat tisztáznunk kell \cite{NeumannOskar}:
 
 \begin{itemize}
 	\item A \emph{játék} a játékosok viselkedését és lényeges körülményeket meghatározó szabálysor által leírt folyamat.
-	\item Az információs halmaz (ismeret) meghatározó szerepű. Ez azt jelenti, hogy az információs halmaz alapján különböző típusokat sorolhatunk fel, például a \emph{tökéletes információs} és \emph{véges}, ahol minden résztvevő birtokolja az összes vonatkozó adatot (szabályok, lehetséges és korábbi események).
+	\item Az információs halmaz (ismeret) meghatározó szerepű. Ez azt jelenti, hogy az információs halmaz alapján különböző típusokat sorolhatunk fel, például a \emph{tökéletes információs} és \emph{véges} játék, ahol minden résztvevő birtokolja az összes vonatkozó adatot (szabályok, lehetséges és korábbi események).
 	\item Egy játék lehet két- vagy többszemélyes.
 	\item Mikor a játékban a játékosok versengenek egymással, akkor \emph{nem kooperatív} játékról beszélünk.
 	\item Zérusösszegű az a játék, amelyben a játékosok csak az ellenfelük nyereségük csökkentésével növelhetik nyereségüket.
 	\item A játékost győzelemre, de minimum döntetlenre segítő módszere a \emph{stratégia}. Ilyenkor kihasználhatja az ellenfél érzékelt hibáit.
 \end{itemize} 
 
-\chapter{Implementáció}
+\chapter{Implementáció} \label{implementation}
+
+\Aref{rules}. szekcióban meghatározott játékszabályok és \aref{game-theory}. szekcióban megfogalmazott játékelméleti fogalmak alapján megállapíthatjuk, hogy az implementálandó játék egy zérusösszegű, teljes információjú, kétszemélyes játék lesz. Teljes információt kielégíti, hiszen mindkét játékos ismeri a lehetséges következő lépéseket. A két játszó fél közül az egyik a felhasználó, másik játékos szerepét a mesterséges intelligencia kapja.
 
 \section{Technológiák}
 
@@ -153,6 +161,8 @@ A játék három scene-ből épül fel: \emph{MenuScene}, \emph{GameScene} és \
 
 \subsection{MenuScene} \label{menusection}
 
+A \emph{MenuScene} az alap \emph{Camera} objektumon kívül tartalmaz egy \emph{Canvas} 2D-s objektumot. A \emph{MenuScene} felépítése \aref{menuscene} ábrán látható. Ezen a felületen találhatóak a különböző funkciókat betöltő objektumok. A kép bal alsó sarkában található az \emph{ExitButton} nevű gomb objektum, amely névéhez illően kilép az alkalmazásból, felette található a \emph{PlayButton} gomb, amely a felhasználó által kiválasztott beállítások alapján elindítja a játékot. A képernyő jobb oldalán lehet találni a beállításokat módosító gombokat és karakterek számát kiválasztó \emph{Dropdown}\footnote{Legördülő lista} listákat. A gomb megnyomásával kiválaszthatja a játékos, hogy saját maga szeretné kezdeni a játékot vagy átadja a kezdés jogát a gépnek. A listákban a játékos ki tudja választani, hogy hány karakterrel induljon a játék, amely a korábban \aref{rules} szekcióban említett szabályok alapján ez akár négy karakterig is terjedhet. 
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=15cm]{./pictures/game_menu.png}
@@ -160,11 +170,9 @@ A játék három scene-ből épül fel: \emph{MenuScene}, \emph{GameScene} és \
 	\label{menuscene}
 \end{figure}
 
-A \emph{MenuScene} az alap \emph{Camera} objektumon kívül tartalmaz egy \emph{Canvas} 2D-s objektumot. Ezen a felületen találhatóak a különböző funkciókat betöltő objektumok. A kép bal alsó sarkában található az \emph{ExitButton} nevű gomb objektum, amely névéhez illően kilép az alkalmazásból, felette található a \emph{PlayButton} gomb, amely a felhasználó által kiválasztott beállítások alapján elindítja a játékot. A képernyő jobb oldalán lehet találni a beállításokat módosító gombokat és karakterek számát kiválasztó \emph{Dropdown}\footnote{Legördülő lista} listákat. A gomb megnyomásával kiválaszthatja a játékos, hogy saját maga szeretné kezdeni a játékot vagy átadja a kezdés jogát a gépnek. A listákban a játékos ki tudja választani, hogy hány karakterrel induljon a játék, amely a korábban \aref{rules} szekcióban említett szabályok alapján ez akár négy karakterig is terjedhet. A \emph{MenuScene} felépítése \aref{menuscene} ábrán látható.
-
 \subsection{GameScene}
 
-A \emph{GameScene} az alkalmazás felületének leglényegibb része, ahol a játék folyik. A \emph{scene} tartalmaz kettő objektumot: \emph{GridObjectPrefab} nevű \emph{prefab}-et és egy canvas-t. 
+A \emph{GameScene} az alkalmazás felületének leglényegibb része, ahol a játék folyik. A \emph{scene} kettő objektumot tartalmaz: \emph{GridObjectPrefab} nevű \emph{prefab}-et és egy canvas-t. 
 
 A \emph{prefab} akár több \emph{GameObject}\footnote{A GameObject lényegében egy objektum, ami létezhet egy scene-n belül \cite{UnityDocsGameObject}} egyvelege, egy \emph{prefab}-ben a programozó tárolhat konfigurációt, mező értékeket illetve gyermek \emph{GameObject}-eket. Természetesen ezeket újra fel lehet használni, akár kódból példányosítani, illetve törölni is lehet őket a \emph{scene}-ből. \cite{UnityDocsPrefab} 
 
@@ -199,6 +207,10 @@ A vertikális csoport tartalma a karakterek számától függően változik, tar
 	\label{game}
 \end{figure}
 
+\subsection{EndScene}
+
+A játék befejezése után, miután az egyik játékos nyert, a kijelzőn megjelenik, hogy a nem MI játékos nyert vagy veszített. Ezen kívül egy gomb található még a képernyőn, amely kilépteti a felhasználót az alkalmazásból.
+
 \section{Állapottér} \label{state}
 
 Az állapotterét kidolgozását a \emph{StateRepresentation} nevű osztályban oldottam meg. Ez az osztály tartalmaz egy \emph{FieldObject} típusú, hét sorból és tíz oszlopból álló mátrixot. A \emph{FieldObject} osztály az ősosztálya minden táblán szereplő entitásnak, ez alatt értendők az üres mezők, karakterek vagy akadályok. Az osztály példányai rendelkeznek egy azonosítóval és egy \emph{Vector2}\footnote{A Vector2 a Unity-n belüli megvalósítása a 2D-s vektoroknak és pontkoordinátáknak. \cite{UnityDocsVector2}} típusú pozícióval. Az osztály ezen kívül implementálja az \emph{ICloneable} interfészt, ezáltal mély klónozással \aref{minimax} szekcióban tárgyalt minimax algoritmus fel tudja használni. Ebből az osztályból származik a \emph{PlayerObject} osztály, amely már a játékos karakterek reprezentációját képezik a táblán. Ez az osztály az ősosztálybéli mezőkkel együtt tartalmazza még a karakterek életerejét, támadási erejét és egy logikai változót, amely a könnyű beazonosíthatóság érdekében eltárolja, hogy azt a karaktert az MI irányítja vagy sem.
@@ -231,7 +243,7 @@ Ezzel a megoldással azonban feljöttek hibalehetőségek, mégpedig, hogy \aref
 
 \Aref{operator} szekcióban és \aref{operatorimp} alszekcióban tárgyalt operátorokat elérhetővé kell tenni a megoldó algoritmusunk számára. Emiatt szükség van az operátorok generálására, amelyet a \emph{TurnOperatorGenerator} osztályban oldottam meg. Az osztály egy \emph{OperatorGenerator} interfészt implementál, amely egy \emph{Operator} lista csak olvasható mezőt tartalmaz, ebben tároljuk el az összes operátorunkat. A generálás kódját megtekintheti \aref{operatorgen-code} kódrészletben.
 
-Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy ismételve annyiszor, ahány játékos karakterünk van, egy másik listába, a \emph{playerActionI} listában eltároljuk a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezen listaelemek Descartes-szorzatával létrehozzuk az összes lehetséges operátort, melyeket az \emph{operators} listában tárolunk el. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
+Az operátorok legelőször a játék indulása előtt készülnek el, amikor a játékos a menüből rákattintva a ''Játék'' gombra kattint. Ekkor az \emph{Options} osztályból kinyert adatok alapján létrehozza az összes operátort a játékosnak és az MI-nek. Teszi mindezt úgy, hogy annyiszor ismétli a folyamatot, ahány játékos karakterünk van. Ezeket egy \emph{playerActionI} nevű listában eltároljuk, ezen objektumok tartalmazzák a karakterre vonatkozó összes interakciót. Ezeket a listákat eltároljuk egy \emph{actions} nevű másik listába. Ezen listaelemek Descartes-szorzatával létrehozzuk az összes lehetséges operátort, melyeket az \emph{operators} listában tárolunk el. Az MI operátorainak generálása szintén így történik, ebben az esetben az \emph{Options} osztály \emph{enemyCount} statikus változóját veszi figyelembe.
 
 \lstinputlisting[caption=Operátorok létrehozása a játék elején, label=operatorgen-code]{./codes/TurnOperatorGenerator.cs}
 
@@ -258,7 +270,7 @@ A MiniMax megoldó algoritmus implementációját a \emph{MiniMaxBase} osztályb
 
 Esetünkben, a MiniMax algoritmus alapján a paraméterként megadott állapotot eltároljuk egy \emph{Node} osztályba. A \emph{Node} osztály egy példánya lényegében a játékfának egy csomópontja, amely tartalmaz egy állapotot, a saját mélységét, a szülőcsomópontját és gyermekcsomópontok listáját, amennyiben azok léteznek. Továbbá ez a \emph{Node} osztály az állapottérből le tudja kérdezi a játék állását. A \emph{GetHeuristics()} metódus, amennyiben a csomópontnak nincs gyermeke, a saját állapotteréből, egyébként meg a legelső gyermekcsomópont \emph{GetHeruistics()} függvényéből kérdezi le az állapottér heurisztikáját. 
 
-A legkisebb vagy legnagyobb csomópont kiválasztásához szintenként rendezem a fát a \emph{SortChildrenMiniMax()} eljárás segítségével. A paraméterben megadott kör, és a másodlagos opcionális paraméter alapján eldönti, hogy a nyereséget maximalizálni vagy  az ellenfél nyereségét szeretnénk minimalizálni, mindezt rekurzívan meghívva minden egyes csomópontra, amíg van gyermekcsomópontjuk.
+A legkisebb vagy legnagyobb csomópont kiválasztásához szintenként rendezem a fát növekvő és csökkenő sorrendbe a \emph{SortChildrenMiniMax()} eljárás segítségével. A paraméterben megadott kör, és a másodlagos opcionális paraméter alapján eldönti, hogy a nyereséget maximalizálni vagy  az ellenfél nyereségét szeretnénk minimalizálni, mindezt rekurzívan meghívva minden egyes csomópontra, amíg van gyermekcsomópontjuk.
 
 \lstinputlisting[caption=Kiértékelt fa rendezésének logikája, label=sortchildren-code]{./codes/SortChildren.cs}
 
@@ -268,7 +280,7 @@ Ezek alapján a felülírt \emph{NextMove()} metódus egy csomópontban eltárol
 
 Az MiniMax alfa-béta vágásos verzióját a \emph{MiniMaxAlphaBetaPruning} osztályban valósítottam meg. A kiterjesztés logikáját \aref{minimaxalphabeta-code} kódrészletben találja. A lényeges eltérés az \emph{ExtendNode()} metódus törzsének változtatása okozza, illetve a rekurzió használata miatt innentől egy egész értékkel tér vissza. Az alap MiniMax algoritmushoz hasonlóan a függvény ellenőrzi a játék folyamatban van-e vagy a mélység eléri-e a kívánt mélységet, ha valamelyik igaz, akkor visszaadja a csomópont heurisztikai értékét és leállítja a kiterjesztést. Továbbra is minden operátort megvizsgálunk, amennyiben alkalmazható az állapotra, az operátor alkalmazása után az új állapotot eltároljuk egy új csomópontként, ezt szintén felvesszük az eredeti csomópont gyermekelemei közé és azokat rendszerezzük.
 
-A gyermekelemek kiterjesztése pedig alkalmazza az alfa-béta vágás módszerét, amely egy-egy csúcs kiterjesztését szakíthatja félbe. Ez azért ajánlatos, mert nagy lehet a játékfa és exponenciálisan felrobbanhat, így a kiértékelés rengeteg erőforrást és időt vehet igénybe. A módszer lényegében az első részfa kiértékelése után meg tudja állapítani, hogy a következő részfák esetleg nem fognak optimális megoldásra jutni, így azokat ,,levágjuk'' a játékfáról.
+A gyermekelemek kiterjesztése pedig alkalmazza az alfa-béta vágás módszerét, amely egy-egy csúcs kiterjesztését szakíthatja félbe. Ez azért ajánlatos, mert nagy lehet a játékfa és exponenciálisan felrobbanhat, így a kiértékelés rengeteg erőforrást és időt vehet igénybe. A módszer lényegében az egyes részfák kiértékelése után meg tudja állapítani, hogy a következő részfák esetleg nem fognak optimális megoldásra jutni, így azokat ,,levágjuk'' a játékfáról.
 
 \lstinputlisting[caption=Csomópont kiterjesztése alfa-béta vágással, label=minimaxalphabeta-code]{./codes/ExtendNodeAlphaBeta.cs}
 
@@ -280,16 +292,16 @@ A heurisztika talán a másik legnehezebben implementálható komponense a ját�
 
 A heurisztikai értéket a \emph{StateRepresentation} osztályból a \emph{GetHeuristics()} egész értékkel visszatérő függvényből lehet elérni. Ez a függvény látja el a MiniMaxhoz szükséges heurisztikai értékkel a megoldó algoritmust. Ez a metódus több kisebb függvényekből áll, amelyek módosítják a benne lokális, \emph{result} néven tárolt változót, amely maga a heurisztika értéke lesz. 
 
-A függvény törzse elágazásokkal kezdődik, amely vizsgálja, hogy az állapottér státusza alapján valamelyik játékos megnyerte-e a játékot. Nyilván, ez a játékfa kiterjesztése esetén hasznos, ugyanis az előre vetített lépéseknél megtörténhet, hogy egy játékos a következő lépéssel megnyeri a játékot. Mivel a játékosnak a legfontosabb nyerni, ezért mindennél több pontot kap a nyertes és veszít a másik játékos. Amennyiben a játék még folyamatban van, úgy a további kisebb számítási függvények futnak le. Attól függően, hogy éppen az MI játékos saját magára vagy az ellenfelére számolja a heurisztikát, az elágazás azon ága fut le.
+A függvény törzse elágazásokkal kezdődik, amely vizsgálja, hogy az állapottér státusza alapján valamelyik játékos megnyerte-e a játékot. Nyilván, ez a játékfa kiterjesztése esetén hasznos, ugyanis az előre vetített lépéseknél megtörténhet, hogy egy játékos a következő lépéssel megnyeri a játékot. Mivel a játékosnak a legfontosabb nyerni, ezért mindennél több pontot kap a nyertes és veszít a másik játékos. Amennyiben a játék még folyamatban van, úgy a további kisebb számítási függvények futnak le. Attól függően, hogy éppen a minimax algoritmus saját magára vagy az ellenfelére számolja a heurisztikát, az elágazás azon ága fut le.
 
 Ezek a függvények az állapottér helyzetéből, azaz a játékosok pozíciójából, életerejéből és lehetséges lépéseiből számítja ki a heurisztikát a következőképpen: 
 
 \begin{itemize}
 	\item \emph{HealthBonus}: A játékos minden karakterének életerejének száma után kap 1 pontot, illetve minden ellenfél karakterének életerejének száma után veszít 1 pontot
-	\item \emph{AttackBonus}: A játékost jutalmazzuk, amiért próbálja az ellenfelének karaktereit eltüntetni, azonban figyelembe kell venni azt, hogy akkor ne támadjon, ha leütnék utána, ezzel hosszútávon vesztésre állna, ezért a negatív ponttal nyomatékosítjuk ilyenkor. Minden más esetben mérlegelje a támadásnak kockázatát. Ha több életereje van, mint ahány ellenfél karakter mellette, akkor nem tudnák leütni egyből, ha az ellenfelek között maradna sem. Abban az esetben lesz negatív az érték, ha olyan karakterrel szeretnénk támadni, ami veszélyesen közel van, hogy leüssék, azaz annyi életereje van vagy kevesebb, ahány ellenfél éppen körbeveszi.
+	\item \emph{AttackBonus}: A játékost jutalmazzuk, amiért próbálja az ellenfelének karaktereit eltüntetni, azonban figyelembe kell venni azt, hogy akkor ne támadjon, ha leütnék utána, ezzel hosszútávon vesztésre állna, ezért a negatív ponttal nyomatékosítjuk ilyenkor. Minden más esetben mérlegelje a támadásnak kockázatát. Ha több életereje van, mint ahány ellenfél karakter mellette, akkor nem tudnák leütni egyből, ha az ellenfelek között maradna sem. Abban az esetben lesz negatív az érték, ha olyan karakterrel szeretnénk támadni, ami veszélyesen közel van, hogy leüssék, azaz annyi életereje van, vagy kevesebb, ahány ellenfél éppen körbeveszi.
 	\item \emph{PlayerCount}: Megvizsgálja, hogy a játékosnak mennyi karaktere van az ellenfeléhez képest. Legtöbb esetben több karakterrel könnyebb megnyerni a játékot, hiszen több lehetőség áll rendelkezésre, ezért a több karakterrel rendelkező játékost jutalmazzuk az ellenfelével szemben.
 	\item \emph{CheckPossibleMoves}: Minden lehetséges lépés további pontokat ér, amennyiben egy vagy több irányba nem tud lépni, az negatív pontot ér, mivel a játékos korlátozza karakterét. Legrosszabb lehetőség, ha valamelyik sarokba visszük a karakterünket.
-	\item \emph{MaxCoverageBonus}: A karakterek mindig maguk mellett 1 egység távolságra tudnak támadni. Ha a karakterek egymástól csak 2 egységre vannak, akkor két karakter tud támadni egy négyzetet, amely támadás esetén hasznos, viszont pozicionálás szempontjából megadja a lehetőséget az ellenfélnek menekülésre. Ezért érdemes inkább 3 négyzet távolságra lenni egymástól x és y koordináta szerint, hiszen ilyenkor már 2 négyzetet fedünk le minimum a támadásunkkal. Amennyiben átlósan 1 négyzet választ el, és a két karakter között egy ellenfél megállna, akkor a legoptimálisabb lépése is egy lehetséges támadásba belépése volna.
+	\item \emph{MaxCoverageBonus}: A karakterek mindig maguk mellett 1 egység távolságra tudnak támadni. Ha a karakterek egymástól csak 2 egységre vannak, akkor két karakter tud támadni egy négyzetet, amely támadás esetén hasznos, viszont pozicionálás szempontjából megadja a lehetőséget az ellenfélnek menekülésre. Ezért érdemes inkább 3 négyzet távolságra lenni egymástól x és y koordináta szerint, hiszen ilyenkor már 2 négyzetet fedünk le minimum a támadásunkkal. Amennyiben átlósan 1 négyzet választ el, és a két karakter között egy ellenfél megállna, akkor a legoptimálisabb lépés esetén is egy megtámadható pozícióba kerülne.
 	\item \emph{BadPosition}: Amennyiben a játékos karaktere mellett közvetlenül található ellenfél, az ellenfelek számától függően negatív pont. Amennyiben saját karakter is található, az további negatív pont, hiszen korlátozza mindkét karakter mozgását ezzel.
 	\item \emph{CentralControl}: Ez az előnyt a sakkban is szokták alkalmazni, ugyanis aki a tábla közepén tartózkodik a karakterével, annak van a legtöbb lehetősége taktikázni, azaz agresszívabban támadhat, esetleg védekezhet, visszavonulhat, átrendezheti a karaktereit.
 	\item \emph{ConfrontationMovement}: A játék előrehaladása érdekében jutalmazzuk a játékost, ha próbál harcot kezdeményezni, illetve távolságot minimalizálni az ellenfele között. Figyelembe kell azonban venni, hogy nem mindig maradjunk közel ellenfelünkhöz, ezért kevesebb pontot adunk, mint az \emph{AttackBonus}-ért.
@@ -301,17 +313,17 @@ Ezek a függvények az állapottér helyzetéből, azaz a játékosok pozíciój
 
 A \emph{GameManager} osztály a Singleton tervezési mintát használja fel alapul. Ennek az osztálynak egyetlen példánya van futási időben és ennek változóit az \emph{Instance} mezőn keresztül lehet lekérdezni, amely a Singleton tervezési mintának legfőbb jellegzetessége. A \emph{GameManager} osztály tartalmazza a \emph{canvas}-on megjelenő akadály és karakter \emph{GameObject}-ek listáit. Ezen kívül működteti a UI\footnote{User Interface, magyarul felhasználó felület, esetünkben a játék felülete} elemeket, mi esetünkben az életerősávot manipulálja az állapottérnek megfelelően, tartalmaz egy példányt az állapottérről és a megoldó algoritmusról.
 
-Tartalmaz pár szükséges metódust is, mint például a \emph{CheckStatus()} logikai függvényt, amely az állapottérből lekérdezi az aktuális állapotot, amennyiben valamelyik játékos győzelmet aratott, igaz értékkel tér vissza, abban az esetben pedig hamis, amikor még folyamatban van a játék. 
+Tartalmaz pár szükséges metódust is, mint például a \emph{CheckStatus()} logikai függvényt, amely az állapottérből lekérdezi az aktuális állapotot, amennyiben valamelyik játékos győzelmet aratott, igaz értékkel tér vissza, ellenkező esetben pedig hamis értékkel, amikor még folyamatban van a játék. 
 
 Az előbbi függvényt használja a \emph{ProgressGame()} eljárás. Lényegében ez a metódus intézi a körök felosztását, az interakciók kezelését és ezek eljuttatását az állapottérbe az operátor \emph{Apply()} metódus használatával. Az eljárás magjában szereplő \emph{PlayerAction} példányt létrehozza a játékos által választott interakció és kurzor pozíció alapján, amelynek működése \aref{tileselector} alszekcióban össze van foglalva. Ez a metódus egy körben annyiszor fut le, ahány karaktere van a játékosnak. Mivel operátornak egy kör összes interakciója egybevéve felel meg, ezért a játékos lépéseinél vizsgálni kell, hogy az aktuális interakciójával megnyeri a játékot vagy sem. Emiatt minden \emph{PlayerAction} létrehozása után megvizsgáljuk a \emph{GameManager}-ben tárolt \emph{enemies} \emph{GameObject} listának a hosszát, amennyiben ez nulla, a játékos nyert, és átirányítjuk a képernyő képét az \emph{EndScene}-re. Amennyiben nem nyert a játékos, a \emph{RedrawTable()} metódus átalakítja az életerősávot és pozíciót az interakcióknak megfelelően és az ismétlések után létrehozzuk az operátort szintén az interakciók alapján. Ezt alkalmazzuk az állapottéren, a játékos köre pedig a lokális változók alaphelyzetbe állítása után véget ér. 
 
-Ezután vizsgáljuk, \aref{operatorgen} alszekcióban taglalt operátorok újragenerálásának szükségességét. Amennyiben az eljárásunk előtti karakterszám eltér az eljárás utáni állapottól, a \emph{solver} példányunkat kicseréljük egy új példánnyal, melyben az operátorokat már a módosult karakterkészlet alapján hozzuk újra létre. Ez után érkezik az MI köre, ahol szimplán meghívjuk a megoldó algoritmus \emph{NextMove()} metódusát. Amennyiben az állapottér státuszából kiderül, hogy nyert az MI, átirányítjuk a képernyő képét az \emph{EndScene}-re, ellenkező esetben ismételten felülvizsgáljuk az operátorok újragenerálásának igényét. Mindezek után végrehajtjuk a módosításokat a \emph{canvas}-on és átadjuk a játékosnak a kört. Ezzel a folyamat kezdődik elölről.
+Ezután vizsgáljuk \aref{operatorgen} alszekcióban taglalt operátorok újragenerálásának szükségességét. Amennyiben az eljárásunk előtti karakterszám eltér az eljárás utáni állapottól, a \emph{solver} példányunkat kicseréljük egy új példánnyal, melyben az operátorokat már a módosult karakterkészlet alapján hozzuk újra létre. Ez után érkezik az MI köre, ahol szimplán meghívjuk a megoldó algoritmus \emph{NextMove()} metódusát. Amennyiben az állapottér státuszából kiderül, hogy nyert az MI, átirányítjuk a képernyő képét az \emph{EndScene}-re, ellenkező esetben ismételten felülvizsgáljuk az operátorok újragenerálásának igényét. Mindezek után végrehajtjuk a módosításokat a \emph{canvas}-on és átadjuk a játékosnak a kört. Ezzel a folyamat kezdődik elölről.
 
 A \emph{RedrawTable()} eljárás összehasonlítja a \emph{GameManager} karakterlistáit az állapottérben található karakterlistákkal, amennyiben a korábbiban olyan karakter van, ami az állapottérben már nem létezik, azt eltávolítja a \emph{canvas} táblájáról és példányát az életerősávból is. Szintén ez a metódus kezeli, ha valamely karakternek változik az életereje vagy pozíciója.
 
 \subsection{TileSelector} \label{tileselector}
 
-Ez az osztály végzi az interakciókhoz tartozó koordináták kiválasztását. A \emph{SelectTile()} metódus minden képkockán ellenőrzi a bal egér gombjának lenyomását, ezzel elindítva egy folyamatot: a kurzor pozícióját felhasználva, a \emph{scene}-n belüli globális pozícióját kiszámolva meg tudjuk állapítani, hogy melyik \emph{Tile} található ezen a pozíción, így ezt eltárolva felhasználjuk. A \emph{GameManager}-ben található \emph{actionSelected} változó értéke alapján eldöntjük, hogy lépés vagy támadás lesz az interakció, a játékos karaktere és a kiválasztott cella pozíciója alapján pedig az interakció irányát tudjuk meghatározni. Ezután a karakter pozícióját a komponensében és pozíciójában is átmozgatom, és meghívom a \emph{ProgressGame()} metódust. Támadás esetén a különbség annyi, hogy a kijelölt cellán található karakter életerejét csökkentem, amennyiben elfogyna, azaz nulla lenne, eltávolítom a listából és elpusztítom a \emph{GameObject} példányát. Végül engedélyezem újra az interakció kiválasztó gombokat.
+Ez az osztály végzi az interakciókhoz tartozó koordináták kiválasztását. A \emph{SelectTile()} metódus minden képkockán ellenőrzi a bal egér gombjának lenyomását, ezzel elindítva egy folyamatot: a kurzor pozícióját felhasználva, a \emph{scene}-n belüli globális pozícióját kiszámolva meg tudjuk állapítani, hogy melyik \emph{Tile} található ezen a pozíción, így ezt eltárolva felhasználjuk. A \emph{GameManager}-ben található \emph{actionSelected} változó értéke alapján eldöntjük, hogy lépés vagy támadás lesz az interakció, a játékos karaktere és a kiválasztott cella pozíciója alapján pedig az interakció irányát tudjuk meghatározni. Ezután a karakter pozícióját a komponensében és pozíciójában is átmozgatom, és meghívom a \emph{ProgressGame()} metódust. Támadás esetén a különbség annyi, hogy a kijelölt cellán található karakter életerejét csökkentem, amennyiben elfogyna, azaz nulla lenne, eltávolítom a listából és kitörlöm a \emph{GameObject} példányát. Végül engedélyezem újra az interakció kiválasztó gombokat.
 
 Természetesen, mint az operátoroknál, a felületen is vizsgálni kell, hogy a felhasználó legális lépéseket vagy támadásokat akar-e végrehajtani, így kizárólag csak azokat a műveleteket engedélyezem interakcióként elfogadni, amelyek a játék szabályainak megfelelnek.
 
@@ -319,26 +331,75 @@ Természetesen, mint az operátoroknál, a felületen is vizsgálni kell, hogy a
 
 \chapter{Tesztelés}
 
-Egy alkalmazás fejlesztése során elengedhetetlen a különböző funkciók, algoritmusok és kódrészletek tesztelése. A tesztelés tökéletes módja, hogy ellenőrizzük a programunk működését, az üzemi kód eredményei a követelményekben megfogalmazott értékeket adják, valamint javítási lehetőségek találására. Általában a legegyszerűbb módja a tesztelésnek a manuális tesztelés. Ebben az esetben a fejlesztőnek a felhasználó szemszögéből használjuk az alkalmazásunkat, és tesszük próbára különböző szituációkban.
+Egy alkalmazás fejlesztése során elengedhetetlen a különböző funkciók, algoritmusok és kódrészletek tesztelése. A tesztelés tökéletes módja, hogy ellenőrizzük a programunk működését, azt, hogy az üzemi kód eredményei a követelményekben megfogalmazott értékeket adják, valamint javítási lehetőségek találására. Általában a legegyszerűbb módja a tesztelésnek a manuális tesztelés. Ebben az esetben automatizált folyamatok nélkül használjuk az alkalmazásunkat, vagy adjuk ki tesztelőknek és tesszük próbára különböző szituációkban.
 
-A manuális tesztelésnek is több fajtáját használjuk. \emph{Feketedobozos} tesztnek nevezzük, amikor a specifikációnak megfelelő bevitelre, a meghatározott eredményt kapjuk-e, eközben pedig nem foglalkozunk a forráskóddal, illetve hogy az futási időben hogyan futott a kívánt eredményre. \emph{Fehérdobozos} tesztnek nevezzük, mikor a forráskód felépítését, futási időben pedig működését vizsgáljuk. \emph{Szürkedobozos} tesztek az előző kettő technikáját vegyíti, szakdolgozatom írása során javarészt ezt a technikát alkalmaztam. \cite{BlackboxEn,WhiteboxEn,GrayboxEn}
+A manuális tesztelésnek is több fajtáját használjuk. \emph{Feketedobozos} tesztnek nevezzük, amikor a specifikációnak megfelelő bevitelre, a meghatározott eredményt kapjuk-e, eközben pedig nem ismerjük a forráskódot, illetve hogy az futás után milyen eredményt és milyen lépéseket végzett el. \emph{Fehérdobozos} tesztnek nevezzük, mikor a forráskódot ismerjük, ezért az esetleg problémás kódrészletet tudjuk ellenőrizni, futási időben pedig működését vizsgáljuk. \emph{Szürkedobozos} tesztek az előző kettő technikáját vegyíti. Szakdolgozatom írása során fehérdobozos tesztet, a közösségi tesztelők pedig feketedobozos teszt technikáját alkalmazták. \cite{BlackboxEn,WhiteboxEn,GrayboxEn}
 
-% Ez a rész még kidolgozás alatt van.
-A Unity keretein belül a különböző metódusok és szkriptek tesztelésére az egységtesztek alkalmazása körülményes, ezért az alkalmazásom tesztelése javarészt manuálisan, próba-hiba módszerrel történt. Amikor megírtam egy metódust, megnéztem hogyan reagál a játék, ha valami elromlott, akkor a Unity-be beépített \emph{Debug} osztály \emph{Log()} metódusát alkalmaztam, amelyet a konzolra kiírt különböző változókat és eredményeket. \cite{UnityDocsDebug}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=14cm]{./pictures/game_debug.png}
+	\caption{Debug loggolás használata}
+	\label{debug}
+\end{figure}
 
-% Tervezek közösségi tesztet végrehajtani, ahol a felhasználók Google Forms kérdőíven keresztül leírhatják a véleményüket.
+A Unity keretein belül a különböző metódusok és szkriptek tesztelésére az egységtesztek alkalmazása körülményes, ezért az alkalmazásom tesztelése javarészt manuálisan, próba-hiba módszerrel történt. Amikor megírtam egy metódust, megnéztem hogyan reagál a játék, ha valami elromlott, akkor a Unity-be beépített \emph{Debug} osztály \emph{Log()} metódusát alkalmaztam, amelyet a konzolra írja a függvény paraméterét. \cite{UnityDocsDebug}
+
+A tesztelés során több különböző szempont alapján vizsgáltam a játékomat. Elsődleges prioritást kapott, hogy játék során ne legyenek kivételek, illetve ne álljon le váratlanul a program. A játék kezdeti fejlesztésében a játékfolyamat készítésekor előfordult, hogy végtelen ciklusba került, ezért kényszeríteni kellett leállításra. Örülök, hogy az ilyesfajta problémákat sikerült kiszűrni a szakdolgozati verzióban.
+
+
+Szintén hasonlóan fontos volt a különböző funkciók és felhasználói felület elemek működése, hiszen ezek nélkül a játék szinte játszhatatlanra romolhat. Ezek közül a legfontosabb az interakciógombok és játéktábla cellaválasztó osztályok működése volt. Fejlesztés során előfordult, hogy az interakció gombok nem jelentek meg, illetve nem tűntek el a körnek megfelelően. Ezek a problémák nincsenek jelen ebben a verzióban.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=8cm]{./pictures/game_error.png}
+	\caption{Unity pánik}
+	\label{error}
+\end{figure}
+
+A játékszabályok alkalmazása és ellenőrzésének tesztelése a fejlesztés folyamán folyamatosan szükségesnek bizonyult, ugyanis egy nem megfelelő operátor alkalmazás a szabályok megszegéséhez, rosszabb esetben kivételhez vezettek. Ezek memória allokációs problémákat okoztak, amely a Unity játékmotort teljes pánikba hozták, amelyet \aref{error}. ábra szemléltet. Természetesen manuális teszteléssel csak sok idő után lehetünk biztosak, hogy a programunk betartja a specifikációkat, de a hiba lehetősége mindig fenn állhat emberi figyelmetlenség miatt. A tesztelések során ilyen hibával nem találkoztam.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=16cm]{./pictures/game_situation1.png}
+	\caption{Találkozás a centrumban az ellenféllel}
+	\label{game-situation-1}
+\end{figure}
+
+Miután a szabályok alkalmazása sikeres volt, a funkciók működtek, és nem kaptam sehol kivételt, elkezdtem a heurisztikát és az MI-t tesztelni. Ezt úgy viteleztem ki, hogy megpróbáltam különbözőképpen, más stílussal játszani, például folyamatosan az ellenfél felé lépek, támadom minden lehetőségen, menekülök előle. Ebben az esetben már vitatható eredményt kaptam. A heurisztika, mint ahogyan \aref{heuristics}. szekcióban is említettem, a legnehezebben implementálható egysége a játéknak, ezért nehéz is jó heurisztikát írni. Jelen esetben azt a következtetést vonhatom le, hogy az MI ezzel a heurisztikai modellel passzívan játszik, sokszor látszólag előnyös helyzetben sem támadja meg a karaktereimet. Ez természetesen javítható, amennyiben a heurisztikát finomítjuk, illetve a támadási pontszorzókat arányosan növeljük a többi szemponthoz képest. Ha túl sokat adnánk, akkor lehetséges, hogy túl agresszívvá válna és olyan helyzetekben is támadna, ami számára már kedvezőtlen szituációkhoz vezetne. Tehát a heurisztika nem tökéletes, azonban játszható annyira, hogy egy kezdő és közepesen játszó játékos lépéseire képes.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=16cm]{./pictures/game_situation2.png}
+	\caption{Az ellenfél közrefogja a karakteremet}
+	\label{game-situation-2}
+\end{figure}
+
+Sajnos kiemelendő, hogy amennyiben mindkét játékos több mint 2 karakterrel rendelkezik, a számítási idő elszáll, ezt az állapottér exponenciális robbanása okozza. Ilyenkor már a karakterekre az adott mélységen már annyi számítást kell végeznie a mesterséges intelligenciának, hogy a játék megáll ideiglenesen, ilyenkor olyan érzést kelt, mintha ''kifagyott'' volna. Azonban ilyenkor csak éppen értékeli ki a játékfát, pár másodperc után visszatér az új állapottal.
+
+Néhány embert megkértem, hogy teszteljék a játékomat, amelyről véleményüket egy \emph{Google Forms} kérdőív kérdésein keresztül leírhatták. Fontos megjegyezni, hogy a tesztelők nem ismerték a forráskódot, illetve a játék működését, azaz feketedobozos tesztnek számítotható, csupán elküldtem nekik az alkalmazást, hogy játszanak vele, a kérdőívet amikor befejezték a játékot. A kérdések a kérdőíven a következők voltak:
+\begin{enumerate}
+	\item \emph{Játszott valaha körökre osztott stratégiai játékkal?} - igen vagy nem válasz lehetőség
+	\item \emph{Mennyire könnyen kezelhető Önnek a játék felülete?} - 1-től 5-ig terjedő skálán értékelhette a játék felületét
+	\item \emph{Mi a véleménye az ellenfél viselkedéséről?} - Itt tájékoztattam a tesztelőt, hogy az ellenfél MI által van vezérelve, és hosszú szöveges válaszban értékelnie kell a működését.
+	\item \emph{Találkozott bármilyen hibával a játék során? Ha igen, kérem írja le a hibát!} - Itt amennyiben valamilyen hiba elkerülte a figyelmemet, a tesztelők le tudták írni.
+\end{enumerate}
+
+A szakdolgozat írásakor a válaszadók többségének feltűnt az MI korábban említett passzivitása, amely betudható a kevésbé agresszív heurisztikának. Ezen kívül kellemetlen tényezőnek gondolták három a három ellen feletti várakozási időt, azonban további szélsőséges hibákkal nem találkoztak.
+
+A közösségi tesztelés nyers, táblázatos eredményei elérhetőek a következő linken: \url{https://drive.google.com/drive/folders/1C-2cGemq0t4ECZmj0p5VrQ7pdp0V6QhS?usp=sharing}
 
 \chapter*{Összegzés}
 \addcontentsline{toc}{chapter}{Összegzés}
-% Ez a rész még kidolgozás alatt van.
 
-A szakdolgozatomban megvalósítottam az általam elképzelt játékot, amely egy remek kihívás volt, az eddig autodidakta módon tanult Unity tudásom teszteléséhez. Bár nem a legmélyebb komponensekbe nyúltam bele, így is tökéletesen mutatja, hogy játékfejlesztéshez elég ez a minimális tudás és ambíció.
+A szakdolgozatomban megvalósítottam az általam elképzelt játékot, amely egy remek kihívás volt, az eddig autodidakta módon tanult Unity tudásom teszteléséhez. Bár nem a legmélyebb komponensekbe nyúltam bele, így is tökéletesen mutatja, hogy hogy a játékfejlesztésbe ezzel a játékmotorral akár kellő ambícióval is bele tudunk vágni, nem szükséges hozzá több évnyi tanulás, hogy alkotni tudjunk vele.
 
-A játékról összességében az emberek a közösségi teszt alatt jól vélekedtek, legtöbbet említett hibának a nehezen megkülönböztethető karaktereket említették, ezt mindenképpen szeretném a jövőben javítani.
+A játékról összességében az emberek a közösségi teszt alatt jól vélekedtek, legtöbbet említett hibának a számítási időt említették, ugyanis ilyenkor azt hitték, befagyott a játék, ezt mindenképpen szeretném a jövőben javítani.
 
-A játék készítése során pár váratlan problémába is ütköztem, de ezek a problémák rávilágítottak a szakmai hiányosságaimra, illetve a problémamegoldó képességemet tették próbára. Jó érzés volt, hogy nem mindig ugyanazok a problémák merültek fel, esetleg egy megoldása után felmerült egy másik, de ez szükséges volt ahhoz, hogy egy rendben működő programot tudjak létrehozni.
+A játék készítése során pár váratlan problémába is ütköztem, de ezek a problémák rávilágítottak a szakmai hiányosságaimra, illetve a problémamegoldó képességemet tették próbára, így a dolgozat készítése során ezen téren is fejlődni tudtam. Jó érzés volt, hogy bár sok fajta probléma merült fel a fejlesztés során, ezeket sikerült leküzdeni, ezzel is hozzá járulva ahhoz, hogy egy jobb produktum készülhessen el.
 
-Ez azonban nem azt jelenti, hogy hibátlan a játék. A jövőben tervezem a heurisztikát finomítani, tökéletesíteni, hogy az MI interakciói a lehető legjobbak legyenek, valamint a kódban már előkészített, különböző típusú ellenfelek implementálását is, amelyet eltérő \emph{sprite}-juk alapján lehet megkülönböztetni.
+Ez azonban nem azt jelenti, hogy hibátlan a játék. A jövőben tervezem a heurisztikát finomítani, tökéletesíteni, hogy az MI interakciói a lehető legjobbak legyenek, valamint a kódban már előkészített, különböző típusú ellenfelek implementálását is, amelyet eltérő \emph{sprite}-juk alapján lehet megkülönböztetni, ezek különböző erőponttal, életerővel és támadási távolsággal rendelkeznének.
+
+Köszönöm szépen az Eszterházy Károly Katolikus Egyetemnek összes oktatójának, akik tudásukat a lehető legjobban átadták számomra a tanulmányaim során, az egyetem hallgatóinak, akik segítettek tanulmányi és hétköznapi ügyekben. Külön köszönöm a szakdolgozatom készítése során konzulensem, Dr. Kovásznai Gergely szakmai támogatását, aki nélkül ez a szakdolgozat nem jöhetett volna létre ebben a formában.
 
 
 \begin{thebibliography}{2}
