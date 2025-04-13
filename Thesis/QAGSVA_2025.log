@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  8 APR 2025 21:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.17)  13 APR 2025 21:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1024,26 +1024,26 @@ Underfull \hbox (badness 10000) in paragraph at lines 493--495
 ug []$\T1/lmtt/m/n/12 https : / / docs . unity3d . com / 2022 . 3 /
  []
 
-<nyilatkozat/nyilatkozat.pdf, id=610, 597.50829pt x 845.0471pt>
+<nyilatkozat/nyilatkozat.pdf, id=610, 597.432pt x 844.83629pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 500.
-(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+(pdftex.def)             Requested size: 597.43054pt x 844.83423pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf  used on input line 500.
-(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<nyilatkozat/nyilatkozat.pdf, id=613, page=1, 597.50829pt x 845.0471pt>
+(pdftex.def)             Requested size: 597.43054pt x 844.83423pt.
+<nyilatkozat/nyilatkozat.pdf, id=613, page=1, 597.432pt x 844.83629pt>
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
  500.
-(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
+(pdftex.def)             Requested size: 597.43054pt x 844.83423pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
  500.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+(pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
 
 
 [34]
@@ -1051,22 +1051,27 @@ File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
  500.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+(pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
  500.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+(pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
 
 
 File: nyilatkozat/nyilatkozat.pdf Graphic file (type pdf)
 <use nyilatkozat/nyilatkozat.pdf, page 1>
 Package pdftex.def Info: nyilatkozat/nyilatkozat.pdf , page1 used on input line
  500.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
+(pdftex.def)             Requested size: 597.93192pt x 845.54323pt.
 [35
 
- <./nyilatkozat/nyilatkozat.pdf>] (./QAGSVA_2025.aux)
+ <./nyilatkozat/nyilatkozat.pdf
+
+pdfTeX warning: pdflatex.exe (file ./nyilatkozat/nyilatkozat.pdf): PDF inclusio
+n: Subtype in Resources dict is not a name (key 'Subtype', type <stream>); igno
+red.
+>] (./QAGSVA_2025.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-12-25>
@@ -1093,10 +1098,10 @@ ve/2024/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2024/texmf-dist
 /fonts/type1/public/lm/lmsy6.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public
 /lm/lmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/
 texlive/2024/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on QAGSVA_2025.pdf (35 pages, 3133262 bytes).
+Output written on QAGSVA_2025.pdf (35 pages, 3309263 bytes).
 PDF statistics:
- 772 PDF objects out of 1000 (max. 8388607)
- 668 compressed objects within 7 object streams
+ 762 PDF objects out of 1000 (max. 8388607)
+ 659 compressed objects within 7 object streams
  259 named destinations out of 1000 (max. 500000)
  307 words of extra memory for PDF output out of 10000 (max. 10000000)
 
